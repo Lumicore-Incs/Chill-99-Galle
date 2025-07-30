@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+:root {
+  --color-topline: #1F0D09;
+  --color-navbar: #2D1B17;
+  --green-primary: #A4B310;
+  --font-family-default: "Inter", sans-serif;
+  --font-family-nav: "Roboto", sans-serif;
+}
