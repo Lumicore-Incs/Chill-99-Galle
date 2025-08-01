@@ -17,7 +17,7 @@ export const Navbar = () => {
         </nav>
       </div>
       <div>
-        <button className="bg-[var(--green-primary)] text-[var(--color-topline)] text-md py-2 px-5 rounded-xl font-semibold cursor-pointer hover:bg-[var(--green-dark)] transition-all duration-500">
+        <button className="bg-[var(--green-primary)] text-[var(--color-topline)] text-md py-2 px-5 rounded-lg font-semibold cursor-pointer hover:bg-[var(--green-dark)] transition-all duration-500">
           BOOK A TABLE
         </button>
       </div>
