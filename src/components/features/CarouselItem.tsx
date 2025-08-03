@@ -84,110 +84,101 @@ const ImageCarousel: React.FC = () => {
   const visibleItems = getVisibleItems();
 
   return (
-    <section className="w-full relative overflow-hidden flex items-center justify-center">
-      {/* Carousel Container */}
+    <section className="w-full relative overflow-hidden flex items-center justify-center py-8">
       <div className="relative w-full max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-center space-x-4">
+        <div className="flex items-center justify-center space-x-2 lg:space-x-4">
           {/* Navigation Button - Left */}
-          <button
+          {/* <button
             onClick={prevSlide}
-            className="z-20 p-3 bg-white/20 hover:bg-white/30 rounded-full backdrop-blur-sm transition-all duration-300 text-white hover:text-amber-100"
+            className="z-20 p-2 lg:p-3 bg-white/20 hover:bg-white/30 rounded-full backdrop-blur-sm transition-all duration-300 text-white hover:text-amber-100"
           >
-            <ChevronLeft size={24} />
-          </button>
+            <ChevronLeft size={20} className="lg:w-6 lg:h-6" />
+          </button> */}
 
-          {/* Images Container */}
-          <div className="flex items-center justify-center space-x-6 relative">
-            {visibleItems.map((item, index) => {
-              const { position, actualIndex } = item;
-              const isCenter = position === 0;
-              const isAdjacent = Math.abs(position) === 1;
-              const isEdge = Math.abs(position) === 2;
+          {/* Images Container - Mobile shows 1, Tablet shows 3, Desktop shows 5 */}
+          <div className="flex items-center justify-center space-x-2 lg:space-x-6 relative">
+            {/* Mobile: Show only current image */}
+            <div className="block md:hidden">
+              <div className="relative cursor-pointer w-64 h-80">
+                <div className="relative w-full h-full rounded-[5px] overflow-hidden shadow-2xl">
+                  <img
+                    src={carouselItems[currentIndex].image}
+                    alt={carouselItems[currentIndex].title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                    <h3 className="text-[var(--green-primary)] text-2xl font-bold text-center">
+                      {carouselItems[currentIndex].title}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-              // Animation classes
-              let animationClass = "transition-all duration-700 ease-in-out";
-              if (position < 0)
-                animationClass += " opacity-100 translate-x-[-40px]";
-              if (position > 0)
-                animationClass += " opacity-100 translate-x-[40px]";
-              if (isCenter) animationClass += " opacity-100 scale-100";
-              if (isEdge) animationClass += " opacity-60 scale-95";
-
-              return (
-                <div
-                  key={`${item.id}-${currentIndex}-${index}`}
-                  className={`
-          relative cursor-pointer
-          w-[321px] h-[394px]
-          ${isCenter ? "z-10 mb-20" : ""}
-          ${isAdjacent ? "z-5 mt-20" : ""}
-          ${isEdge ? "z-0 mb-20" : ""}
-          ${animationClass}
-        `}
-                  onMouseEnter={() => setHoveredIndex(actualIndex)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  onClick={() => setCurrentIndex(actualIndex)}
-                >
-                  {/* Image */}
-                  <div className="relative w-full h-full rounded-[5px] overflow-hidden shadow-2xl">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                    />
-
-                    {/* Gradient overlay for edge items */}
-                    {isEdge && (
-                      <div
-                        className="absolute inset-0 pointer-events-none"
-                        style={{
-                          background:
-                            "linear-gradient(to right, #2D1B17B2, #2D1B17B2)",
-                        }}
-                      ></div>
-                    )}
-
-                    {/* Hover Effect - Yellow Frame and Title */}
-                    {(isEdge || isCenter || isAdjacent) &&
-                      hoveredIndex === actualIndex && (
-                        <div
-                          className="
-                      absolute inset-0 transition-all duration-300 pointer-events-none"
-                          style={{
-                            background:
-                              "linear-gradient(to right, #2D1B17B2, #2D1B17B2)",
-                          }}
-                        >
-                          {/* Yellow Border Frame */}
-                          <div className="absolute inset-8 border-2 border-[var(--green-primary)] rounded-[5px] shadow-lg"></div>
-
-                          {/* Title Background */}
-                          <div className="absolute top-[40%] left-4 right-4 rounded-lg p-4">
-                            <h3 className="text-[var(--green-primary)] text-3xl font-bold text-center">
+            {/* Tablet and Desktop: Show multiple images */}
+            <div className="hidden md:flex items-center justify-center space-x-4">
+              {Array.from({ length: window.innerWidth >= 1024 ? 5 : 3 }, (_, i) => {
+                const offset = window.innerWidth >= 1024 ? i - 2 : i - 1;
+                const index = (currentIndex + offset + carouselItems.length) % carouselItems.length;
+                const item = carouselItems[index];
+                const isCenter = offset === 0;
+                
+                return (
+                  <div
+                    key={`${item.id}-${currentIndex}-${i}`}
+                    className={`
+                      relative cursor-pointer transition-all duration-700 ease-in-out
+                      ${isCenter ? 'w-72 h-96 lg:w-80 lg:h-[400px] z-10' : 'w-48 h-64 lg:w-60 lg:h-80 z-5 opacity-70'}
+                    `}
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    onClick={() => setCurrentIndex(index)}
+                  >
+                    <div className="relative w-full h-full rounded-[5px] overflow-hidden shadow-2xl">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                      />
+                      
+                      {hoveredIndex === index && (
+                        <div className="absolute inset-0 bg-black/50 transition-all duration-300">
+                          <div className="absolute inset-4 border-2 border-[var(--green-primary)] rounded-[5px]"></div>
+                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                            <h3 className="text-[var(--green-primary)] text-xl lg:text-3xl font-bold text-center">
                               {item.title}
                             </h3>
                           </div>
                         </div>
                       )}
-
-                    {/* Active indicator for center item */}
-                    {isCenter && (
-                      <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-yellow-400 rounded-full"></div>
-                    )}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
 
           {/* Navigation Button - Right */}
-          <button
+          {/* <button
             onClick={nextSlide}
-            className="z-20 p-3 bg-white/20 hover:bg-white/30 rounded-full backdrop-blur-sm transition-all duration-300 text-white hover:text-amber-100"
+            className="z-20 p-2 lg:p-3 bg-white/20 hover:bg-white/30 rounded-full backdrop-blur-sm transition-all duration-300 text-white hover:text-amber-100"
           >
-            <ChevronRight size={24} />
-          </button>
+            <ChevronRight size={20} className="lg:w-6 lg:h-6" />
+          </button> */}
         </div>
+
+        {/* Dots indicator for mobile */}
+        {/* <div className="flex md:hidden justify-center space-x-2 mt-6">
+          {carouselItems.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                index === currentIndex ? "bg-[var(--green-primary)] scale-125" : "bg-white/50"
+              }`}
+            />
+          ))}
+        </div> */}
       </div>
     </section>
   );

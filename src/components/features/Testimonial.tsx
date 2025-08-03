@@ -71,74 +71,94 @@ export const Testimonial = () => {
   };
 
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {testimonials.map((testimonial, index) => (
-          <div
-            key={testimonial.id}
-            className="bg-[#1F0D09] backdrop-blur-sm rounded-lg px-6 py-10 transform transition-all duration-300 hover:scale-105 shadow-lg"
-          >
-            {/* Avatar */}
+    <div className="w-full">
+      {/* Mobile: Carousel view */}
+      <div className="block lg:hidden">
+        <div className="relative">
+          <div className="bg-[#1F0D09] backdrop-blur-sm rounded-lg px-6 py-10 mx-4">
             <div className="flex justify-center mb-6">
-              <div className="absolute -top-5">
-                <img
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  className="w-16 h-16 rounded-full object-cover"
-                />
-              </div>
+              <img
+                src={testimonials[currentIndex].avatar}
+                alt={testimonials[currentIndex].name}
+                className="w-16 h-16 rounded-full object-cover"
+              />
             </div>
-
-            {/* Rating */}
             <div className="flex justify-center mb-4">
-              {renderStars(testimonial.rating)}
+              {renderStars(testimonials[currentIndex].rating)}
             </div>
-
-            {/* Testimonial Text */}
             <p className="text-white text-sm leading-relaxed mb-4 text-center">
-              "{testimonial.text}"
+              "{testimonials[currentIndex].text}"
             </p>
-
-            {/* Name */}
             <div className="text-center">
               <p className="text-[#E5B024] font-semibold">
-                {testimonial.name}
+                {testimonials[currentIndex].name}
               </p>
             </div>
           </div>
-        ))}
+          
+          {/* Navigation for mobile */}
+          <div className="flex justify-center mt-6 space-x-2">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentIndex
+                    ? "bg-[var(--green-primary)] scale-125"
+                    : "bg-yellow-600/50 hover:bg-[var(--green-primary)]"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* Navigation Dots */}
-      <div className="flex justify-center space-x-2">
-        {testimonials.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentIndex
-                ? "bg-[var(--green-primary)] scale-125"
-                : "bg-yellow-600/50 hover:bg-[var(--green-primary)]"
-            }`}
-          />
-        ))}
+      {/* Desktop: Grid view */}
+      <div className="hidden lg:block">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {testimonials.map((testimonial) => (
+            <div
+              key={testimonial.id}
+              className="bg-[#1F0D09] backdrop-blur-sm rounded-lg px-6 py-10 transform transition-all duration-300 hover:scale-105 shadow-lg relative"
+            >
+              <div className="flex justify-center mb-6">
+                <div className="absolute -top-5">
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-16 h-16 rounded-full object-cover"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-center mb-4">
+                {renderStars(testimonial.rating)}
+              </div>
+              <p className="text-white text-sm leading-relaxed mb-4 text-center">
+                "{testimonial.text}"
+              </p>
+              <div className="text-center">
+                <p className="text-[#E5B024] font-semibold">
+                  {testimonial.name}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div className="flex justify-center space-x-2">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentIndex
+                  ? "bg-[var(--green-primary)] scale-125"
+                  : "bg-yellow-600/50 hover:bg-[var(--green-primary)]"
+              }`}
+            />
+          ))}
+        </div>
       </div>
-
-      {/* Navigation Arrows */}
-      {/* <div className="flex justify-center mt-8 space-x-4">
-        <button
-          onClick={prevSlide}
-          className="p-3 bg-yellow-600/20 hover:bg-yellow-600/40 rounded-full text-yellow-400 transition-all duration-300 hover:scale-110"
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="p-3 bg-yellow-600/20 hover:bg-yellow-600/40 rounded-full text-yellow-400 transition-all duration-300 hover:scale-110"
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
-      </div> */}
     </div>
   );
 };
