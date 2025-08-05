@@ -39,7 +39,7 @@ export const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="absolute top-full left-0 w-full bg-[var(--color-navbar)] lg:hidden z-50">
+        <div className="absolute top-17 left-0 w-full bg-[var(--color-navbar)] lg:hidden z-50">
           <nav className="flex flex-col p-4 space-y-4 text-white font-semibold">
             <a href="#home" className="hover:text-[var(--green-primary)] transition-all duration-500 py-2">Home</a>
             <a href="#menu" className="hover:text-[var(--green-primary)] duration-500 transition-all py-2">Menu</a>

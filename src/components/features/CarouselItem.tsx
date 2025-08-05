@@ -99,20 +99,32 @@ const ImageCarousel: React.FC = () => {
           <div className="flex items-center justify-center space-x-2 lg:space-x-6 relative">
             {/* Mobile: Show only current image */}
             <div className="block md:hidden">
-              <div className="relative cursor-pointer w-64 h-80">
-                <div className="relative w-full h-full rounded-[5px] overflow-hidden shadow-2xl">
-                  <img
-                    src={carouselItems[currentIndex].image}
-                    alt={carouselItems[currentIndex].title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                    <h3 className="text-[var(--green-primary)] text-2xl font-bold text-center">
-                      {carouselItems[currentIndex].title}
-                    </h3>
-                  </div>
-                </div>
-              </div>
+              <div
+  className="relative cursor-pointer w-64 h-80"
+  onClick={() =>
+    setHoveredIndex(hoveredIndex === currentIndex ? null : currentIndex)
+  }
+  onMouseEnter={() => setHoveredIndex(currentIndex)}
+  onMouseLeave={() => setHoveredIndex(null)}
+>
+  <div className="relative w-full h-full rounded-[5px] overflow-hidden shadow-2xl">
+    <img
+      src={carouselItems[currentIndex].image}
+      alt={carouselItems[currentIndex].title}
+      className="w-full h-full object-cover"
+    />
+    {(hoveredIndex === currentIndex) && (
+      <div className="absolute inset-0 bg-black/50 transition-all duration-300">
+        <div className="absolute inset-4 border-2 border-[var(--green-primary)] rounded-[5px]"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <h3 className="text-[var(--green-primary)] text-3xl font-bold text-center">
+            {carouselItems[currentIndex].title}
+          </h3>
+        </div>
+      </div>
+    )}
+  </div>
+</div>
             </div>
 
             {/* Tablet and Desktop: Show multiple images */}

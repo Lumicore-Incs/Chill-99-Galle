@@ -399,7 +399,7 @@ export const Home = () => {
                     <p className="font-semibold">July 9, 2025</p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <MessagesSquaren className="w-4"/>
+                    <MessagesSquare className="w-4"/>
                     <p className="font-semibold">Comments (22)</p>
                   </div>
                 </div>
@@ -438,12 +438,12 @@ export const Home = () => {
       </section>
 
       {/* Footer */}
-      <footer className="relative bg-[#261410] w-full min-h-[60vh] lg:h-[70vh] text-white px-4 lg:px-50 py-8 lg:py-10">
+      <footer className="relative bg-[#261410] w-full min-h-[60vh] lg:h-[90vh] xl:h-[70vh] text-white px-4 lg:px-50 py-8 lg:py-10">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {/* Logo */}
             <div className="flex justify-center md:justify-start">
-              <img src={logo} alt="Chill 99 Logo" className="w-32 lg:w-50 h-auto" />
+              <img src={logo} alt="Chill 99 Logo" className="w-full h-auto object-contain max-w-[300px]" />
             </div>
 
             {/* Working Hours */}
