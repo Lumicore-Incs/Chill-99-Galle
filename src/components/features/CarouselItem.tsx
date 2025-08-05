@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import image1 from "../../assets/imagecaro-01.jpg";
 import image2 from "../../assets/imagecaro-02.jpg";
 import image3 from "../../assets/imagecaro-03.jpg";

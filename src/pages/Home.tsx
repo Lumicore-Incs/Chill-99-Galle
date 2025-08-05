@@ -15,12 +15,9 @@ import ImageCarousel from "../components/features/CarouselItem";
 import { PopularMenu } from "../components/features/PopularMenu";
 import iconchoose01 from "../assets/iconschoose01.png";
 import iconchoose02 from "../assets/iconchoose02.png";
-import iconchoose03 from "../assets/iconschoose03.png";
-import iconchoose04 from "../assets/iconschoose04.png";
 import iconchoose05 from "../assets/iconchoose05.png";
 import iconchoose06 from "../assets/iconchoose06.png";
 import burger from "../assets/imagecaro-01.jpg";
-import beverage from "../assets/beverage.jpg";
 import coffee from "../assets/cofee.jpg";
 import gal1 from "../assets/cofee2.jpg"
 import gal2 from "../assets/coffee3.jpg"
