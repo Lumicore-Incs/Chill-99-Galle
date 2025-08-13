@@ -54,33 +54,12 @@ const ImageCarousel: React.FC = () => {
     setCurrentIndex((prev) => (prev + 1) % carouselItems.length);
   };
 
-  const prevSlide = () => {
-    setCurrentIndex(
-      (prev) => (prev - 1 + carouselItems.length) % carouselItems.length
-    );
-  };
-
   // Auto-play functionality
   useEffect(() => {
     const interval = setInterval(nextSlide, 4000);
     return () => clearInterval(interval);
   }, []);
 
-  const getVisibleItems = () => {
-    const items = [];
-    for (let i = -2; i <= 2; i++) {
-      const index =
-        (currentIndex + i + carouselItems.length) % carouselItems.length;
-      items.push({
-        ...carouselItems[index],
-        position: i,
-        actualIndex: index,
-      });
-    }
-    return items;
-  };
-
-  const visibleItems = getVisibleItems();
 
   return (
     <section className="w-full relative overflow-hidden flex items-center justify-center py-8">
