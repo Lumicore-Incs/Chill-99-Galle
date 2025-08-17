@@ -14,8 +14,8 @@ export const Navbar = () => {
       {/* Desktop Navigation */}
       <div className="hidden lg:block">
         <nav className="text-white flex space-x-6 font-semibold text-xl lg:text-2xl">
-          <a href="#home" className="hover:text-[var(--green-primary)] transition-all duration-500">Home</a>
-          <a href="#menu" className="hover:text-[var(--green-primary)] duration-500 transition-all">Menu</a>
+          <a href="/" className="hover:text-[var(--green-primary)] transition-all duration-500">Home</a>
+          <a href="/menu" className="hover:text-[var(--green-primary)] duration-500 transition-all">Menu</a>
           <a href="#gallery" className="hover:text-[var(--green-primary)] duration-500 transition-all">Gallery</a>
           <a href="#about" className="hover:text-[var(--green-primary)] duration-500 transition-all">About</a>
           <a href="#contact" className="hover:text-[var(--green-primary)] duration-500 transition-all">Contact</a>
@@ -41,8 +41,8 @@ export const Navbar = () => {
       {isMenuOpen && (
         <div className="absolute top-17 left-0 w-full bg-[var(--color-navbar)] lg:hidden z-50">
           <nav className="flex flex-col p-4 space-y-4 text-white font-semibold">
-            <a href="#home" className="hover:text-[var(--green-primary)] transition-all duration-500 py-2">Home</a>
-            <a href="#menu" className="hover:text-[var(--green-primary)] duration-500 transition-all py-2">Menu</a>
+            <a href="/" className="hover:text-[var(--green-primary)] transition-all duration-500 py-2">Home</a>
+            <a href="/menu" className="hover:text-[var(--green-primary)] duration-500 transition-all py-2">Menu</a>
             <a href="#gallery" className="hover:text-[var(--green-primary)] duration-500 transition-all py-2">Gallery</a>
             <a href="#about" className="hover:text-[var(--green-primary)] duration-500 transition-all py-2">About</a>
             <a href="#contact" className="hover:text-[var(--green-primary)] duration-500 transition-all py-2">Contact</a>
