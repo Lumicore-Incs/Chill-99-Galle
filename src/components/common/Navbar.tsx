@@ -27,10 +27,10 @@ export const Navbar = () => {
             Gallery
           </a>
           <a
-            href="#about"
+            href="/feed-back"
             className="hover:text-[var(--green-primary)] duration-500 transition-all"
           >
-            About
+            Feed Back
           </a>
           <a
             href="#contact"
@@ -76,10 +76,10 @@ export const Navbar = () => {
               Gallery
             </a>
             <a
-              href="#about"
+              href="/feed-back"
               className="hover:text-[var(--green-primary)] duration-500 transition-all py-2"
             >
-              About
+              Feed Back
             </a>
             <a
               href="#contact"
