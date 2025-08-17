@@ -15,16 +15,16 @@ import sandwich04 from "../assets/gallery/sandwich-04.jpg";
 import sandwitch02 from "../assets/gallery/sandwitch-02.jpg";
 import sandwitch03 from "../assets/gallery/sandwitch-03.jpg";
 
-const galleryImages = [
-  bun01,
-  bun02,
-  imagecaro01,
-  pancake,
-  pie,
-  sandwich01,
-  sandwich04,
-  sandwitch02,
-  sandwitch03,
+const galleryImageData = [
+  { src: bun01, name: "Chill 99 Waffle Fries" },
+  { src: bun02, name: "Salmon Sandwich" },
+  { src: imagecaro01, name: "Waffle Burger" },
+  { src: pancake, name: "Loaded Fries" },
+  { src: pie, name: "Chill 99 Special Sandwich" }, // Center tile with label
+  { src: sandwich01, name: "Burger Platter" },
+  { src: sandwich04, name: "Classic Burger" },
+  { src: sandwitch02, name: "Strawberry Dessert" },
+  { src: sandwitch03, name: "Salad Bowl" },
 ];
 
 export const Gallery = () => {
@@ -68,16 +68,28 @@ export const Gallery = () => {
           </h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-5xl">
-          {galleryImages.map((img, idx) => (
+          {galleryImageData.map((img, idx) => (
             <div
               key={idx}
-              className="bg-[#31201B] rounded-lg overflow-hidden shadow-lg flex items-center justify-center"
+              className="bg-[#31201B] rounded-lg overflow-hidden shadow-lg flex items-center justify-center relative group"
             >
               <img
-                src={img}
-                alt={`Gallery ${idx + 1}`}
-                className="w-full h-64 object-cover transition-transform duration-300 hover:scale-105"
+                src={img.src}
+                alt={img.name}
+                className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
               />
+              {/* Overlay on hover */}
+              <div
+                className="absolute inset-0 flex items-end justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ background: "#31201BBF" }}
+              >
+                <span
+                  className="px-6 py-2 rounded text-[#ffcc7d] text-lg font-semibold shadow-lg"
+                  style={{ minWidth: "150px", textAlign: "center" }}
+                >
+                  {img.name}
+                </span>
+              </div>
             </div>
           ))}
         </div>
@@ -96,7 +108,10 @@ export const Gallery = () => {
         />
 
         {/* Center form */}
-        <div className="w-full lg:w-2/4 px-6 lg:px-16 py-12 flex flex-col items-center text-center text-white bg-[#1F0D09]">
+        <div
+          className="w-full lg:w-2/4 px-6 lg:px-16 py-12 flex flex-col items-center text-center text-white bg-[#1F0D09]"
+          style={{ height: "100vh", borderTop: "1px solid #FFD580" }}
+        >
           <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">Booking Table</p>
           <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[#FFD580] font-semibold mb-8">
             Make Your Reservation
