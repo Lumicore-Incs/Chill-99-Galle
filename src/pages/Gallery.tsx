@@ -1,3 +1,4 @@
+import emailjs from "@emailjs/browser";
 import { useState } from "react";
 import formimg2 from "../assets/imagecaro-01.jpg";
 import formimg1 from "../assets/imageside.jpg";
@@ -84,66 +85,51 @@ export const Gallery = () => {
         return;
       }
 
-      console.log("✅ Validation passed - creating email...");
+      console.log("✅ Validation passed - sending via EmailJS...");
 
-      // Create formatted email content
-      const subject = `New Reservation Request - ${formData.fullName}`;
-      const emailBody = `
-New Reservation Request from Chill 99 Gallery
+      // EmailJS Configuration - REPLACE THESE WITH YOUR ACTUAL IDs
+      const serviceId = "service_ga0l9mu"; // Get from EmailJS dashboard
+      const templateId = "template_i110m2w"; // Get from EmailJS dashboard
+      const publicKey = "p1sWGViGQPTgg6qBM"; // Get from EmailJS dashboard
 
-Customer Details:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-👤 Full Name: ${formData.fullName}
-📧 Email: ${formData.email}
-📞 Phone: ${formData.phone}
-
-Reservation Details:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-👥 Number of Guests: ${formData.guests}
-📅 Preferred Date: ${formData.date}
-🕐 Preferred Time: ${formData.time}
-
-Please contact the customer to confirm this reservation.
-
-Best regards,
-Chill 99 Reservation System
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-This is an automated email from the Chill 99 website reservation system.
-      `.trim();
-
-      // Using mailto to open default email client
-      const mailtoLink = `mailto:mg4.aca@gmail.com?subject=${encodeURIComponent(
-        subject
-      )}&body=${encodeURIComponent(emailBody)}`;
-
-      // Open email client with pre-filled reservation details
-      window.open(mailtoLink, "_blank");
-
-      // Store reservation in localStorage as backup
-      const reservationData = {
-        ...formData,
-        timestamp: new Date().toISOString(),
-        id: `res_${Date.now()}`,
+      // Prepare template parameters for EmailJS (simplified approach)
+      const templateParams = {
+        from_name: formData.fullName,
+        from_email: formData.email,
+        customer_name: formData.fullName,
+        customer_email: formData.email,
+        customer_phone: formData.phone,
+        guest_count: formData.guests,
+        reservation_date: formData.date,
+        reservation_time: formData.time,
+        reply_to: formData.email,
+        message: `New reservation request from ${formData.fullName} for ${formData.guests} on ${formData.date} at ${formData.time}. Contact: ${formData.phone} (${formData.email})`
       };
 
-      const existingReservations = JSON.parse(localStorage.getItem("chill99_reservations") || "[]");
-      existingReservations.push(reservationData);
-      localStorage.setItem("chill99_reservations", JSON.stringify(existingReservations));
+      console.log("📧 Sending email with EmailJS...");
 
-      // Reset form
-      setFormData({
-        fullName: "",
-        email: "",
-        phone: "",
-        guests: "1 Person",
-        date: "",
-        time: "",
-      });
+      try {
+        // Send email using EmailJS
+        const result = await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
-      alert(
-        "Reservation request created! Your default email client should open with the reservation details. The reservation has also been saved locally as backup."
-      );
+        console.log("✅ EmailJS Success:", result);
+
+        // Reset form
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          guests: "1 Person",
+          date: "",
+          time: "",
+        });
+
+        alert("🎉 Reservation sent successfully! You will receive a confirmation email shortly.");
+      } catch (emailError) {
+        console.error("❌ EmailJS Error:", emailError);
+
+        alert("❌ Failed to send reservation. Please try again or contact us directly at mg4.aca@gmail.com");
+      }
     } catch (error) {
       console.error("Error processing reservation:", error);
       alert(
