@@ -1,5 +1,6 @@
 import emailjs from "@emailjs/browser";
-import { useState } from "react";
+import { Alert, Snackbar } from "@mui/material";
+import { useEffect, useState } from "react";
 import formimg2 from "../assets/imagecaro-01.jpg";
 import formimg1 from "../assets/imageside.jpg";
 import { Footer } from "../components/common/Footer";
@@ -41,6 +42,13 @@ export const Gallery = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Snackbar state
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success" as "success" | "error" | "warning" | "info",
+  });
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -48,6 +56,31 @@ export const Gallery = () => {
       [name]: value,
     }));
   };
+
+  // Function to show snackbar
+  const showSnackbar = (message: string, severity: "success" | "error" | "warning" | "info") => {
+    setSnackbar({
+      open: true,
+      message,
+      severity,
+    });
+  };
+
+  // Function to close snackbar
+  const handleSnackbarClose = () => {
+    setSnackbar((prev) => ({ ...prev, open: false }));
+  };
+
+  // Handle hash navigation to reservation section
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash === "#reservation-section") {
+      const element = document.getElementById("reservation-section");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, []);
 
   // Function to generate sample data
   const generateSampleData = () => {
@@ -80,7 +113,7 @@ export const Gallery = () => {
         !formData.time
       ) {
         console.log("❌ Validation failed - missing fields");
-        alert("Please fill in all required fields!");
+        showSnackbar("Please fill in all required fields!", "error");
         setIsSubmitting(false);
         return;
       }
@@ -103,7 +136,7 @@ export const Gallery = () => {
         reservation_date: formData.date,
         reservation_time: formData.time,
         reply_to: formData.email,
-        message: `New reservation request from ${formData.fullName} for ${formData.guests} on ${formData.date} at ${formData.time}. Contact: ${formData.phone} (${formData.email})`
+        message: `New reservation request from ${formData.fullName} for ${formData.guests} on ${formData.date} at ${formData.time}. Contact: ${formData.phone} (${formData.email})`,
       };
 
       console.log("📧 Sending email with EmailJS...");
@@ -124,16 +157,20 @@ export const Gallery = () => {
           time: "",
         });
 
-        alert("🎉 Reservation sent successfully! You will receive a confirmation email shortly.");
+        showSnackbar("Reservation sent successfully!", "success");
       } catch (emailError) {
         console.error("❌ EmailJS Error:", emailError);
 
-        alert("❌ Failed to send reservation. Please try again or contact us directly at mg4.aca@gmail.com");
+        showSnackbar(
+          "❌ Failed to send reservation. \nPlease try again or contact us directly at mg4.aca@gmail.com",
+          "error"
+        );
       }
     } catch (error) {
       console.error("Error processing reservation:", error);
-      alert(
-        "Sorry, there was an error processing your reservation. Please try again or contact us directly."
+      showSnackbar(
+        "Sorry, there was an error processing your reservation. Please try again or contact us directly.",
+        "error"
       );
     } finally {
       setIsSubmitting(false);
@@ -320,6 +357,54 @@ export const Gallery = () => {
       </section>
 
       <Footer />
+
+      {/* Material-UI Snackbar for alerts */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity={snackbar.severity}
+          variant="filled"
+          sx={{
+            width: "100%",
+            whiteSpace: "pre-line", // This allows \n to create line breaks
+            "&.MuiAlert-filledSuccess": {
+              backgroundColor: "#FFD580", // Green for success
+              color: "#1f1c18ff", // Golden text
+              "& .MuiAlert-icon": {
+                color: "#a1a09eff",
+              },
+            },
+            "&.MuiAlert-filledError": {
+              backgroundColor: "#8B4513", // Warm brown for errors (matches theme)
+              color: "#FFD580", // Golden text
+              "& .MuiAlert-icon": {
+                color: "#FFD580",
+              },
+            },
+            "&.MuiAlert-filledWarning": {
+              backgroundColor: "#FF8C00", // Warm orange for warnings
+              color: "#1F0D09", // Dark text for contrast
+              "& .MuiAlert-icon": {
+                color: "#1F0D09",
+              },
+            },
+            "&.MuiAlert-filledInfo": {
+              backgroundColor: "#31201B", // Theme dark color for info
+              color: "#FFD580", // Golden text
+              "& .MuiAlert-icon": {
+                color: "#FFD580",
+              },
+            },
+          }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

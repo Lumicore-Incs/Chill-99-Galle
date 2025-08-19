@@ -1,9 +1,13 @@
 import { Menu as MenuIcon, X } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/chill-99.png";
+import { useReservationNavigation } from "../../utils/navigation";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const handleReservationClick = useReservationNavigation(navigate);
 
   return (
     <div className="flex items-center justify-between bg-[var(--color-navbar)] px-4 lg:px-20 py-3">
@@ -43,7 +47,10 @@ export const Navbar = () => {
 
       {/* Desktop CTA Button */}
       <div className="hidden lg:block">
-        <button className="bg-[var(--green-primary)] text-[var(--color-topline)] text-md py-2 px-5 rounded-lg font-semibold cursor-pointer hover:bg-[var(--green-dark)] transition-all duration-500">
+        <button 
+          onClick={handleReservationClick}
+          className="bg-[var(--green-primary)] text-[var(--color-topline)] text-md py-2 px-5 rounded-lg font-semibold cursor-pointer hover:bg-[var(--green-dark)] transition-all duration-500"
+        >
           BOOK A TABLE
         </button>
       </div>
@@ -87,7 +94,10 @@ export const Navbar = () => {
             >
               Contact
             </a>
-            <button className="bg-[var(--green-primary)] text-[var(--color-topline)] text-md py-2 px-5 rounded-lg font-semibold cursor-pointer hover:bg-[var(--green-dark)] transition-all duration-500 mt-4">
+            <button 
+              onClick={handleReservationClick}
+              className="bg-[var(--green-primary)] text-[var(--color-topline)] text-md py-2 px-5 rounded-lg font-semibold cursor-pointer hover:bg-[var(--green-dark)] transition-all duration-500 mt-4"
+            >
               BOOK A TABLE
             </button>
           </nav>
