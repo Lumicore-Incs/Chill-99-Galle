@@ -142,7 +142,7 @@ export const Home = () => {
             {current.buttons.map((btn, idx) => (
               <button
                 key={idx}
-                className={`${btn.color} flex items-center gap-3 px-4 lg:px-5 py-2 rounded-lg cursor-pointer w-full sm:w-auto justify-center`}
+                className={`${btn.color} flex items-center gap-3 px-6 lg:px-8 py-4 rounded-lg cursor-pointer w-full sm:w-auto justify-center min-h-[48px] min-w-[160px]`}
               >
                 {btn.text} <FaChevronRight />
               </button>
@@ -203,7 +203,7 @@ export const Home = () => {
         <div className="flex items-center text-sm sm:text-base lg:text-lg font-medium">
           <button
             onClick={handleReservationClick}
-            className="flex items-center gap-3 px-4 lg:px-5 py-2 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer"
+            className="flex items-center gap-3 px-6 lg:px-8 py-4 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center"
           >
             BOOK A SPOT <FaChevronRight />
           </button>
@@ -255,7 +255,7 @@ export const Home = () => {
         <div className="flex items-center text-sm sm:text-base lg:text-lg font-medium">
           <button
             onClick={handleReservationClick}
-            className="flex items-center gap-3 px-4 lg:px-5 py-2 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer"
+            className="flex items-center gap-3 px-6 lg:px-8 py-4 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center"
           >
             BOOK A TABLE <FaChevronRight />
           </button>
@@ -331,7 +331,7 @@ export const Home = () => {
 
       {/* Testimonials */}
       <section
-        className="relative w-full min-h-[80vh] lg:min-h-[100vh] flex flex-col bg-[#31201B] text-white px-4 lg:px-50 py-12 lg:py-20 gap-8 lg:gap-30"
+        className="relative w-full min-h-[80vh] lg:min-h-[100vh] flex flex-col bg-[#31201B] text-white px-4 lg:px-50 py-12 lg:py-20 gap-8 lg:gap-16"
         style={{
           backgroundImage: `linear-gradient(to right, #2D1B17C9, #2D1B17C9), url(${testimonial})`,
           backgroundRepeat: "no-repeat",
@@ -352,7 +352,7 @@ export const Home = () => {
             </h2>
           </div>
         </div>
-        <div className="flex-1 flex items-center justify-center">
+        <div className="flex-1 flex items-center justify-center w-full">
           <Testimonial />
         </div>
       </section>
@@ -421,7 +421,7 @@ export const Home = () => {
         </div>
 
         <div className="flex items-center justify-center">
-          <button className="flex items-center gap-3 rounded-md cursor-pointer text-[var(--green-primary)] border border-[var(--green-primary)] py-2 px-4 lg:px-6 hover:bg-[var(--green-primary)] hover:text-[var(--color-topline)] transition-all duration-300">
+          <button className="flex items-center gap-3 rounded-md cursor-pointer text-[var(--green-primary)] border border-[var(--green-primary)] py-3 px-6 lg:px-8 hover:bg-[var(--green-primary)] hover:text-[var(--color-topline)] transition-all duration-300 min-h-[48px] min-w-[160px] justify-center">
             Explore More <FaChevronRight />
           </button>
         </div>
@@ -446,7 +446,7 @@ export const Home = () => {
           </h2>
         </div>
         <div className="flex items-center text-sm sm:text-base lg:text-lg font-medium">
-          <button className="flex items-center gap-3 px-4 lg:px-5 py-2 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer">
+          <button className="flex items-center gap-3 px-6 lg:px-8 py-4 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center">
             JOIN NOW <FaChevronRight />
           </button>
         </div>

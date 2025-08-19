@@ -356,33 +356,33 @@ export const Menu = () => {
         </div>
       </section>
 
-      {/* Functional Reservation Form Section */}
+      {/* Mobile-Optimized Reservation Form Section */}
       <section className="bg-[#1F0D09] w-full min-h-screen flex items-center justify-center relative" id="reservation-section">
-        {/* Left image */}
+        {/* Left image - Hidden on mobile and tablet */}
         <img
           src={formimg1}
           alt=""
-          className="hidden md:block w-1/4 min-h-screen object-cover object-right"
+          className="hidden lg:block w-1/4 min-h-screen object-cover object-right"
         />
 
-        {/* Center form */}
-        <div className="w-full lg:w-2/4 px-6 lg:px-16 py-12 flex flex-col items-center text-center text-white bg-[#1F0D09]">
-          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">
+        {/* Center form - Full width on mobile, constrained on desktop */}
+        <div className="w-full lg:w-2/4 px-4 sm:px-6 lg:px-16 py-8 lg:py-12 flex flex-col items-center text-center text-white bg-[#1F0D09]">
+          <p className="text-base sm:text-lg lg:text-xl text-[#FAF3E0] font-medium">
             Booking Table
           </p>
-          <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[#FFD580] font-semibold mb-8">
+          <h2 className="italic text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-[#FFD580] font-semibold mb-6 lg:mb-8">
             Make Your Reservation
           </h2>
 
-          {/* Functional Form */}
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+          {/* Form - Single column on mobile, two columns on larger screens */}
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full max-w-lg lg:max-w-none">
             <input
               type="text"
               name="fullName"
               placeholder="Full Name"
               value={formData.fullName}
               onChange={handleInputChange}
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white placeholder-gray-300"
+              className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white placeholder-gray-300 min-h-[48px]"
               required
             />
             <input
@@ -391,7 +391,7 @@ export const Menu = () => {
               placeholder="Email Address"
               value={formData.email}
               onChange={handleInputChange}
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white placeholder-gray-300"
+              className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white placeholder-gray-300 min-h-[48px]"
               required
             />
             <input
@@ -400,14 +400,14 @@ export const Menu = () => {
               placeholder="Phone Number"
               value={formData.phone}
               onChange={handleInputChange}
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white placeholder-gray-300"
+              className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white placeholder-gray-300 min-h-[48px]"
               required
             />
             <select 
               name="guests"
               value={formData.guests}
               onChange={handleInputChange}
-              className="p-3 rounded bg-[#1F0D09] border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white"
+              className="p-4 text-base rounded bg-[#1F0D09] border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white min-h-[48px]"
             >
               <option value="1 Person">1 Person</option>
               <option value="2 People">2 People</option>
@@ -421,7 +421,7 @@ export const Menu = () => {
               name="date"
               value={formData.date}
               onChange={handleInputChange}
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white"
+              className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white min-h-[48px]"
               required
             />
             <input
@@ -429,17 +429,17 @@ export const Menu = () => {
               name="time"
               value={formData.time}
               onChange={handleInputChange}
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white"
+              className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white min-h-[48px]"
               required
             />
           </form>
 
-          <div className="flex items-center text-sm sm:text-base lg:text-lg font-medium mt-6">
+          <div className="flex justify-center mt-6">
             <button 
               type="submit"
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className={`flex items-center gap-3 px-4 lg:px-5 py-2 rounded-lg transition-all duration-500 cursor-pointer ${
+              className={`flex items-center gap-3 px-6 lg:px-8 py-4 text-base lg:text-lg font-semibold rounded-lg transition-all duration-500 cursor-pointer min-h-[48px] min-w-[200px] justify-center ${
                 isSubmitting 
                   ? 'bg-gray-500 cursor-not-allowed' 
                   : 'bg-[var(--green-primary)] hover:bg-[var(--green-dark)]'
@@ -450,11 +450,11 @@ export const Menu = () => {
           </div>
         </div>
 
-        {/* Right image */}
+        {/* Right image - Hidden on mobile and tablet */}
         <img
           src={formimg2}
           alt=""
-          className="hidden md:block w-1/4 min-h-screen object-cover object-left"
+          className="hidden lg:block w-1/4 min-h-screen object-cover object-left"
         />
       </section>
 

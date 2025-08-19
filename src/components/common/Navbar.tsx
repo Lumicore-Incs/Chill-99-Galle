@@ -9,6 +9,10 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const handleReservationClick = useReservationNavigation(navigate);
 
+  const handleMobileNavClick = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <div className="flex items-center justify-between bg-[var(--color-navbar)] px-4 lg:px-20 py-3">
       <div>
@@ -66,37 +70,45 @@ export const Navbar = () => {
           <nav className="flex flex-col p-4 space-y-4 text-white font-semibold">
             <a
               href="/"
-              className="hover:text-[var(--green-primary)] transition-all duration-500 py-2"
+              onClick={handleMobileNavClick}
+              className="hover:text-[var(--green-primary)] transition-all duration-500 py-3 text-lg min-h-[44px] flex items-center"
             >
               Home
             </a>
             <a
               href="/menu"
-              className="hover:text-[var(--green-primary)] duration-500 transition-all py-2"
+              onClick={handleMobileNavClick}
+              className="hover:text-[var(--green-primary)] duration-500 transition-all py-3 text-lg min-h-[44px] flex items-center"
             >
               Menu
             </a>
             <a
               href="/gallery"
-              className="hover:text-[var(--green-primary)] duration-500 transition-all py-2"
+              onClick={handleMobileNavClick}
+              className="hover:text-[var(--green-primary)] duration-500 transition-all py-3 text-lg min-h-[44px] flex items-center"
             >
               Gallery
             </a>
             <a
               href="/feed-back"
-              className="hover:text-[var(--green-primary)] duration-500 transition-all py-2"
+              onClick={handleMobileNavClick}
+              className="hover:text-[var(--green-primary)] duration-500 transition-all py-3 text-lg min-h-[44px] flex items-center"
             >
               Feed Back
             </a>
             <a
               href="#contact"
-              className="hover:text-[var(--green-primary)] duration-500 transition-all py-2"
+              onClick={handleMobileNavClick}
+              className="hover:text-[var(--green-primary)] duration-500 transition-all py-3 text-lg min-h-[44px] flex items-center"
             >
               Contact
             </a>
             <button 
-              onClick={handleReservationClick}
-              className="bg-[var(--green-primary)] text-[var(--color-topline)] text-md py-2 px-5 rounded-lg font-semibold cursor-pointer hover:bg-[var(--green-dark)] transition-all duration-500 mt-4"
+              onClick={() => {
+                handleReservationClick();
+                handleMobileNavClick();
+              }}
+              className="bg-[var(--green-primary)] text-[var(--color-topline)] text-lg py-3 px-5 rounded-lg font-semibold cursor-pointer hover:bg-[var(--green-dark)] transition-all duration-500 mt-4 min-h-[44px]"
             >
               BOOK A TABLE
             </button>

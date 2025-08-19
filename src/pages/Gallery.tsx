@@ -6,6 +6,7 @@ import formimg1 from "../assets/imageside.jpg";
 import { Footer } from "../components/common/Footer";
 import { Navbar } from "../components/common/Navbar";
 import { TopLine } from "../components/common/TopLine";
+import { GalleryCarousel } from "../components/features/GalleryCarousel";
 
 import banner from "../assets/gallery/background-image.jpg";
 import bun01 from "../assets/gallery/bun-01.jpg";
@@ -208,77 +209,49 @@ export const Gallery = () => {
         </div>
       </section>
 
-      {/* Gallery Grid */}
+      {/* Mobile-Optimized Gallery */}
       <section className="bg-[#1F0D09] w-full px-4 lg:px-50 py-12 lg:py-20 flex flex-col items-center justify-center text-white gap-8">
         <div className="flex flex-col items-center text-center mb-8">
-          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">Our Photo Gallery</p>
-          <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">
-            Looks Our Photo Gallery
+          <p className="text-base md:text-lg lg:text-xl text-[#FAF3E0] font-medium">Our Photo Gallery</p>
+          <h2 className="italic text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">
+            Look at Our Photo Gallery
           </h2>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-5xl">
-          {galleryImageData.map((img, idx) => (
-            <div
-              key={idx}
-              className="bg-[#31201B] rounded-lg overflow-hidden shadow-lg flex items-center justify-center relative group"
-            >
-              <img
-                src={img.src}
-                alt={img.name}
-                className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              {/* Overlay on hover */}
-              <div
-                className="absolute inset-0 flex items-end justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ background: "#31201BBF" }}
-              >
-                <span
-                  className="px-6 py-2 rounded text-[#ffcc7d] text-lg font-semibold shadow-lg"
-                  style={{ minWidth: "150px", textAlign: "center" }}
-                >
-                  {img.name}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
+        <GalleryCarousel images={galleryImageData} />
       </section>
 
-      {/* Reservation Section (copied from Menu.tsx) */}
+      {/* Mobile-Optimized Reservation Section */}
       <section
         id="reservation-section"
         className="bg-[#1F0D09] w-full min-h-screen flex items-center justify-center relative"
       >
-        {/* Left image */}
+        {/* Left image - Hidden on mobile and tablet */}
         <img
           src={formimg1}
           alt=""
-          className="hidden md:block w-1/4 min-h-screen object-cover object-right"
+          className="hidden lg:block w-1/4 min-h-screen object-cover object-right"
         />
 
-        {/* Center form */}
-        <div
-          className="w-full lg:w-2/4 px-6 lg:px-16 py-12 flex flex-col items-center text-center text-white bg-[#1F0D09]"
-          style={{ height: "100vh", borderTop: "1px solid #FFD580" }}
-        >
-          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">Booking Table</p>
-          <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[#FFD580] font-semibold mb-8">
+        {/* Center form - Full width on mobile, constrained on desktop */}
+        <div className="w-full lg:w-2/4 px-4 sm:px-6 lg:px-16 py-8 lg:py-12 flex flex-col items-center text-center text-white bg-[#1F0D09]">
+          <p className="text-base sm:text-lg lg:text-xl text-[#FAF3E0] font-medium">Booking Table</p>
+          <h2 className="italic text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-[#FFD580] font-semibold mb-6 lg:mb-8">
             Make Your Reservations
           </h2>
 
-          {/* Sample Data Button */}
-          <div className="mb-4">
+          {/* Sample Data Button - Hidden on small screens */}
+          <div className="mb-4 hidden sm:block">
             <button
               type="button"
               onClick={generateSampleData}
-              className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition-all duration-300"
+              className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition-all duration-300 min-h-[44px]"
             >
               📝 Fill Sample Data
             </button>
           </div>
 
-          {/* Form fields */}
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+          {/* Form fields - Single column on mobile, two columns on larger screens */}
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full max-w-lg lg:max-w-none">
             <input
               type="text"
               name="fullName"
@@ -286,7 +259,7 @@ export const Gallery = () => {
               onChange={handleInputChange}
               placeholder="Full Name"
               required
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
+              className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white placeholder-gray-300 min-h-[48px]"
             />
             <input
               type="email"
@@ -295,7 +268,7 @@ export const Gallery = () => {
               onChange={handleInputChange}
               placeholder="Email Address"
               required
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
+              className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white placeholder-gray-300 min-h-[48px]"
             />
             <input
               type="tel"
@@ -304,19 +277,21 @@ export const Gallery = () => {
               onChange={handleInputChange}
               placeholder="Phone Number"
               required
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
+              className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white placeholder-gray-300 min-h-[48px]"
             />
             <select
               name="guests"
               value={formData.guests}
               onChange={handleInputChange}
               required
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
+              className="p-4 text-base rounded bg-[#1F0D09] border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white min-h-[48px]"
             >
-              <option>1 Person</option>
-              <option>2 People</option>
-              <option>3 People</option>
-              <option>4 People</option>
+              <option value="1 Person">1 Person</option>
+              <option value="2 People">2 People</option>
+              <option value="3 People">3 People</option>
+              <option value="4 People">4 People</option>
+              <option value="5 People">5 People</option>
+              <option value="6+ People">6+ People</option>
             </select>
             <input
               type="date"
@@ -324,7 +299,7 @@ export const Gallery = () => {
               value={formData.date}
               onChange={handleInputChange}
               required
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
+              className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white min-h-[48px]"
             />
             <input
               type="time"
@@ -332,15 +307,15 @@ export const Gallery = () => {
               value={formData.time}
               onChange={handleInputChange}
               required
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
+              className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white min-h-[48px]"
             />
 
-            <div className="flex items-center text-sm sm:text-base lg:text-lg font-medium mt-6 md:col-span-2">
+            <div className="lg:col-span-2 flex justify-center mt-6">
               <button
                 type="submit"
                 disabled={isSubmitting}
                 onClick={() => console.log("🔘 Button clicked directly!")}
-                className="flex items-center gap-3 px-4 lg:px-5 py-2 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center gap-3 px-6 lg:px-8 py-4 text-base lg:text-lg font-semibold rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px] min-w-[200px] justify-center"
               >
                 {isSubmitting ? "SENDING..." : "BOOKING TABLE"}
               </button>
