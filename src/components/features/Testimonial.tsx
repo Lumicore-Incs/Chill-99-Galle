@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import av1 from "../../assets/av1.png";
 import av2 from "../../assets/av2.png";
 import av3 from "../../assets/av3.png";
@@ -50,9 +50,7 @@ export const Testimonial = () => {
     return Array.from({ length: 5 }, (_, index) => (
       <span
         key={index}
-        className={`text-xl ${
-          index < rating ? "text-[var(--green-primary)]" : "text-gray-400"
-        }`}
+        className={`text-xl ${index < rating ? "text-[var(--green-primary)]" : "text-gray-400"}`}
       >
         ★
       </span>
@@ -84,7 +82,7 @@ export const Testimonial = () => {
               </p>
             </div>
           </div>
-          
+
           {/* Navigation for mobile */}
           <div className="flex justify-center mt-8 space-x-3">
             {testimonials.map((_, index) => (
@@ -97,9 +95,11 @@ export const Testimonial = () => {
                     : "bg-yellow-600/50 hover:bg-[var(--green-primary)]"
                 }`}
               >
-                <div className={`w-3 h-3 rounded-full ${
-                  index === currentIndex ? "bg-white" : "bg-transparent"
-                }`} />
+                <div
+                  className={`w-3 h-3 rounded-full ${
+                    index === currentIndex ? "bg-white" : "bg-transparent"
+                  }`}
+                />
               </button>
             ))}
           </div>
@@ -123,9 +123,7 @@ export const Testimonial = () => {
                   />
                 </div>
               </div>
-              <div className="flex justify-center mb-4 pt-2">
-                {renderStars(testimonial.rating)}
-              </div>
+              <div className="flex justify-center mb-4 pt-2">{renderStars(testimonial.rating)}</div>
               <p className="text-white text-sm leading-relaxed mb-6 text-center">
                 "{testimonial.text}"
               </p>
@@ -137,7 +135,7 @@ export const Testimonial = () => {
             </div>
           ))}
         </div>
-        
+
         <div className="flex justify-center space-x-3">
           {testimonials.map((_, index) => (
             <button
