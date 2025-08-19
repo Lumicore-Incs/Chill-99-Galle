@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import image1 from "../../assets/imagecaro-01.jpg";
 import image2 from "../../assets/imagecaro-02.jpg";
 import image3 from "../../assets/imagecaro-03.jpg";
@@ -60,7 +60,6 @@ const ImageCarousel: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-
   return (
     <section className="w-full relative overflow-hidden flex items-center justify-center py-8">
       <div className="relative w-full max-w-7xl mx-auto px-4">
@@ -78,31 +77,29 @@ const ImageCarousel: React.FC = () => {
             {/* Mobile: Show only current image */}
             <div className="block md:hidden">
               <div
-  className="relative cursor-pointer w-64 h-80"
-  onClick={() =>
-    setHoveredIndex(hoveredIndex === currentIndex ? null : currentIndex)
-  }
-  onMouseEnter={() => setHoveredIndex(currentIndex)}
-  onMouseLeave={() => setHoveredIndex(null)}
->
-  <div className="relative w-full h-full rounded-[5px] overflow-hidden shadow-2xl">
-    <img
-      src={carouselItems[currentIndex].image}
-      alt={carouselItems[currentIndex].title}
-      className="w-full h-full object-cover"
-    />
-    {(hoveredIndex === currentIndex) && (
-      <div className="absolute inset-0 bg-black/50 transition-all duration-300">
-        <div className="absolute inset-4 border-2 border-[var(--green-primary)] rounded-[5px]"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <h3 className="text-[var(--green-primary)] text-3xl font-bold text-center">
-            {carouselItems[currentIndex].title}
-          </h3>
-        </div>
-      </div>
-    )}
-  </div>
-</div>
+                className="relative cursor-pointer w-64 h-80"
+                onClick={() => setHoveredIndex(hoveredIndex === currentIndex ? null : currentIndex)}
+                onMouseEnter={() => setHoveredIndex(currentIndex)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                <div className="relative w-full h-full rounded-[5px] overflow-hidden shadow-2xl">
+                  <img
+                    src={carouselItems[currentIndex].image}
+                    alt={carouselItems[currentIndex].title}
+                    className="w-full h-full object-cover"
+                  />
+                  {hoveredIndex === currentIndex && (
+                    <div className="absolute inset-0 bg-black/50 transition-all duration-300">
+                      <div className="absolute inset-4 border-2 border-[var(--green-primary)] rounded-[5px]"></div>
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <h3 className="text-[var(--green-primary)] text-3xl font-bold text-center">
+                          {carouselItems[currentIndex].title}
+                        </h3>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
 
             {/* Tablet and Desktop: Show multiple images */}
@@ -111,14 +108,20 @@ const ImageCarousel: React.FC = () => {
                 const offset = window.innerWidth >= 1024 ? i - 2 : i - 1;
                 const index = (currentIndex + offset + carouselItems.length) % carouselItems.length;
                 const item = carouselItems[index];
-                const isCenter = offset === 0;
-                
+                // Add alternating margin classes
+                let marginClass = "";
+                if (i === 0) marginClass = "mt-[3rem]";
+                else if (i === 1) marginClass = "mb-[3rem]";
+                else if (i === 2) marginClass = "mt-[3rem]";
+                else if (i === 3) marginClass = "mb-[3rem]";
+                else if (i === 4) marginClass = "mt-[3rem]";
                 return (
                   <div
                     key={`${item.id}-${currentIndex}-${i}`}
                     className={`
                       relative cursor-pointer transition-all duration-700 ease-in-out
-                      ${isCenter ? 'w-72 h-96 lg:w-80 lg:h-[400px] z-10' : 'w-48 h-64 lg:w-60 lg:h-80 z-5 opacity-70'}
+                      ${"w-48 h-64 lg:w-60 lg:h-80 z-5 opacity-70 gap-3"}
+                      ${marginClass}
                     `}
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
@@ -130,7 +133,6 @@ const ImageCarousel: React.FC = () => {
                         alt={item.title}
                         className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                       />
-                      
                       {hoveredIndex === index && (
                         <div className="absolute inset-0 bg-black/50 transition-all duration-300">
                           <div className="absolute inset-4 border-2 border-[var(--green-primary)] rounded-[5px]"></div>

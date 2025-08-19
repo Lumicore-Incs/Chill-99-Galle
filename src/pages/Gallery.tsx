@@ -1,3 +1,4 @@
+import { useState } from "react";
 import formimg2 from "../assets/imagecaro-01.jpg";
 import formimg1 from "../assets/imageside.jpg";
 import { Footer } from "../components/common/Footer";
@@ -28,6 +29,131 @@ const galleryImageData = [
 ];
 
 export const Gallery = () => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    guests: "1 Person",
+    date: "",
+    time: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Function to generate sample data
+  const generateSampleData = () => {
+    const sampleData = {
+      fullName: "John Doe",
+      email: "dev.mg4@gmail.com",
+      phone: "+1-555-123-4567",
+      guests: "2 People",
+      date: "2025-08-25", // A week from today
+      time: "19:30", // 7:30 PM
+    };
+
+    setFormData(sampleData);
+    console.log("📝 Sample data generated:", sampleData);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    console.log("🔥 handleSubmit function called!");
+    e.preventDefault();
+    console.log("📝 Form data:", formData);
+    setIsSubmitting(true);
+
+    try {
+      // Validate required fields
+      if (
+        !formData.fullName ||
+        !formData.email ||
+        !formData.phone ||
+        !formData.date ||
+        !formData.time
+      ) {
+        console.log("❌ Validation failed - missing fields");
+        alert("Please fill in all required fields!");
+        setIsSubmitting(false);
+        return;
+      }
+
+      console.log("✅ Validation passed - creating email...");
+
+      // Create formatted email content
+      const subject = `New Reservation Request - ${formData.fullName}`;
+      const emailBody = `
+New Reservation Request from Chill 99 Gallery
+
+Customer Details:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 Full Name: ${formData.fullName}
+📧 Email: ${formData.email}
+📞 Phone: ${formData.phone}
+
+Reservation Details:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+👥 Number of Guests: ${formData.guests}
+📅 Preferred Date: ${formData.date}
+🕐 Preferred Time: ${formData.time}
+
+Please contact the customer to confirm this reservation.
+
+Best regards,
+Chill 99 Reservation System
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This is an automated email from the Chill 99 website reservation system.
+      `.trim();
+
+      // Using mailto to open default email client
+      const mailtoLink = `mailto:mg4.aca@gmail.com?subject=${encodeURIComponent(
+        subject
+      )}&body=${encodeURIComponent(emailBody)}`;
+
+      // Open email client with pre-filled reservation details
+      window.open(mailtoLink, "_blank");
+
+      // Store reservation in localStorage as backup
+      const reservationData = {
+        ...formData,
+        timestamp: new Date().toISOString(),
+        id: `res_${Date.now()}`,
+      };
+
+      const existingReservations = JSON.parse(localStorage.getItem("chill99_reservations") || "[]");
+      existingReservations.push(reservationData);
+      localStorage.setItem("chill99_reservations", JSON.stringify(existingReservations));
+
+      // Reset form
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        guests: "1 Person",
+        date: "",
+        time: "",
+      });
+
+      alert(
+        "Reservation request created! Your default email client should open with the reservation details. The reservation has also been saved locally as backup."
+      );
+    } catch (error) {
+      console.error("Error processing reservation:", error);
+      alert(
+        "Sorry, there was an error processing your reservation. Please try again or contact us directly."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="w-full overflow-x-hidden relative">
       <TopLine />
@@ -114,27 +240,56 @@ export const Gallery = () => {
         >
           <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">Booking Table</p>
           <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[#FFD580] font-semibold mb-8">
-            Make Your Reservation
+            Make Your Reservations
           </h2>
 
+          {/* Sample Data Button */}
+          <div className="mb-4">
+            <button
+              type="button"
+              onClick={generateSampleData}
+              className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition-all duration-300"
+            >
+              📝 Fill Sample Data
+            </button>
+          </div>
+
           {/* Form fields */}
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
             <input
               type="text"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleInputChange}
               placeholder="Full Name"
+              required
               className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
             />
             <input
               type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
               placeholder="Email Address"
+              required
               className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
             />
             <input
               type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
               placeholder="Phone Number"
+              required
               className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
             />
-            <select className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none">
+            <select
+              name="guests"
+              value={formData.guests}
+              onChange={handleInputChange}
+              required
+              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
+            >
               <option>1 Person</option>
               <option>2 People</option>
               <option>3 People</option>
@@ -142,19 +297,32 @@ export const Gallery = () => {
             </select>
             <input
               type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleInputChange}
+              required
               className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
             />
             <input
               type="time"
+              name="time"
+              value={formData.time}
+              onChange={handleInputChange}
+              required
               className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
             />
-          </form>
 
-          <div className="flex items-center text-sm sm:text-base lg:text-lg font-medium mt-6">
-            <button className="flex items-center gap-3 px-4 lg:px-5 py-2 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer">
-              BOOKING TABLE
-            </button>
-          </div>
+            <div className="flex items-center text-sm sm:text-base lg:text-lg font-medium mt-6 md:col-span-2">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                onClick={() => console.log("🔘 Button clicked directly!")}
+                className="flex items-center gap-3 px-4 lg:px-5 py-2 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? "SENDING..." : "BOOKING TABLE"}
+              </button>
+            </div>
+          </form>
         </div>
 
         {/* Right image */}
