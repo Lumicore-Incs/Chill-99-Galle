@@ -1,5 +1,8 @@
 import { Menu as MenuIcon, X } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import logo from "../../assets/chill-99.png";
+import { useReservationNavigation } from "../../utils/navigation";
 // Helper to scroll to footer
 const scrollToFooter = () => {
   const footer = document.getElementById("footer-section");
@@ -7,9 +10,6 @@ const scrollToFooter = () => {
     footer.scrollIntoView({ behavior: "smooth" });
   }
 };
-import { useNavigate } from "react-router-dom";
-import logo from "../../assets/chill-99.png";
-import { useReservationNavigation } from "../../utils/navigation";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

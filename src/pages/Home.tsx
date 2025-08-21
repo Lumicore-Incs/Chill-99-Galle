@@ -1,33 +1,33 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { CalendarDays, MessagesSquare } from "lucide-react";
+import { useState } from "react";
+import { FaChevronRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { Navbar } from "../components/common/Navbar";
-import { TopLine } from "../components/common/TopLine";
-import banner1 from "../assets/header-banner.jpg";
+import aboutbg from "../assets/about-bg.png";
+import about from "../assets/about.png";
+import thirdbanner from "../assets/banner03.jpg";
+import burgerfries from "../assets/burger.jpg";
+import logo from "../assets/chill-99.png";
 import banner2 from "../assets/header-banner-02.jpg";
 import banner3 from "../assets/header-banner-03.png";
-import aboutbg from "../assets/about-bg.png";
-import secondbanner from "../assets/second-banner.jpg";
-import thirdbanner from "../assets/banner03.jpg";
-import about from "../assets/about.png";
-import whychhose from "../assets/whychoose.jpg";
-import popularBg from "../assets/popular-bg.png";
-import { FaChevronRight } from "react-icons/fa6";
-import ImageCarousel from "../components/features/CarouselItem";
-import { PopularMenu } from "../components/features/PopularMenu";
+import banner1 from "../assets/header-banner.jpg";
 import iconchoose02 from "../assets/iconchoose02.png";
 import iconchoose05 from "../assets/iconchoose05.png";
 import iconchoose06 from "../assets/iconchoose06.png";
 import iconchoose01 from "../assets/iconschoose01.png";
 import burger from "../assets/imagecaro-01.jpg";
-import logo from "../assets/chill-99.png";
-import testimonial from "../assets/testimonialbg.png";
-import { Testimonial } from "../components/features/Testimonial";
-import waffles from "../assets/imagecaro-06.jpg";
 import meat from "../assets/imagecaro-04.png";
-import burgerfries from "../assets/burger.jpg";
-import { CalendarDays, MessagesSquare } from "lucide-react";
+import waffles from "../assets/imagecaro-06.jpg";
 import mandala from "../assets/mandala.png";
+import popularBg from "../assets/popular-bg.png";
+import secondbanner from "../assets/second-banner.jpg";
+import testimonial from "../assets/testimonialbg.png";
+import whychhose from "../assets/whychoose.jpg";
+import { Navbar } from "../components/common/Navbar";
+import { TopLine } from "../components/common/TopLine";
+import ImageCarousel from "../components/features/CarouselItem";
+import { PopularMenu } from "../components/features/PopularMenu";
+import { Testimonial } from "../components/features/Testimonial";
 import { useReservationNavigation } from "../utils/navigation";
 
 import { Footer } from "../components/common/Footer";
@@ -167,7 +167,7 @@ export const Home = () => {
             ))}
           </div>
         </motion.div>
-  </section>
+      </section>
 
       {/* About Us */}
       <section
@@ -218,7 +218,7 @@ export const Home = () => {
             transition={{ duration: 0.7, delay: 0.4 }}
           />
         </motion.div>
-  </section>
+      </section>
 
       {/* Breakfast Banner */}
       <section
@@ -260,7 +260,7 @@ export const Home = () => {
             BOOK A SPOT <FaChevronRight />
           </motion.button>
         </motion.div>
-  </section>
+      </section>
 
       {/* Image Carousel */}
       <section className="bg-[var(--color-navbar)] min-h-[400px] lg:h-[571px] w-full flex items-center justify-center">
@@ -298,7 +298,7 @@ export const Home = () => {
         >
           <PopularMenu />
         </motion.div>
-  </section>
+      </section>
 
       {/* Table Booking Banner */}
       <motion.section

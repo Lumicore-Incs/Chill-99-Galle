@@ -1,23 +1,22 @@
-import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Alert, Snackbar } from "@mui/material";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { FaChevronRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import image3 from "../assets/biriyani.jpg";
+import { default as formimg2, default as image1 } from "../assets/imagecaro-01.jpg";
+import waffles1 from "../assets/imagecaro-06.jpg";
+import formimg1 from "../assets/imageside.jpg";
+import banner from "../assets/menubanner.png";
+import popularBg from "../assets/popular-bg.png";
+import secondbanner from "../assets/second-banner.jpg";
+import image2 from "../assets/soup.jpg";
+import image4 from "../assets/spagetty.jpg";
+import { Footer } from "../components/common/Footer";
 import { Navbar } from "../components/common/Navbar";
 import { TopLine } from "../components/common/TopLine";
-import banner from "../assets/menubanner.png";
-import image1 from "../assets/imagecaro-01.jpg";
-import image2 from "../assets/soup.jpg";
-import image3 from "../assets/biriyani.jpg";
-import image4 from "../assets/spagetty.jpg";
-import formimg1 from "../assets/imageside.jpg";
-import formimg2 from "../assets/imagecaro-01.jpg";
-import secondbanner from "../assets/second-banner.jpg";
-import { FaChevronRight } from "react-icons/fa";
-import { Footer } from "../components/common/Footer";
 import { useReservationNavigation } from "../utils/navigation";
-import popularBg from "../assets/popular-bg.png";
-import waffles1 from "../assets/imagecaro-06.jpg";
 
 interface MenuItem {
   id: number;
@@ -105,18 +104,24 @@ export const Menu = () => {
   // Handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validation
-    if (!formData.fullName || !formData.email || !formData.phone || !formData.date || !formData.time) {
+    if (
+      !formData.fullName ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.date ||
+      !formData.time
+    ) {
       showSnackbar("Please fill in all required fields", "error");
       return;
     }
@@ -136,14 +141,14 @@ export const Menu = () => {
       };
 
       await emailjs.send(
-        'service_ga0l9mu',
-        'template_i110m2w',
+        "service_ga0l9mu",
+        "template_i110m2w",
         templateParams,
-        'p1sWGViGQPTgg6qBM'
+        "p1sWGViGQPTgg6qBM"
       );
 
       showSnackbar("Reservation request sent successfully! We'll contact you soon.", "success");
-      
+
       // Reset form
       setFormData({
         fullName: "",
@@ -153,9 +158,8 @@ export const Menu = () => {
         date: "",
         time: "",
       });
-
     } catch (error) {
-      console.error('EmailJS Error:', error);
+      console.error("EmailJS Error:", error);
       showSnackbar("Failed to send reservation request. Please try again.", "error");
     } finally {
       setIsSubmitting(false);
@@ -201,8 +205,7 @@ export const Menu = () => {
               transition={{ duration: 0.7, delay: 0.3 }}
               className="text-base sm:text-lg lg:text-xl italic text-[var(--green-primary)] font-medium"
             >
-              Browse our selection of freshly crafted dishes made to delight
-              your taste buds.
+              Browse our selection of freshly crafted dishes made to delight your taste buds.
             </motion.p>
           </div>
         </motion.div>
@@ -216,9 +219,7 @@ export const Menu = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="flex flex-col items-center text-center"
         >
-          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">
-            Choose Best Dishes
-          </p>
+          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">Choose Best Dishes</p>
           <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">
             Soup & Salad Selection
           </h2>
@@ -360,7 +361,7 @@ export const Menu = () => {
           </h2>
         </div>
         <div className="flex items-center text-sm sm:text-base lg:text-lg font-medium">
-          <button 
+          <button
             onClick={handleReservationClick}
             className="flex items-center gap-3 px-4 lg:px-5 py-2 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer"
           >
@@ -377,9 +378,7 @@ export const Menu = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="flex flex-col items-center text-center"
         >
-          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">
-            Choose Best Dishes
-          </p>
+          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">Choose Best Dishes</p>
           <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">
             Chill 99 Restaurant Menu
           </h2>
@@ -447,7 +446,10 @@ export const Menu = () => {
       </section>
 
       {/* Mobile-Optimized Reservation Form Section */}
-      <section className="bg-[#1F0D09] w-full min-h-screen flex items-center justify-center relative" id="reservation-section">
+      <section
+        className="bg-[#1F0D09] w-full min-h-screen flex items-center justify-center relative"
+        id="reservation-section"
+      >
         {/* Left image - Hidden on mobile and tablet */}
         <img
           src={formimg1}
@@ -465,7 +467,10 @@ export const Menu = () => {
           </h2>
 
           {/* Form - Single column on mobile, two columns on larger screens */}
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full max-w-lg lg:max-w-none">
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full max-w-lg lg:max-w-none"
+          >
             <input
               type="text"
               name="fullName"
@@ -493,7 +498,7 @@ export const Menu = () => {
               className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white placeholder-gray-300 min-h-[48px]"
               required
             />
-            <select 
+            <select
               name="guests"
               value={formData.guests}
               onChange={handleInputChange}
@@ -525,17 +530,17 @@ export const Menu = () => {
           </form>
 
           <div className="flex justify-center mt-6">
-            <button 
+            <button
               type="submit"
               onClick={handleSubmit}
               disabled={isSubmitting}
               className={`flex items-center gap-3 px-6 lg:px-8 py-4 text-base lg:text-lg font-semibold rounded-lg transition-all duration-500 cursor-pointer min-h-[48px] min-w-[200px] justify-center ${
-                isSubmitting 
-                  ? 'bg-gray-500 cursor-not-allowed' 
-                  : 'bg-[var(--green-primary)] hover:bg-[var(--green-dark)]'
+                isSubmitting
+                  ? "bg-gray-500 cursor-not-allowed"
+                  : "bg-[var(--green-primary)] hover:bg-[var(--green-dark)]"
               }`}
             >
-              {isSubmitting ? 'SENDING...' : 'BOOK TABLE'} <FaChevronRight />
+              {isSubmitting ? "SENDING..." : "BOOK TABLE"} <FaChevronRight />
             </button>
           </div>
         </div>
@@ -553,38 +558,44 @@ export const Menu = () => {
         open={snackbar.open}
         autoHideDuration={6000}
         onClose={handleSnackbarClose}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <Alert
           onClose={handleSnackbarClose}
           severity={snackbar.severity}
           sx={{
-            width: '100%',
-            backgroundColor: snackbar.severity === 'success' ? '#FFD580' : 
-                           snackbar.severity === 'error' ? '#f44336' : 
-                           snackbar.severity === 'warning' ? '#ff9800' : '#2196f3',
-            color: snackbar.severity === 'success' ? '#1F0D09' : 'white',
-            '& .MuiAlert-icon': {
-              color: snackbar.severity === 'success' ? '#1F0D09' : 'white'
-            }
+            width: "100%",
+            backgroundColor:
+              snackbar.severity === "success"
+                ? "#FFD580"
+                : snackbar.severity === "error"
+                ? "#f44336"
+                : snackbar.severity === "warning"
+                ? "#ff9800"
+                : "#2196f3",
+            color: snackbar.severity === "success" ? "#1F0D09" : "white",
+            "& .MuiAlert-icon": {
+              color: snackbar.severity === "success" ? "#1F0D09" : "white",
+            },
           }}
         >
           {snackbar.message}
         </Alert>
       </Snackbar>
 
-      <section className="bg-[#1F0D09] w-full min-h-[100vh] px-4 lg:px-50 py-12 lg:py-20 flex flex-col items-center justify-center text-white gap-8" style={{
+      <section
+        className="bg-[#1F0D09] w-full min-h-[100vh] px-4 lg:px-50 py-12 lg:py-20 flex flex-col items-center justify-center text-white gap-8"
+        style={{
           backgroundImage: `linear-gradient(to right, #1F0D09C9, #1F0D09C9), url(${popularBg})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
-        }}>
+        }}
+      >
         <div className="flex flex-col items-center text-center">
-          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">
-            Choose Best Dishes
-          </p>
+          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">Choose Best Dishes</p>
           <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">
-             Waffle & Desert Menu
+            Waffle & Desert Menu
           </h2>
         </div>
         <div className="flex flex-col items-center gap-10">

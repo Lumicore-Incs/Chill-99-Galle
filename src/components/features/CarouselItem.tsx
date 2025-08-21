@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import image1 from "../../assets/imagecaro-01.jpg";
 import image2 from "../../assets/imagecaro-02.jpg";
 import image3 from "../../assets/imagecaro-03.jpg";
@@ -42,11 +42,16 @@ const ImageCarousel: React.FC = () => {
   };
 
   // Helper function to render image item
-  const renderImageItem = (item: CarouselItem, itemIndex: number, key: string, size: "mobile" | "tablet" | "desktop") => {
+  const renderImageItem = (
+    item: CarouselItem,
+    itemIndex: number,
+    key: string,
+    size: "mobile" | "tablet" | "desktop"
+  ) => {
     const sizeClasses = {
       mobile: "w-64 h-80",
       tablet: "w-48 h-64",
-      desktop: "w-60 h-80"
+      desktop: "w-60 h-80",
     };
 
     return (
@@ -70,9 +75,11 @@ const ImageCarousel: React.FC = () => {
             <div className="absolute inset-0 bg-black/50 transition-all duration-300">
               <div className="absolute inset-4 border-2 border-[var(--green-primary)] rounded-lg"></div>
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <h3 className={`text-[var(--green-primary)] font-bold text-center ${
-                  size === "desktop" ? "text-3xl" : "text-xl"
-                }`}>
+                <h3
+                  className={`text-[var(--green-primary)] font-bold text-center ${
+                    size === "desktop" ? "text-3xl" : "text-xl"
+                  }`}
+                >
                   {item.title}
                 </h3>
               </div>
@@ -87,7 +94,6 @@ const ImageCarousel: React.FC = () => {
     <section className="w-full relative overflow-hidden flex items-center justify-center py-8">
       <div className="relative w-full max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-center">
-          
           {/* Mobile: Show only current image */}
           <div className="block md:hidden">
             {renderImageItem(
@@ -102,12 +108,7 @@ const ImageCarousel: React.FC = () => {
           <div className="hidden md:flex lg:hidden items-center justify-center space-x-4">
             {[-1, 0, 1].map((offset, i) => {
               const index = (currentIndex + offset + carouselItems.length) % carouselItems.length;
-              return renderImageItem(
-                carouselItems[index],
-                index,
-                `tablet-${index}-${i}`,
-                "tablet"
-              );
+              return renderImageItem(carouselItems[index], index, `tablet-${index}-${i}`, "tablet");
             })}
           </div>
 
@@ -123,7 +124,6 @@ const ImageCarousel: React.FC = () => {
               );
             })}
           </div>
-          
         </div>
       </div>
     </section>

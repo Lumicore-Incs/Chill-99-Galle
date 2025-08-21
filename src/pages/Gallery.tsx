@@ -1,5 +1,6 @@
 import emailjs from "@emailjs/browser";
 import { Alert, Snackbar } from "@mui/material";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import formimg2 from "../assets/imagecaro-01.jpg";
 import formimg1 from "../assets/imageside.jpg";
@@ -7,7 +8,6 @@ import { Footer } from "../components/common/Footer";
 import { Navbar } from "../components/common/Navbar";
 import { TopLine } from "../components/common/TopLine";
 import { GalleryCarousel } from "../components/features/GalleryCarousel";
-import { motion } from "framer-motion";
 
 import banner from "../assets/gallery/background-image.jpg";
 import bun01 from "../assets/gallery/bun-01.jpg";
@@ -234,7 +234,9 @@ export const Gallery = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="flex flex-col items-center text-center mb-8"
         >
-          <p className="text-base md:text-lg lg:text-xl text-[#FAF3E0] font-medium">Our Photo Gallery</p>
+          <p className="text-base md:text-lg lg:text-xl text-[#FAF3E0] font-medium">
+            Our Photo Gallery
+          </p>
           <h2 className="italic text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">
             Look at Our Photo Gallery
           </h2>
@@ -262,7 +264,9 @@ export const Gallery = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="w-full lg:w-2/4 px-4 sm:px-6 lg:px-16 py-8 lg:py-12 flex flex-col items-center text-center text-white bg-[#1F0D09]"
         >
-          <p className="text-base sm:text-lg lg:text-xl text-[#FAF3E0] font-medium">Booking Table</p>
+          <p className="text-base sm:text-lg lg:text-xl text-[#FAF3E0] font-medium">
+            Booking Table
+          </p>
           <h2 className="italic text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-[#FFD580] font-semibold mb-6 lg:mb-8">
             Make Your Reservations
           </h2>

@@ -12,8 +12,8 @@ import { TopLine } from "../components/common/TopLine";
 
 const carosalImages = [carosal1, carosal2, carosal3, carosal4, carosal5];
 
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export const Feedback = () => {
   const [rating, setRating] = useState(0);
@@ -32,24 +32,26 @@ export const Feedback = () => {
         }}
       >
         <div className="flex flex-col text-center lg:text-left max-w-4xl lg:absolute lg:left-[10%]">
-            <motion.div className="mb-6"
-              initial={{ y: -30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 className="text-2xl sm:text-3xl lg:text-5xl xl:text-6xl font-bold leading-tight">
-                From Your Table to Our Heart at <br className="hidden lg:block" /> Chill 99
-              </h1>
-            </motion.div>
-            <motion.div className="mb-5"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
-              <p className="text-base sm:text-lg lg:text-xl italic text-[var(--green-primary)] font-medium">
-                A collection of voices, made to inspire both our hearts and our service.
-              </p>
-            </motion.div>
+          <motion.div
+            className="mb-6"
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h1 className="text-2xl sm:text-3xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+              From Your Table to Our Heart at <br className="hidden lg:block" /> Chill 99
+            </h1>
+          </motion.div>
+          <motion.div
+            className="mb-5"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
+            <p className="text-base sm:text-lg lg:text-xl italic text-[var(--green-primary)] font-medium">
+              A collection of voices, made to inspire both our hearts and our service.
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -141,7 +143,7 @@ export const Feedback = () => {
                       type="button"
                       onClick={() => setRating(star)}
                       className="focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center"
-                      aria-label={`Rate ${star} star${star > 1 ? 's' : ''}`}
+                      aria-label={`Rate ${star} star${star > 1 ? "s" : ""}`}
                       whileHover={{ scale: 1.2 }}
                       whileTap={{ scale: 0.9 }}
                     >
