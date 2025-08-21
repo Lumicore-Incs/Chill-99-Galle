@@ -9,12 +9,14 @@ import thirdbanner from "../assets/banner03.jpg";
 import burgerfries from "../assets/burger.jpg";
 import logo from "../assets/chill-99.png";
 import banner2 from "../assets/header-banner-02.jpg";
-import banner3 from "../assets/header-banner-03.png";
+import banner3 from "../assets/header-banner-03.jpg";
 import banner1 from "../assets/header-banner.jpg";
 import iconchoose02 from "../assets/iconchoose02.png";
 import iconchoose05 from "../assets/iconchoose05.png";
 import iconchoose06 from "../assets/iconchoose06.png";
 import iconchoose01 from "../assets/iconschoose01.png";
+import iconchoose03 from "../assets/iconschoose03.png";
+import iconchoose04 from "../assets/iconschoose04.png";
 import burger from "../assets/imagecaro-01.jpg";
 import meat from "../assets/imagecaro-04.png";
 import waffles from "../assets/imagecaro-06.jpg";
@@ -22,6 +24,7 @@ import mandala from "../assets/mandala.png";
 import popularBg from "../assets/popular-bg.png";
 import secondbanner from "../assets/second-banner.jpg";
 import testimonial from "../assets/testimonialbg.png";
+import uberLogo from "../assets/uber-logo.svg";
 import whychhose from "../assets/whychoose.jpg";
 import { Navbar } from "../components/common/Navbar";
 import { TopLine } from "../components/common/TopLine";
@@ -37,7 +40,9 @@ const banners = [
     image: banner1,
     title: (
       <>
-        Chill 99 - Your<span className="block">Everyday Escape</span>
+        Chill 99 - Your
+        <br />
+        Everyday Escape
       </>
     ),
     subtitle: (
@@ -48,19 +53,24 @@ const banners = [
     ),
     buttons: [
       {
-        text: "Explore More",
-        color: "bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500",
+        text: "Order now",
+        color: "bg-[#05A357] hover:bg-[#059e4e] transition-all duration-500",
+        href: "https://www.ubereats.com/lk/store/chill-99-galle-fort-galle/Uy9eNDD1VGq5rv6BTOMk-A?srsltid=AfmBOopcnc5JJKxHWa-Tp-sFn0LwZCVJE98R15M5PM6LFSsVwTcSYtmJ",
+        icon: (
+          <img src={uberLogo} alt="Uber Eats" style={{ height: "30px", borderRadius: "6px" }} />
+        ),
       },
-      { text: "Get Delivery", color: "bg-[#5B443F] text-white" },
+      {
+        text: "Book a Table",
+        color: "bg-[#FFD580] text-[#31201B] hover:bg-[#e6c16b] transition-all duration-500",
+        href: "#booking-table-section",
+        icon: null,
+      },
     ],
   },
   {
     image: banner2,
-    title: (
-      <>
-        Workshop Seats For You &<span className="block">Your Loved Ones</span>
-      </>
-    ),
+    title: <>Workshop Seats For You & Your Loved Ones</>,
     subtitle: (
       <>
         Inspiring moments, shared creativity, and a space to grow together.
@@ -76,12 +86,7 @@ const banners = [
   },
   {
     image: banner3,
-    title: (
-      <>
-        Breakfast Reservation – Share
-        <span className="block">the Morning Together</span>
-      </>
-    ),
+    title: <>Breakfast Reservation – Share the Morning Together</>,
     subtitle: (
       <>
         Warm sips, hearty bites, and mornings made meaningful. We’re
@@ -117,13 +122,14 @@ export const Home = () => {
 
       {/* Hero Banner */}
       <section
-        className="text-white flex items-center justify-center px-4 lg:px-50 transition-all duration-700 min-h-[60vh] lg:min-h-[80vh]"
+        className="text-white flex items-center justify-center px-4 lg:px-50 transition-all duration-700 min-h-[60vh] lg:min-h-[96vh]"
         style={{
           backgroundImage: `linear-gradient(to right, #230700, #8C4A3B00), url(${current.image})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
           cursor: "pointer",
+          marginTop: "64px", // Adjust this value to match your navbar height
         }}
         onClick={handleBannerChange}
         onTouchStart={handleBannerChange}
@@ -132,39 +138,57 @@ export const Home = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex flex-col text-center lg:text-left max-w-4xl"
+          className="flex flex-row text-left max-w-4xl left-[-20%] relative"
         >
-          <div className="mb-3">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-tight"
-            >
-              {current.title}
-            </motion.h1>
-          </div>
-          <div className="mb-5">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-              className="text-base sm:text-lg lg:text-xl italic text-[var(--green-primary)] font-medium"
-            >
-              {current.subtitle}
-            </motion.p>
-          </div>
-          <div className="flex flex-col sm:flex-row text-[var(--color-topline)] items-center justify-center lg:justify-start gap-3 text-sm sm:text-base lg:text-lg font-medium">
-            {current.buttons.map((btn, idx) => (
-              <motion.button
-                key={idx}
-                whileHover={{ scale: 1.08 }}
-                whileTap={{ scale: 0.96 }}
-                className={`${btn.color} flex items-center gap-3 px-6 lg:px-8 py-4 rounded-lg cursor-pointer w-full sm:w-auto justify-center min-h-[48px] min-w-[160px]`}
+          <img src={logo} alt="Chill 99 Logo" style={{ height: "11vw", marginRight: "16px" }} />
+          <div>
+            <div className="mb-3">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.3 }}
+                className="flex items-center text-left text-2xl sm:text-3xl lg:text-5xl font-bold leading-tight"
+                style={{ color: "#ffc000" }}
               >
-                {btn.text} <FaChevronRight />
-              </motion.button>
-            ))}
+                {current.title}
+              </motion.h1>
+            </div>
+            <div className="mb-5">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.4 }}
+                className="text-base sm:text-lg lg:text-xl italic text-[var(--green-primary)] font-medium"
+              >
+                {current.subtitle}
+              </motion.p>
+            </div>
+            <div className="flex flex-col sm:flex-row text-[var(--color-topline)] items-center justify-center lg:justify-start gap-3 text-sm sm:text-base lg:text-lg font-medium">
+              {current.buttons.map((btn, idx) =>
+                btn.href ? (
+                  <motion.a
+                    key={idx}
+                    href={btn.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.96 }}
+                    className={`${btn.color} flex items-center gap-3 px-6 lg:px-8 rounded-lg cursor-pointer w-full sm:w-auto justify-center min-h-[48px] min-w-[160px]`}
+                  >
+                    {btn.icon} {btn.text} <FaChevronRight />
+                  </motion.a>
+                ) : (
+                  <motion.button
+                    key={idx}
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.96 }}
+                    className={`${btn.color} flex items-center gap-3 px-6 lg:px-8 rounded-lg cursor-pointer w-full sm:w-auto justify-center min-h-[48px] min-w-[160px]`}
+                  >
+                    {btn.icon} {btn.text} <FaChevronRight />
+                  </motion.button>
+                )
+              )}
+            </div>
           </div>
         </motion.div>
       </section>
@@ -383,7 +407,28 @@ export const Home = () => {
             </h2>
           </div>
 
-          {Array.from({ length: 4 }, (_, i) => (
+          {[
+            {
+              icon: iconchoose01,
+              title: "Signature Dishes, Freshly Prepared Daily",
+              desc: "Enjoy a range of handcrafted dishes, made with bold flavors, fresh ingredients, and a whole lot of care.",
+            },
+            {
+              icon: iconchoose02,
+              title: "Coffee That Warms the Soul",
+              desc: "From smooth cappuccinos to bold espresso – we brew every cup with care.",
+            },
+            {
+              icon: iconchoose03,
+              title: "Bubble Tea, Bursting with Flavor",
+              desc: "Discover your new favorite drink among our unique and refreshing bubble tea blends.",
+            },
+            {
+              icon: iconchoose04,
+              title: "A Cozy Escape in Galle Fort",
+              desc: "Relax in a warm, stylish setting tucked inside the historic beauty of Galle Fort.",
+            },
+          ].map((item, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 30 }}
@@ -392,19 +437,12 @@ export const Home = () => {
               transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
               className="flex flex-col sm:flex-row items-start gap-3 text-center sm:text-left"
             >
-              <img
-                src={iconchoose01}
-                alt=""
-                className="w-8 h-8 mx-auto sm:mx-0 mt-2 flex-shrink-0"
-              />
+              <img src={item.icon} alt="" className="w-8 h-8 mx-auto sm:mx-0 mt-2 flex-shrink-0" />
               <div className="flex flex-col">
                 <h3 className="text-[#FAF3E0] font-bold text-lg lg:text-xl xl:text-2xl mb-2">
-                  Signature Dishes, Freshly Prepared Daily
+                  {item.title}
                 </h3>
-                <p className="text-base lg:text-lg font-normal">
-                  Enjoy a range of handcrafted dishes, made with bold flavors, fresh ingredients,
-                  and a whole lot of care.
-                </p>
+                <p className="text-base lg:text-lg font-normal">{item.desc}</p>
               </div>
             </motion.div>
           ))}
