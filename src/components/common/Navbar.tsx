@@ -21,7 +21,7 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="flex items-center justify-between bg-[var(--color-navbar)] px-4 lg:px-20 py-3">
+    <div className="fixed top-0 left-0 w-full z-50 flex items-center justify-between bg-[var(--color-navbar)] px-4 lg:px-20 py-3 shadow-md">
       <div>
         <img src={logo} alt="chill-99-logo" className="w-12 h-12 lg:w-20 lg:h-20" />
       </div>

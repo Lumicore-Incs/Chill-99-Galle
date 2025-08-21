@@ -23,7 +23,7 @@ export const Feedback = () => {
       <Navbar />
       {/* Hero Banner */}
       <section
-        className="text-white flex items-center justify-center px-4 lg:px-50 transition-all duration-700 min-h-[60vh] lg:min-h-[80vh]"
+        className="text-white flex items-center justify-center px-4 lg:px-50 transition-all duration-700 min-h-[60vh] lg:min-h-[96vh]"
         style={{
           backgroundImage: `linear-gradient(to right, #1F0D09E0 60%, #1F0D0900), url('${mainImage}')`,
           backgroundRepeat: "no-repeat",
