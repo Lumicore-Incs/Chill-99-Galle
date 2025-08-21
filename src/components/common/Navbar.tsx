@@ -1,5 +1,12 @@
 import { Menu as MenuIcon, X } from "lucide-react";
 import { useState } from "react";
+// Helper to scroll to footer
+const scrollToFooter = () => {
+  const footer = document.getElementById("footer-section");
+  if (footer) {
+    footer.scrollIntoView({ behavior: "smooth" });
+  }
+};
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/chill-99.png";
 import { useReservationNavigation } from "../../utils/navigation";
@@ -38,20 +45,22 @@ export const Navbar = () => {
             href="/feed-back"
             className="hover:text-[var(--green-primary)] duration-500 transition-all"
           >
-            Feed Back
+            Feedback
           </a>
-          <a
-            href="#contact"
-            className="hover:text-[var(--green-primary)] duration-500 transition-all"
+          <button
+            type="button"
+            onClick={scrollToFooter}
+            className="hover:text-[var(--green-primary)] duration-500 transition-all bg-transparent border-none cursor-pointer px-0 text-inherit font-inherit"
+            style={{ background: "none" }}
           >
             Contact
-          </a>
+          </button>
         </nav>
       </div>
 
       {/* Desktop CTA Button */}
       <div className="hidden lg:block">
-        <button 
+        <button
           onClick={handleReservationClick}
           className="bg-[var(--green-primary)] text-[var(--color-topline)] text-md py-2 px-5 rounded-lg font-semibold cursor-pointer hover:bg-[var(--green-dark)] transition-all duration-500"
         >
@@ -94,16 +103,20 @@ export const Navbar = () => {
               onClick={handleMobileNavClick}
               className="hover:text-[var(--green-primary)] duration-500 transition-all py-3 text-lg min-h-[44px] flex items-center"
             >
-              Feed Back
+              Feedback
             </a>
-            <a
-              href="#contact"
-              onClick={handleMobileNavClick}
-              className="hover:text-[var(--green-primary)] duration-500 transition-all py-3 text-lg min-h-[44px] flex items-center"
+            <button
+              type="button"
+              onClick={() => {
+                scrollToFooter();
+                handleMobileNavClick();
+              }}
+              className="hover:text-[var(--green-primary)] duration-500 transition-all py-3 text-lg min-h-[44px] flex items-center bg-transparent border-none cursor-pointer px-0 text-inherit font-inherit"
+              style={{ background: "none" }}
             >
               Contact
-            </a>
-            <button 
+            </button>
+            <button
               onClick={() => {
                 handleReservationClick();
                 handleMobileNavClick();

@@ -11,7 +11,7 @@ const galleryImages = [gal1, coffee, gal2, gal3, gal4, gal5];
 
 export const Footer = () => {
   return (
-    <footer className="relative bg-[#261410] w-full min-h-[60vh] lg:h-[90vh] xl:h-[70vh] text-white px-4 lg:px-50 py-8 lg:py-10">
+    <footer id="footer-section" className="relative bg-[#261410] w-full min-h-[60vh] lg:h-[90vh] xl:h-[70vh] text-white px-4 lg:px-50 py-8 lg:py-10">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {/* Logo */}

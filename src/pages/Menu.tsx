@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Alert, Snackbar } from "@mui/material";
@@ -177,43 +178,78 @@ export const Menu = () => {
           cursor: "pointer",
         }}
       >
-        <div className="flex flex-col text-center lg:text-left max-w-4xl">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col text-center lg:text-left max-w-4xl"
+        >
           <div className="mb-3">
-            <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-tight">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-tight"
+            >
               Savor Every Bite at Chill 99
-            </h1>
+            </motion.h1>
           </div>
           <div className="mb-5">
-            <p className="text-base sm:text-lg lg:text-xl italic text-[var(--green-primary)] font-medium">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="text-base sm:text-lg lg:text-xl italic text-[var(--green-primary)] font-medium"
+            >
               Browse our selection of freshly crafted dishes made to delight
               your taste buds.
-            </p>
+            </motion.p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section className="bg-[#1F0D09] w-full min-h-[100vh] px-4 lg:px-50 py-12 lg:py-20 flex flex-col items-center justify-center text-white gap-8">
-        <div className="flex flex-col items-center text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex flex-col items-center text-center"
+        >
           <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">
             Choose Best Dishes
           </p>
           <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">
             Soup & Salad Selection
           </h2>
-        </div>
+        </motion.div>
         <div className="flex flex-col items-center gap-10">
-          <div className="flex items-center justify-between flex-col lg:flex-row gap-5">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex items-center justify-between flex-col lg:flex-row gap-5"
+          >
             <div className="w-full bg-[#31201BF0] py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
               <div className="lg:gap-5 w-full flex flex-col">
                 {menuItems.slice(0, 4).map((item) => (
-                  <div
+                  <motion.div
                     key={item.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
                     className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
                   >
-                    <img
+                    <motion.img
                       src={item.image}
                       alt={item.title}
                       className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
                     />
                     <div className="text-center sm:text-left">
                       <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
@@ -223,37 +259,71 @@ export const Menu = () => {
                         Rs. {item.price.toFixed(2)}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
-            <div className="w-full flex justify-center">
-              <img
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="w-full flex justify-center"
+            >
+              <motion.img
                 src={image2}
                 alt="Why choose us"
                 className="w-full max-w-md lg:w-[90%] rounded-lg"
+                initial={{ scale: 0.95, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, delay: 0.5 }}
               />
-            </div>
-          </div>
-          <div className="flex items-center justify-between flex-col-reverse lg:flex-row gap-5">
-            <div className="w-full flex justify-center">
-              <img
+            </motion.div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="flex items-center justify-between flex-col-reverse lg:flex-row gap-5"
+          >
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="w-full flex justify-center"
+            >
+              <motion.img
                 src={image2}
                 alt="Why choose us"
                 className="w-full max-w-md lg:w-[90%] rounded-lg"
+                initial={{ scale: 0.95, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, delay: 0.6 }}
               />
-            </div>
+            </motion.div>
             <div className="w-full bg-[#31201BF0] py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
               <div className="lg:gap-5 w-full flex flex-col">
                 {menuItems.slice(0, 4).map((item) => (
-                  <div
+                  <motion.div
                     key={item.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
                     className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
                   >
-                    <img
+                    <motion.img
                       src={item.image}
                       alt={item.title}
                       className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
                     />
                     <div className="text-center sm:text-left">
                       <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
@@ -263,11 +333,11 @@ export const Menu = () => {
                         Rs. {item.price.toFixed(2)}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -300,14 +370,20 @@ export const Menu = () => {
       </section>
 
       <section className="bg-[#31201B] w-full min-h-[100vh] px-4 lg:px-50 py-12 lg:py-20 flex flex-col items-center justify-center text-white gap-8">
-        <div className="flex flex-col items-center text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex flex-col items-center text-center"
+        >
           <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">
             Choose Best Dishes
           </p>
           <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">
             Chill 99 Restaurant Menu
           </h2>
-        </div>
+        </motion.div>
         {/* menu select bar */}
         <div className="flex items-center justify-center gap-4 flex-wrap">
           <button className="px-4 py-2 rounded-lg bg-[#1F0D09] hover:bg-[#81685F] transition-all duration-500">
@@ -331,16 +407,30 @@ export const Menu = () => {
         </div>
 
         <div className="w-full bg-[#1F0D09] flex flex-col items-center justify-between py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full"
+          >
             {menuItems.slice(0, 6).map((item) => (
-              <div
+              <motion.div
                 key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
                 className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
               >
-                <img
+                <motion.img
                   src={item.image}
                   alt={item.title}
                   className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                  initial={{ scale: 0.95, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
                 />
                 <div className="text-center sm:text-left">
                   <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
@@ -350,9 +440,9 @@ export const Menu = () => {
                     Rs. {item.price.toFixed(2)}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -498,18 +588,38 @@ export const Menu = () => {
           </h2>
         </div>
         <div className="flex flex-col items-center gap-10">
-          <div className="flex items-center justify-center flex-col lg:flex-row gap-5">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex items-center justify-center flex-col lg:flex-row gap-5"
+          >
             <div className="w-full bg-[#00000051] py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, delay: 0.4 }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full"
+              >
                 {menuItems.map((item) => (
-                  <div
+                  <motion.div
                     key={item.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
                     className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
                   >
-                    <img
+                    <motion.img
                       src={item.image}
                       alt={item.title}
                       className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
                     />
                     <div className="text-center sm:text-left">
                       <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
@@ -519,30 +629,60 @@ export const Menu = () => {
                         Rs. {item.price.toFixed(2)}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
-            <div className="flex justify-center lg:w-[50%] w-full h-100">
-              <img
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="flex justify-center lg:w-[50%] w-full h-100"
+            >
+              <motion.img
                 src={waffles1}
                 alt="Why choose us"
                 className="w-full max-w-md lg:w-[90%] rounded-lg h-auto object-cover"
+                initial={{ scale: 0.95, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, delay: 0.5 }}
               />
-            </div>
-          </div>
-          <div className="flex items-center justify-center flex-col lg:flex-row-reverse gap-5">
+            </motion.div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex items-center justify-center flex-col lg:flex-row-reverse gap-5"
+          >
             <div className="w-full bg-[#00000051] py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, delay: 0.4 }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full"
+              >
                 {menuItems.map((item) => (
-                  <div
+                  <motion.div
                     key={item.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
                     className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
                   >
-                    <img
+                    <motion.img
                       src={item.image}
                       alt={item.title}
                       className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
                     />
                     <div className="text-center sm:text-left">
                       <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
@@ -552,18 +692,28 @@ export const Menu = () => {
                         Rs. {item.price.toFixed(2)}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
-            <div className="flex justify-center lg:w-[50%] w-full h-100">
-              <img
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="flex justify-center lg:w-[50%] w-full h-100"
+            >
+              <motion.img
                 src={waffles1}
                 alt="Why choose us"
                 className="w-full max-w-md lg:w-[90%] rounded-lg h-auto object-cover"
+                initial={{ scale: 0.95, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, delay: 0.5 }}
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 

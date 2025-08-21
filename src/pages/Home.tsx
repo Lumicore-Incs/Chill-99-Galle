@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "../components/common/Navbar";
 import { TopLine } from "../components/common/TopLine";
@@ -127,29 +128,46 @@ export const Home = () => {
         onClick={handleBannerChange}
         onTouchStart={handleBannerChange}
       >
-        <div className="flex flex-col text-center lg:text-left max-w-4xl">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="flex flex-col text-center lg:text-left max-w-4xl"
+        >
           <div className="mb-3">
-            <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-tight">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-tight"
+            >
               {current.title}
-            </h1>
+            </motion.h1>
           </div>
           <div className="mb-5">
-            <p className="text-base sm:text-lg lg:text-xl italic text-[var(--green-primary)] font-medium">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="text-base sm:text-lg lg:text-xl italic text-[var(--green-primary)] font-medium"
+            >
               {current.subtitle}
-            </p>
+            </motion.p>
           </div>
           <div className="flex flex-col sm:flex-row text-[var(--color-topline)] items-center justify-center lg:justify-start gap-3 text-sm sm:text-base lg:text-lg font-medium">
             {current.buttons.map((btn, idx) => (
-              <button
+              <motion.button
                 key={idx}
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.96 }}
                 className={`${btn.color} flex items-center gap-3 px-6 lg:px-8 py-4 rounded-lg cursor-pointer w-full sm:w-auto justify-center min-h-[48px] min-w-[160px]`}
               >
                 {btn.text} <FaChevronRight />
-              </button>
+              </motion.button>
             ))}
           </div>
-        </div>
-      </section>
+        </motion.div>
+  </section>
 
       {/* About Us */}
       <section
@@ -161,7 +179,13 @@ export const Home = () => {
           backgroundPosition: "center",
         }}
       >
-        <div className="flex flex-col text-center lg:text-left lg:w-1/2">
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex flex-col text-center lg:text-left lg:w-1/2"
+        >
           <h2 className="font-medium text-lg">ABOUT US</h2>
           <p className="text-[var(--green-primary)] font-semibold italic text-2xl sm:text-3xl lg:text-4xl mb-3">
             Where tradition meets taste in the heart of Galle Fort.
@@ -176,11 +200,25 @@ export const Home = () => {
             satisfying dishes in a relaxed, stylish setting — the perfect escape from the everyday
             bustle.
           </p>
-        </div>
-        <div className="lg:w-1/2 flex justify-center">
-          <img src={about} alt="About Chill 99" className="w-full max-w-md lg:max-w-lg" />
-        </div>
-      </section>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="lg:w-1/2 flex justify-center"
+        >
+          <motion.img
+            src={about}
+            alt="About Chill 99"
+            className="w-full max-w-md lg:max-w-lg"
+            initial={{ scale: 0.95, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+          />
+        </motion.div>
+  </section>
 
       {/* Breakfast Banner */}
       <section
@@ -192,23 +230,37 @@ export const Home = () => {
           backgroundPosition: "center",
         }}
       >
-        <div className="text-center lg:text-left">
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-center lg:text-left"
+        >
           <p className="font-medium text-lg lg:text-xl mb-2">
             Start your day with a cozy breakfast at Chill 99.
           </p>
           <h2 className="text-[var(--green-primary)] italic font-semibold text-2xl sm:text-3xl lg:text-4xl">
             Breakfast Reservation – Share the Morning Together
           </h2>
-        </div>
-        <div className="flex items-center text-sm sm:text-base lg:text-lg font-medium">
-          <button
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="flex items-center text-sm sm:text-base lg:text-lg font-medium"
+        >
+          <motion.button
             onClick={handleReservationClick}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.96 }}
             className="flex items-center gap-3 px-6 lg:px-8 py-4 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center"
           >
             BOOK A SPOT <FaChevronRight />
-          </button>
-        </div>
-      </section>
+          </motion.button>
+        </motion.div>
+  </section>
 
       {/* Image Carousel */}
       <section className="bg-[var(--color-navbar)] min-h-[400px] lg:h-[571px] w-full flex items-center justify-center">
@@ -225,19 +277,35 @@ export const Home = () => {
           backgroundPosition: "center",
         }}
       >
-        <div className="flex flex-col items-center text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex flex-col items-center text-center"
+        >
           <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">Choose Best Dishes</p>
           <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">
             Chill 99 – Customer Favorites
           </h2>
-        </div>
-        <div className="w-full max-w-6xl">
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="w-full max-w-6xl"
+        >
           <PopularMenu />
-        </div>
-      </section>
+        </motion.div>
+  </section>
 
       {/* Table Booking Banner */}
-      <section
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
         className="text-white flex flex-col lg:flex-row items-center justify-between gap-6 px-4 lg:px-50 py-8 lg:py-0 min-h-[40vh] lg:h-[271px] bg-[#1F0D09]"
         style={{
           backgroundImage: `linear-gradient(to right, #1F0D09BA, #1F0D09BA), url(${thirdbanner})`,
@@ -246,28 +314,68 @@ export const Home = () => {
           backgroundPosition: "center",
         }}
       >
-        <div className="text-center lg:text-left">
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-center lg:text-left"
+        >
           <p className="font-medium text-lg lg:text-xl mb-2">Need a Table On Chill 99</p>
           <h2 className="text-[var(--green-primary)] italic font-semibold text-2xl sm:text-3xl lg:text-4xl">
             Booking Table For Your & Family Members
           </h2>
-        </div>
-        <div className="flex items-center text-sm sm:text-base lg:text-lg font-medium">
-          <button
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="flex items-center text-sm sm:text-base lg:text-lg font-medium"
+        >
+          <motion.button
             onClick={handleReservationClick}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.96 }}
             className="flex items-center gap-3 px-6 lg:px-8 py-4 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center"
           >
             BOOK A TABLE <FaChevronRight />
-          </button>
-        </div>
-      </section>
+          </motion.button>
+        </motion.div>
+      </motion.section>
 
       {/* Why Choose Us */}
-      <section className="bg-[#261410] w-full min-h-[100vh] px-4 lg:px-50 py-12 lg:py-20 flex flex-col lg:flex-row items-center justify-center text-white gap-8">
-        <div className="w-full lg:w-[40%] flex justify-center">
-          <img src={whychhose} alt="Why choose us" className="w-full max-w-md lg:w-[80%]" />
-        </div>
-        <div className="flex flex-col items-start w-full lg:w-[60%] gap-6">
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+        className="bg-[#261410] w-full min-h-[100vh] px-4 lg:px-50 py-12 lg:py-20 flex flex-col lg:flex-row items-center justify-center text-white gap-8"
+      >
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="w-full lg:w-[40%] flex justify-center"
+        >
+          <motion.img
+            src={whychhose}
+            alt="Why choose us"
+            className="w-full max-w-md lg:w-[80%]"
+            initial={{ scale: 0.95, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+          />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="flex flex-col items-start w-full lg:w-[60%] gap-6"
+        >
           <div className="text-center lg:text-left">
             <p className="text-lg lg:text-xl font-medium text-[#FAF3E0] mb-2">Why Choose Us</p>
             <h2 className="text-[var(--green-primary)] italic font-semibold text-2xl sm:text-3xl lg:text-4xl">
@@ -276,8 +384,12 @@ export const Home = () => {
           </div>
 
           {Array.from({ length: 4 }, (_, i) => (
-            <div
+            <motion.div
               key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
               className="flex flex-col sm:flex-row items-start gap-3 text-center sm:text-left"
             >
               <img
@@ -294,21 +406,31 @@ export const Home = () => {
                   and a whole lot of care.
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* Menu Categories */}
-      <section className="w-full min-h-[400px] lg:h-[441px] bg-[#31201B] px-4 lg:px-50 flex items-center justify-center py-8">
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+        className="w-full min-h-[400px] lg:h-[441px] bg-[#31201B] px-4 lg:px-50 flex items-center justify-center py-8"
+      >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 w-full max-w-6xl">
           {[
             { title: "Cafe Menu", icon: iconchoose02 },
             { title: "Coffee Menu", icon: iconchoose05 },
             { title: "Beverages", icon: iconchoose06 },
           ].map((item, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
               className="relative w-full h-48 lg:h-64 overflow-hidden rounded-lg cursor-pointer group"
             >
               <div
@@ -324,13 +446,17 @@ export const Home = () => {
                 </h3>
               </div>
               <div className="absolute inset-4 lg:inset-8 border-2 border-[var(--green-primary)] opacity-80" />
-            </div>
+            </motion.div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* Testimonials */}
-      <section
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
         className="relative w-full min-h-[80vh] lg:min-h-[100vh] flex flex-col bg-[#31201B] text-white px-4 lg:px-50 py-12 lg:py-20 gap-8 lg:gap-16"
         style={{
           backgroundImage: `linear-gradient(to right, #2D1B17C9, #2D1B17C9), url(${testimonial})`,
@@ -345,45 +471,82 @@ export const Home = () => {
             alt="Chill 99 Logo"
             className="hidden lg:block absolute top-10 left-30 w-32 lg:w-50 h-auto"
           />
-          <div className="flex flex-col items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="flex flex-col items-center justify-center"
+          >
             <p className="text-[#FAF3E0] font-medium text-lg lg:text-xl mb-2">Customer Feedback</p>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[var(--green-primary)] italic">
               What Our Clients Say
             </h2>
-          </div>
+          </motion.div>
         </div>
-        <div className="flex-1 flex items-center justify-center w-full">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="flex-1 flex items-center justify-center w-full"
+        >
           <Testimonial />
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* Statistics */}
-      <section className="bg-[#230700FC] min-h-[250px] lg:h-[300px] w-full flex flex-col lg:flex-row items-center justify-around lg:justify-between px-4 lg:px-50 py-8 lg:py-10 text-white gap-8 lg:gap-0">
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+        className="bg-[#230700FC] min-h-[250px] lg:h-[300px] w-full flex flex-col lg:flex-row items-center justify-around lg:justify-between px-4 lg:px-50 py-8 lg:py-10 text-white gap-8 lg:gap-0"
+      >
         {[
           { number: "120+", title: "Happy Customers", subtitle: "Sweet smiles, daily." },
           { number: "350+", title: "Dishes Served", subtitle: "Flavors with Feeling." },
           { number: "50+", title: "Positive Reviews", subtitle: "A local and tourist favorite." },
         ].map((stat, index) => (
-          <div key={index} className="flex flex-col items-center text-center">
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+            className="flex flex-col items-center text-center"
+          >
             <h3 className="text-[#F4C430] text-3xl sm:text-4xl lg:text-5xl font-medium mb-2">
               {stat.number}
             </h3>
             <h4 className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-2">{stat.title}</h4>
             <p className="text-base lg:text-xl font-medium">{stat.subtitle}</p>
-          </div>
+          </motion.div>
         ))}
-      </section>
+      </motion.section>
 
       {/* Blog/Updates Section */}
-      <section className="bg-[#2D1B17] w-full min-h-[80vh] lg:min-h-[100vh] flex flex-col px-4 lg:px-50 py-8 lg:py-10 gap-8 lg:gap-10 text-[#F5F5F5]">
-        <div className="flex flex-col items-center justify-center text-center">
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+        className="bg-[#2D1B17] w-full min-h-[80vh] lg:min-h-[100vh] flex flex-col px-4 lg:px-50 py-8 lg:py-10 gap-8 lg:gap-10 text-[#F5F5F5]"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex flex-col items-center justify-center text-center"
+        >
           <p className="text-[#FAF3E0] font-medium text-lg lg:text-xl mb-2">
             Get Every Single Update
           </p>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[var(--green-primary)] italic">
             Fresh updates, straight from Chill 99
           </h2>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {[
@@ -391,8 +554,12 @@ export const Home = () => {
             { title: "New Burger Just Dropped", image: burgerfries },
             { title: "Flavor of the Month V Meat Classic", image: meat },
           ].map((update, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
               className="relative w-full h-64 lg:h-[400px] overflow-hidden rounded-lg cursor-pointer group"
             >
               <div
@@ -416,16 +583,20 @@ export const Home = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         <div className="flex items-center justify-center">
-          <button className="flex items-center gap-3 rounded-md cursor-pointer text-[var(--green-primary)] border border-[var(--green-primary)] py-3 px-6 lg:px-8 hover:bg-[var(--green-primary)] hover:text-[var(--color-topline)] transition-all duration-300 min-h-[48px] min-w-[160px] justify-center">
+          <motion.button
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.96 }}
+            className="flex items-center gap-3 rounded-md cursor-pointer text-[var(--green-primary)] border border-[var(--green-primary)] py-3 px-6 lg:px-8 hover:bg-[var(--green-primary)] hover:text-[var(--color-topline)] transition-all duration-300 min-h-[48px] min-w-[160px] justify-center"
+          >
             Explore More <FaChevronRight />
-          </button>
+          </motion.button>
         </div>
-      </section>
+      </motion.section>
 
       {/* Workshop Banner */}
       <section

@@ -7,6 +7,7 @@ import { Footer } from "../components/common/Footer";
 import { Navbar } from "../components/common/Navbar";
 import { TopLine } from "../components/common/TopLine";
 import { GalleryCarousel } from "../components/features/GalleryCarousel";
+import { motion } from "framer-motion";
 
 import banner from "../assets/gallery/background-image.jpg";
 import bun01 from "../assets/gallery/bun-01.jpg";
@@ -194,29 +195,50 @@ export const Gallery = () => {
           cursor: "pointer",
         }}
       >
-        <div className="flex flex-col text-center lg:text-left absolute left-[10%]">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col text-center lg:text-left absolute left-[10%]"
+        >
           <div className="mb-3">
-            <h1 className="text-2xl sm:text-3xl lg:text-[60px] font-bold leading-tight">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="text-2xl sm:text-3xl lg:text-[60px] font-bold leading-tight"
+            >
               A Taste of Moments at <br />
               Chill 99
-            </h1>
+            </motion.h1>
           </div>
           <div className="mb-5">
-            <p className="text-base sm:text-lg lg:text-xl italic text-[var(--green-primary)] font-medium">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="text-base sm:text-lg lg:text-xl italic text-[var(--green-primary)] font-medium"
+            >
               A gallery of flavors, made to please both your eyes and your appetite{" "}
-            </p>
+            </motion.p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Mobile-Optimized Gallery */}
       <section className="bg-[#1F0D09] w-full px-4 lg:px-50 py-12 lg:py-20 flex flex-col items-center justify-center text-white gap-8">
-        <div className="flex flex-col items-center text-center mb-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex flex-col items-center text-center mb-8"
+        >
           <p className="text-base md:text-lg lg:text-xl text-[#FAF3E0] font-medium">Our Photo Gallery</p>
           <h2 className="italic text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">
             Look at Our Photo Gallery
           </h2>
-        </div>
+        </motion.div>
         <GalleryCarousel images={galleryImageData} />
       </section>
 
@@ -233,7 +255,13 @@ export const Gallery = () => {
         />
 
         {/* Center form - Full width on mobile, constrained on desktop */}
-        <div className="w-full lg:w-2/4 px-4 sm:px-6 lg:px-16 py-8 lg:py-12 flex flex-col items-center text-center text-white bg-[#1F0D09]">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="w-full lg:w-2/4 px-4 sm:px-6 lg:px-16 py-8 lg:py-12 flex flex-col items-center text-center text-white bg-[#1F0D09]"
+        >
           <p className="text-base sm:text-lg lg:text-xl text-[#FAF3E0] font-medium">Booking Table</p>
           <h2 className="italic text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-[#FFD580] font-semibold mb-6 lg:mb-8">
             Make Your Reservations
@@ -241,17 +269,26 @@ export const Gallery = () => {
 
           {/* Sample Data Button - Hidden on small screens */}
           <div className="mb-4 hidden sm:block">
-            <button
+            <motion.button
               type="button"
               onClick={generateSampleData}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.96 }}
               className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition-all duration-300 min-h-[44px]"
             >
               📝 Fill Sample Data
-            </button>
+            </motion.button>
           </div>
 
           {/* Form fields - Single column on mobile, two columns on larger screens */}
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full max-w-lg lg:max-w-none">
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full max-w-lg lg:max-w-none"
+          >
             <input
               type="text"
               name="fullName"
@@ -320,8 +357,8 @@ export const Gallery = () => {
                 {isSubmitting ? "SENDING..." : "BOOKING TABLE"}
               </button>
             </div>
-          </form>
-        </div>
+          </motion.form>
+        </motion.div>
 
         {/* Right image */}
         <img
