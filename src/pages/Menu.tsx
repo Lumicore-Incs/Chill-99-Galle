@@ -1,17 +1,22 @@
+import emailjs from "@emailjs/browser";
+import { Alert, Snackbar } from "@mui/material";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { FaChevronRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import image3 from "../assets/biriyani.jpg";
+import { default as formimg2, default as image1 } from "../assets/imagecaro-01.jpg";
+import waffles1 from "../assets/imagecaro-06.jpg";
+import formimg1 from "../assets/imageside.jpg";
+import banner from "../assets/menubanner.png";
+import popularBg from "../assets/popular-bg.png";
+import secondbanner from "../assets/second-banner.jpg";
+import image2 from "../assets/soup.jpg";
+import image4 from "../assets/spagetty.jpg";
+import { Footer } from "../components/common/Footer";
 import { Navbar } from "../components/common/Navbar";
 import { TopLine } from "../components/common/TopLine";
-import banner from "../assets/menubanner.png";
-import image1 from "../assets/imagecaro-01.jpg";
-import image2 from "../assets/soup.jpg";
-import image3 from "../assets/biriyani.jpg";
-import image4 from "../assets/spagetty.jpg";
-import formimg1 from "../assets/imageside.jpg";
-import formimg2 from "../assets/imagecaro-01.jpg";
-import secondbanner from "../assets/second-banner.jpg";
-import { FaChevronRight } from "react-icons/fa6";
-import { Footer } from "../components/common/Footer";
-import popularBg from "../assets/popular-bg.png";
-import waffles1 from "../assets/imagecaro-06.jpg";
+import { useReservationNavigation } from "../utils/navigation";
 
 interface MenuItem {
   id: number;
@@ -60,6 +65,107 @@ const menuItems: MenuItem[] = [
 ];
 
 export const Menu = () => {
+  const navigate = useNavigate();
+  const handleReservationClick = useReservationNavigation(navigate);
+
+  // Form state
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    guests: "1 Person",
+    date: "",
+    time: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Snackbar state
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success" as "success" | "error" | "warning" | "info",
+  });
+
+  // Function to show snackbar
+  const showSnackbar = (message: string, severity: "success" | "error" | "warning" | "info") => {
+    setSnackbar({
+      open: true,
+      message,
+      severity,
+    });
+  };
+
+  // Function to close snackbar
+  const handleSnackbarClose = () => {
+    setSnackbar({ ...snackbar, open: false });
+  };
+
+  // Handle form input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Validation
+    if (
+      !formData.fullName ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.date ||
+      !formData.time
+    ) {
+      showSnackbar("Please fill in all required fields", "error");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // EmailJS configuration
+      const templateParams = {
+        from_name: formData.fullName,
+        from_email: formData.email,
+        phone: formData.phone,
+        guests: formData.guests,
+        date: formData.date,
+        time: formData.time,
+        message: `Reservation request from ${formData.fullName} for ${formData.guests} on ${formData.date} at ${formData.time}. Contact: ${formData.phone}, Email: ${formData.email}`,
+      };
+
+      await emailjs.send(
+        "service_ga0l9mu",
+        "template_i110m2w",
+        templateParams,
+        "p1sWGViGQPTgg6qBM"
+      );
+
+      showSnackbar("Reservation request sent successfully! We'll contact you soon.", "success");
+
+      // Reset form
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        guests: "1 Person",
+        date: "",
+        time: "",
+      });
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      showSnackbar("Failed to send reservation request. Please try again.", "error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="w-full overflow-x-hidden relative">
       <TopLine />
@@ -76,43 +182,75 @@ export const Menu = () => {
           cursor: "pointer",
         }}
       >
-        <div className="flex flex-col text-center lg:text-left max-w-4xl">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col text-center lg:text-left max-w-4xl"
+        >
           <div className="mb-3">
-            <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-tight">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-tight"
+            >
               Savor Every Bite at Chill 99
-            </h1>
+            </motion.h1>
           </div>
           <div className="mb-5">
-            <p className="text-base sm:text-lg lg:text-xl italic text-[var(--green-primary)] font-medium">
-              Browse our selection of freshly crafted dishes made to delight
-              your taste buds.
-            </p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="text-base sm:text-lg lg:text-xl italic text-[var(--green-primary)] font-medium"
+            >
+              Browse our selection of freshly crafted dishes made to delight your taste buds.
+            </motion.p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section className="bg-[#1F0D09] w-full min-h-[100vh] px-4 lg:px-50 py-12 lg:py-20 flex flex-col items-center justify-center text-white gap-8">
-        <div className="flex flex-col items-center text-center">
-          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">
-            Choose Best Dishes
-          </p>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex flex-col items-center text-center"
+        >
+          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">Choose Best Dishes</p>
           <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">
             Soup & Salad Selection
           </h2>
-        </div>
+        </motion.div>
         <div className="flex flex-col items-center gap-10">
-          <div className="flex items-center justify-between flex-col lg:flex-row gap-5">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex items-center justify-between flex-col lg:flex-row gap-5"
+          >
             <div className="w-full bg-[#31201BF0] py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
               <div className="lg:gap-5 w-full flex flex-col">
                 {menuItems.slice(0, 4).map((item) => (
-                  <div
+                  <motion.div
                     key={item.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
                     className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
                   >
-                    <img
+                    <motion.img
                       src={item.image}
                       alt={item.title}
                       className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
                     />
                     <div className="text-center sm:text-left">
                       <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
@@ -122,37 +260,71 @@ export const Menu = () => {
                         Rs. {item.price.toFixed(2)}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
-            <div className="w-full flex justify-center">
-              <img
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="w-full flex justify-center"
+            >
+              <motion.img
                 src={image2}
                 alt="Why choose us"
                 className="w-full max-w-md lg:w-[90%] rounded-lg"
+                initial={{ scale: 0.95, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, delay: 0.5 }}
               />
-            </div>
-          </div>
-          <div className="flex items-center justify-between flex-col-reverse lg:flex-row gap-5">
-            <div className="w-full flex justify-center">
-              <img
+            </motion.div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="flex items-center justify-between flex-col-reverse lg:flex-row gap-5"
+          >
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="w-full flex justify-center"
+            >
+              <motion.img
                 src={image2}
                 alt="Why choose us"
                 className="w-full max-w-md lg:w-[90%] rounded-lg"
+                initial={{ scale: 0.95, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, delay: 0.6 }}
               />
-            </div>
+            </motion.div>
             <div className="w-full bg-[#31201BF0] py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
               <div className="lg:gap-5 w-full flex flex-col">
                 {menuItems.slice(0, 4).map((item) => (
-                  <div
+                  <motion.div
                     key={item.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
                     className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
                   >
-                    <img
+                    <motion.img
                       src={item.image}
                       alt={item.title}
                       className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
                     />
                     <div className="text-center sm:text-left">
                       <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
@@ -162,11 +334,11 @@ export const Menu = () => {
                         Rs. {item.price.toFixed(2)}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -189,21 +361,28 @@ export const Menu = () => {
           </h2>
         </div>
         <div className="flex items-center text-sm sm:text-base lg:text-lg font-medium">
-          <button className="flex items-center gap-3 px-4 lg:px-5 py-2 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer">
+          <button
+            onClick={handleReservationClick}
+            className="flex items-center gap-3 px-4 lg:px-5 py-2 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer"
+          >
             BOOK A SPOT <FaChevronRight />
           </button>
         </div>
       </section>
 
       <section className="bg-[#31201B] w-full min-h-[100vh] px-4 lg:px-50 py-12 lg:py-20 flex flex-col items-center justify-center text-white gap-8">
-        <div className="flex flex-col items-center text-center">
-          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">
-            Choose Best Dishes
-          </p>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex flex-col items-center text-center"
+        >
+          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">Choose Best Dishes</p>
           <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">
             Chill 99 Restaurant Menu
           </h2>
-        </div>
+        </motion.div>
         {/* menu select bar */}
         <div className="flex items-center justify-center gap-4 flex-wrap">
           <button className="px-4 py-2 rounded-lg bg-[#1F0D09] hover:bg-[#81685F] transition-all duration-500">
@@ -227,16 +406,30 @@ export const Menu = () => {
         </div>
 
         <div className="w-full bg-[#1F0D09] flex flex-col items-center justify-between py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full"
+          >
             {menuItems.slice(0, 6).map((item) => (
-              <div
+              <motion.div
                 key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
                 className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
               >
-                <img
+                <motion.img
                   src={item.image}
                   alt={item.title}
                   className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                  initial={{ scale: 0.95, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
                 />
                 <div className="text-center sm:text-left">
                   <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
@@ -246,104 +439,198 @@ export const Menu = () => {
                     Rs. {item.price.toFixed(2)}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="bg-[#1F0D09] w-full min-h-screen flex items-center justify-center relative">
-        {/* Left image */}
+      {/* Mobile-Optimized Reservation Form Section */}
+      <section
+        className="bg-[#1F0D09] w-full min-h-screen flex items-center justify-center relative"
+        id="reservation-section"
+      >
+        {/* Left image - Hidden on mobile and tablet */}
         <img
           src={formimg1}
           alt=""
-          className="hidden md:block w-1/4 min-h-screen object-cover object-right"
+          className="hidden lg:block w-1/4 min-h-screen object-cover object-right"
         />
 
-        {/* Center form */}
-        <div className="w-full lg:w-2/4 px-6 lg:px-16 py-12 flex flex-col items-center text-center text-white bg-[#1F0D09]">
-          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">
+        {/* Center form - Full width on mobile, constrained on desktop */}
+        <div className="w-full lg:w-2/4 px-4 sm:px-6 lg:px-16 py-8 lg:py-12 flex flex-col items-center text-center text-white bg-[#1F0D09]">
+          <p className="text-base sm:text-lg lg:text-xl text-[#FAF3E0] font-medium">
             Booking Table
           </p>
-          <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[#FFD580] font-semibold mb-8">
+          <h2 className="italic text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-[#FFD580] font-semibold mb-6 lg:mb-8">
             Make Your Reservation
           </h2>
 
-          {/* Form fields */}
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+          {/* Form - Single column on mobile, two columns on larger screens */}
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full max-w-lg lg:max-w-none"
+          >
             <input
               type="text"
+              name="fullName"
               placeholder="Full Name"
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
+              value={formData.fullName}
+              onChange={handleInputChange}
+              className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white placeholder-gray-300 min-h-[48px]"
+              required
             />
             <input
               type="email"
+              name="email"
               placeholder="Email Address"
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
+              value={formData.email}
+              onChange={handleInputChange}
+              className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white placeholder-gray-300 min-h-[48px]"
+              required
             />
             <input
               type="tel"
+              name="phone"
               placeholder="Phone Number"
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
+              value={formData.phone}
+              onChange={handleInputChange}
+              className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white placeholder-gray-300 min-h-[48px]"
+              required
             />
-            <select className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none">
-              <option>1 Person</option>
-              <option>2 People</option>
-              <option>3 People</option>
-              <option>4 People</option>
+            <select
+              name="guests"
+              value={formData.guests}
+              onChange={handleInputChange}
+              className="p-4 text-base rounded bg-[#1F0D09] border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white min-h-[48px]"
+            >
+              <option value="1 Person">1 Person</option>
+              <option value="2 People">2 People</option>
+              <option value="3 People">3 People</option>
+              <option value="4 People">4 People</option>
+              <option value="5 People">5 People</option>
+              <option value="6+ People">6+ People</option>
             </select>
             <input
               type="date"
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
+              name="date"
+              value={formData.date}
+              onChange={handleInputChange}
+              className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white min-h-[48px]"
+              required
             />
             <input
               type="time"
-              className="p-3 rounded bg-transparent border border-[#E5E7EB] focus:outline-none"
+              name="time"
+              value={formData.time}
+              onChange={handleInputChange}
+              className="p-4 text-base rounded bg-transparent border border-[#E5E7EB] focus:outline-none focus:border-[var(--green-primary)] text-white min-h-[48px]"
+              required
             />
           </form>
 
-          <div className="flex items-center text-sm sm:text-base lg:text-lg font-medium mt-6">
-            <button className="flex items-center gap-3 px-4 lg:px-5 py-2 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer">
-              BOOKING TABLE <FaChevronRight />
+          <div className="flex justify-center mt-6">
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className={`flex items-center gap-3 px-6 lg:px-8 py-4 text-base lg:text-lg font-semibold rounded-lg transition-all duration-500 cursor-pointer min-h-[48px] min-w-[200px] justify-center ${
+                isSubmitting
+                  ? "bg-gray-500 cursor-not-allowed"
+                  : "bg-[var(--green-primary)] hover:bg-[var(--green-dark)]"
+              }`}
+            >
+              {isSubmitting ? "SENDING..." : "BOOK TABLE"} <FaChevronRight />
             </button>
           </div>
         </div>
 
-        {/* Right image */}
+        {/* Right image - Hidden on mobile and tablet */}
         <img
           src={formimg2}
           alt=""
-          className="hidden md:block w-1/4 min-h-screen object-cover object-left"
+          className="hidden lg:block w-1/4 min-h-screen object-cover object-left"
         />
       </section>
 
-      <section className="bg-[#1F0D09] w-full min-h-[100vh] px-4 lg:px-50 py-12 lg:py-20 flex flex-col items-center justify-center text-white gap-8" style={{
+      {/* Material-UI Snackbar for notifications */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity={snackbar.severity}
+          sx={{
+            width: "100%",
+            backgroundColor:
+              snackbar.severity === "success"
+                ? "#FFD580"
+                : snackbar.severity === "error"
+                ? "#f44336"
+                : snackbar.severity === "warning"
+                ? "#ff9800"
+                : "#2196f3",
+            color: snackbar.severity === "success" ? "#1F0D09" : "white",
+            "& .MuiAlert-icon": {
+              color: snackbar.severity === "success" ? "#1F0D09" : "white",
+            },
+          }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
+
+      <section
+        className="bg-[#1F0D09] w-full min-h-[100vh] px-4 lg:px-50 py-12 lg:py-20 flex flex-col items-center justify-center text-white gap-8"
+        style={{
           backgroundImage: `linear-gradient(to right, #1F0D09C9, #1F0D09C9), url(${popularBg})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
-        }}>
+        }}
+      >
         <div className="flex flex-col items-center text-center">
-          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">
-            Choose Best Dishes
-          </p>
+          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">Choose Best Dishes</p>
           <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">
-             Waffle & Desert Menu
+            Waffle & Desert Menu
           </h2>
         </div>
         <div className="flex flex-col items-center gap-10">
-          <div className="flex items-center justify-center flex-col lg:flex-row gap-5">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex items-center justify-center flex-col lg:flex-row gap-5"
+          >
             <div className="w-full bg-[#00000051] py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, delay: 0.4 }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full"
+              >
                 {menuItems.map((item) => (
-                  <div
+                  <motion.div
                     key={item.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
                     className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
                   >
-                    <img
+                    <motion.img
                       src={item.image}
                       alt={item.title}
                       className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
                     />
                     <div className="text-center sm:text-left">
                       <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
@@ -353,30 +640,60 @@ export const Menu = () => {
                         Rs. {item.price.toFixed(2)}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
-            <div className="flex justify-center lg:w-[50%] w-full h-100">
-              <img
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="flex justify-center lg:w-[50%] w-full h-100"
+            >
+              <motion.img
                 src={waffles1}
                 alt="Why choose us"
                 className="w-full max-w-md lg:w-[90%] rounded-lg h-auto object-cover"
+                initial={{ scale: 0.95, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, delay: 0.5 }}
               />
-            </div>
-          </div>
-          <div className="flex items-center justify-center flex-col lg:flex-row-reverse gap-5">
+            </motion.div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex items-center justify-center flex-col lg:flex-row-reverse gap-5"
+          >
             <div className="w-full bg-[#00000051] py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, delay: 0.4 }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full"
+              >
                 {menuItems.map((item) => (
-                  <div
+                  <motion.div
                     key={item.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
                     className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
                   >
-                    <img
+                    <motion.img
                       src={item.image}
                       alt={item.title}
                       className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
                     />
                     <div className="text-center sm:text-left">
                       <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
@@ -386,18 +703,28 @@ export const Menu = () => {
                         Rs. {item.price.toFixed(2)}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
-            <div className="flex justify-center lg:w-[50%] w-full h-100">
-              <img
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="flex justify-center lg:w-[50%] w-full h-100"
+            >
+              <motion.img
                 src={waffles1}
                 alt="Why choose us"
                 className="w-full max-w-md lg:w-[90%] rounded-lg h-auto object-cover"
+                initial={{ scale: 0.95, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, delay: 0.5 }}
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
