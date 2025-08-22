@@ -18,7 +18,7 @@ import { useState } from "react";
 export const Feedback = () => {
   const [rating, setRating] = useState(0);
   return (
-    <div className="w-full overflow-x-hidden relative pt-20">
+    <div className="w-full overflow-x-hidden relative lg:pt-20">
       <TopLine />
       <Navbar />
       {/* Hero Banner */}

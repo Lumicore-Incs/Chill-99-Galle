@@ -167,7 +167,7 @@ export const Gallery = () => {
   };
 
   return (
-    <div className="w-full overflow-x-hidden relative pt-20">
+    <div className="w-full overflow-x-hidden relative lg:pt-20">
       <TopLine />
       <Navbar />
 
@@ -189,19 +189,19 @@ export const Gallery = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
         />
-        
+
         <motion.div
           initial={{ opacity: 0, y: 60, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ 
-            duration: 1.2, 
+          transition={{
+            duration: 1.2,
             ease: "easeOut",
             type: "spring",
-            stiffness: 100
+            stiffness: 100,
           }}
           className="flex flex-col text-center lg:text-left absolute left-[10%] z-10"
         >
-          <motion.div 
+          <motion.div
             className="mb-3"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -210,10 +210,10 @@ export const Gallery = () => {
             <motion.h1
               initial={{ opacity: 0, y: 30, rotateX: -15 }}
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{ 
-                duration: 1, 
+              transition={{
+                duration: 1,
                 delay: 0.5,
-                ease: "easeOut"
+                ease: "easeOut",
               }}
               className="text-2xl sm:text-3xl lg:text-[60px] font-bold leading-tight"
             >
@@ -228,7 +228,7 @@ export const Gallery = () => {
               </motion.span>
             </motion.h1>
           </motion.div>
-          <motion.div 
+          <motion.div
             className="mb-5"
             initial={{ opacity: 0, y: 30, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -248,29 +248,29 @@ export const Gallery = () => {
         {/* Floating decorative elements */}
         <motion.div
           className="absolute top-20 right-20 w-4 h-4 bg-[var(--green-primary)] rounded-full opacity-60"
-          animate={{ 
+          animate={{
             y: [-10, 10, -10],
             scale: [1, 1.2, 1],
-            opacity: [0.6, 0.8, 0.6]
+            opacity: [0.6, 0.8, 0.6],
           }}
-          transition={{ 
-            duration: 3, 
+          transition={{
+            duration: 3,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         />
         <motion.div
           className="absolute bottom-40 right-40 w-3 h-3 bg-[#FFD580] rounded-full opacity-70"
-          animate={{ 
+          animate={{
             y: [10, -10, 10],
             scale: [1, 1.3, 1],
-            opacity: [0.7, 0.9, 0.7]
+            opacity: [0.7, 0.9, 0.7],
           }}
-          transition={{ 
-            duration: 2.5, 
+          transition={{
+            duration: 2.5,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 0.5
+            delay: 0.5,
           }}
         />
       </section>
@@ -285,25 +285,28 @@ export const Gallery = () => {
           viewport={{ once: true }}
           transition={{ duration: 1 }}
         >
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 25% 25%, #FFD580 2px, transparent 2px)`,
-            backgroundSize: '50px 50px'
-          }} />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at 25% 25%, #FFD580 2px, transparent 2px)`,
+              backgroundSize: "50px 50px",
+            }}
+          />
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ 
-            duration: 1, 
+          transition={{
+            duration: 1,
             ease: "easeOut",
             type: "spring",
-            stiffness: 100
+            stiffness: 100,
           }}
           className="flex flex-col items-center text-center mb-8 relative z-10"
         >
-          <motion.p 
+          <motion.p
             className="text-base md:text-lg lg:text-xl text-[#FAF3E0] font-medium mb-2"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -312,20 +315,20 @@ export const Gallery = () => {
           >
             Our Photo Gallery
           </motion.p>
-          <motion.h2 
+          <motion.h2
             className="italic text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold"
             initial={{ opacity: 0, y: 30, rotateY: -15 }}
             whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
             viewport={{ once: true }}
-            transition={{ 
-              duration: 0.8, 
+            transition={{
+              duration: 0.8,
               delay: 0.4,
-              ease: "easeOut"
+              ease: "easeOut",
             }}
           >
             Look at Our Photo Gallery
           </motion.h2>
-          
+
           {/* Animated underline */}
           <motion.div
             className="w-24 h-1 bg-[var(--green-primary)] mt-4"
@@ -341,11 +344,11 @@ export const Gallery = () => {
           initial={{ opacity: 0, y: 60, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ 
-            duration: 1.2, 
+          transition={{
+            duration: 1.2,
             ease: "easeOut",
             type: "spring",
-            stiffness: 80
+            stiffness: 80,
           }}
           className="relative z-10 w-full"
         >
@@ -378,11 +381,11 @@ export const Gallery = () => {
           initial={{ opacity: 0, x: -100, scale: 0.9 }}
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ 
-            duration: 1.2, 
+          transition={{
+            duration: 1.2,
             ease: "easeOut",
             type: "spring",
-            stiffness: 80
+            stiffness: 80,
           }}
         />
 
@@ -391,11 +394,11 @@ export const Gallery = () => {
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ 
-            duration: 1.2, 
+          transition={{
+            duration: 1.2,
             ease: "easeOut",
             type: "spring",
-            stiffness: 100
+            stiffness: 100,
           }}
           className="w-full lg:w-2/4 px-4 sm:px-6 lg:px-16 py-8 lg:py-12 flex flex-col items-center text-center text-white bg-[#1F0D09] relative z-10"
         >
@@ -406,7 +409,7 @@ export const Gallery = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-6"
           >
-            <motion.p 
+            <motion.p
               className="text-base sm:text-lg lg:text-xl text-[#FAF3E0] font-medium mb-2"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -415,15 +418,15 @@ export const Gallery = () => {
             >
               Booking Table
             </motion.p>
-            <motion.h2 
+            <motion.h2
               className="italic text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-[#FFD580] font-semibold mb-6 lg:mb-8"
               initial={{ opacity: 0, y: 20, rotateY: -10 }}
               whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
               viewport={{ once: true }}
-              transition={{ 
-                duration: 0.8, 
+              transition={{
+                duration: 0.8,
                 delay: 0.4,
-                ease: "easeOut"
+                ease: "easeOut",
               }}
             >
               Make Your Reservations
@@ -445,21 +448,21 @@ export const Gallery = () => {
               { name: "phone", placeholder: "Phone Number", type: "tel" },
               { name: "guests", placeholder: "Number of Guests", type: "select" },
               { name: "date", placeholder: "Date", type: "date" },
-              { name: "time", placeholder: "Time", type: "time" }
+              { name: "time", placeholder: "Time", type: "time" },
             ].map((field, index) => (
               <motion.div
                 key={field.name}
                 initial={{ opacity: 0, y: 30, scale: 0.95 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ 
-                  duration: 0.6, 
+                transition={{
+                  duration: 0.6,
                   delay: 0.6 + index * 0.1,
-                  ease: "easeOut"
+                  ease: "easeOut",
                 }}
-                whileHover={{ 
+                whileHover={{
                   scale: 1.02,
-                  transition: { duration: 0.2 }
+                  transition: { duration: 0.2 },
                 }}
               >
                 {field.type === "select" ? (
@@ -491,15 +494,15 @@ export const Gallery = () => {
               </motion.div>
             ))}
 
-            <motion.div 
+            <motion.div
               className="lg:col-span-2 flex justify-center mt-6"
               initial={{ opacity: 0, y: 30, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ 
-                duration: 0.8, 
+              transition={{
+                duration: 0.8,
                 delay: 1.2,
-                ease: "easeOut"
+                ease: "easeOut",
               }}
             >
               <motion.button
@@ -507,9 +510,9 @@ export const Gallery = () => {
                 disabled={isSubmitting}
                 onClick={() => console.log("🔘 Button clicked directly!")}
                 className="flex items-center gap-3 px-6 lg:px-8 py-4 text-base lg:text-lg font-semibold rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px] min-w-[200px] justify-center relative overflow-hidden group"
-                whileHover={{ 
+                whileHover={{
                   scale: 1.05,
-                  transition: { duration: 0.2 }
+                  transition: { duration: 0.2 },
                 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -536,11 +539,11 @@ export const Gallery = () => {
           initial={{ opacity: 0, x: 100, scale: 0.9 }}
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ 
-            duration: 1.2, 
+          transition={{
+            duration: 1.2,
             ease: "easeOut",
             type: "spring",
-            stiffness: 80
+            stiffness: 80,
           }}
         />
       </section>
@@ -555,15 +558,15 @@ export const Gallery = () => {
           className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group"
           initial={{ opacity: 0, x: 100, scale: 0.8 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ 
-            duration: 0.8, 
+          transition={{
+            duration: 0.8,
             delay: 0.5,
-            ease: "easeOut"
+            ease: "easeOut",
           }}
-          whileHover={{ 
+          whileHover={{
             scale: 1.1,
             rotate: 5,
-            transition: { duration: 0.2 }
+            transition: { duration: 0.2 },
           }}
           whileTap={{ scale: 0.95 }}
         >
@@ -588,15 +591,15 @@ export const Gallery = () => {
           className="bg-black hover:bg-gray-800 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group"
           initial={{ opacity: 0, x: 100, scale: 0.8 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ 
-            duration: 0.8, 
+          transition={{
+            duration: 0.8,
             delay: 0.7,
-            ease: "easeOut"
+            ease: "easeOut",
           }}
-          whileHover={{ 
+          whileHover={{
             scale: 1.1,
             rotate: -5,
-            transition: { duration: 0.2 }
+            transition: { duration: 0.2 },
           }}
           whileTap={{ scale: 0.95 }}
         >

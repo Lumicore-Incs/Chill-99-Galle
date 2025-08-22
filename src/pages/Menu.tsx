@@ -1,68 +1,23 @@
 import emailjs from "@emailjs/browser";
 import { Alert, Snackbar } from "@mui/material";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import React, { useState } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import image3 from "../assets/biriyani.jpg";
-import { default as formimg2, default as image1 } from "../assets/imagecaro-01.jpg";
+import coffee4 from "../assets/coffee4.jpg";
+import formimg2 from "../assets/imagecaro-01.jpg";
 import waffles1 from "../assets/imagecaro-06.jpg";
 import formimg1 from "../assets/imageside.jpg";
 import banner from "../assets/menubanner.png";
 import popularBg from "../assets/popular-bg.png";
+import saladMain from "../assets/salad-main.jpg";
 import secondbanner from "../assets/second-banner.jpg";
 import image2 from "../assets/soup.jpg";
-import image4 from "../assets/spagetty.jpg";
 import { Footer } from "../components/common/Footer";
 import { Navbar } from "../components/common/Navbar";
 import { TopLine } from "../components/common/TopLine";
+import { allMenuItems } from "../constants/menuData";
 import { useReservationNavigation } from "../utils/navigation";
-
-interface MenuItem {
-  id: number;
-  image: string;
-  title: string;
-  price: number;
-}
-
-const menuItems: MenuItem[] = [
-  {
-    id: 1,
-    image: image1,
-    title: "Chill 99 Special Burger ",
-    price: 4500.0,
-  },
-  {
-    id: 2,
-    image: image2,
-    title: "Cream Soup Of Pumkin",
-    price: 1200.0,
-  },
-  {
-    id: 3,
-    image: image3,
-    title: "Chicken Biriyani ",
-    price: 2500.0,
-  },
-  {
-    id: 4,
-    image: image4,
-    title: "Spegati Carbonara",
-    price: 3000.0,
-  },
-  {
-    id: 5,
-    image: image1,
-    title: "Chill 99 Special Burger ",
-    price: 4500.0,
-  },
-  {
-    id: 6,
-    image: image2,
-    title: "Cream Soup Of Pumkin",
-    price: 1200.0,
-  },
-];
 
 export const Menu = () => {
   const navigate = useNavigate();
@@ -167,7 +122,7 @@ export const Menu = () => {
   };
 
   return (
-    <div className="w-full overflow-x-hidden relative pt-20">
+    <div className="w-full overflow-x-hidden relative lg:pt-20">
       <TopLine />
       <Navbar />
 
@@ -234,34 +189,37 @@ export const Menu = () => {
           >
             <div className="w-full bg-[#31201BF0] py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
               <div className="lg:gap-5 w-full flex flex-col">
-                {menuItems.slice(0, 4).map((item) => (
-                  <motion.div
-                    key={item.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
-                    className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
-                  >
-                    <motion.img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
-                      initial={{ scale: 0.95, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
+                {allMenuItems
+                  .filter((item) => item.category === "soup")
+                  .slice(0, 4)
+                  .map((item) => (
+                    <motion.div
+                      key={item.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.3 }}
-                      transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
-                    />
-                    <div className="text-center sm:text-left">
-                      <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
-                        {item.title}
-                      </h3>
-                      <p className="text-[#B39A91] font-medium text-base lg:text-lg">
-                        Rs. {item.price.toFixed(2)}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
+                      transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
+                      className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
+                    >
+                      <motion.img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                        initial={{ scale: 0.95, opacity: 0 }}
+                        whileInView={{ scale: 1, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
+                      />
+                      <div className="text-center sm:text-left">
+                        <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
+                          {item.title}
+                        </h3>
+                        <p className="text-[#B39A91] font-medium text-base lg:text-lg">
+                          Rs. {item.price.toFixed(2)}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
               </div>
             </div>
             <motion.div
@@ -297,7 +255,7 @@ export const Menu = () => {
               className="w-full flex justify-center"
             >
               <motion.img
-                src={image2}
+                src={saladMain}
                 alt="Why choose us"
                 className="w-full max-w-md lg:w-[90%] rounded-lg"
                 initial={{ scale: 0.95, opacity: 0 }}
@@ -308,13 +266,67 @@ export const Menu = () => {
             </motion.div>
             <div className="w-full bg-[#31201BF0] py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
               <div className="lg:gap-5 w-full flex flex-col">
-                {menuItems.slice(0, 4).map((item) => (
+                {allMenuItems
+                  .filter((item) => item.category === "salad")
+                  .slice(0, 4)
+                  .map((item) => (
+                    <motion.div
+                      key={item.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.3 }}
+                      transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
+                      className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
+                    >
+                      <motion.img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                        initial={{ scale: 0.95, opacity: 0 }}
+                        whileInView={{ scale: 1, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
+                      />
+                      <div className="text-center sm:text-left">
+                        <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
+                          {item.title}
+                        </h3>
+                        <p className="text-[#B39A91] font-medium text-base lg:text-lg">
+                          Rs. {item.price.toFixed(2)}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Beverages Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex flex-col items-center text-center mt-12"
+        >
+          <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">Choose Best Coffee</p>
+          <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[#FFD580] font-bold mb-8">
+            Hot & Cold Expresso
+          </h2>
+        </motion.div>
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-10 mt-4">
+          <div className="w-full bg-[#31201BF0] py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
+            <div className="lg:gap-5 w-full flex flex-col">
+              {allMenuItems
+                .filter((item) => item.category === "beverage")
+                .map((item, idx) => (
                   <motion.div
                     key={item.id}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
+                    transition={{ duration: 0.6, delay: 0.2 + idx * 0.05 }}
                     className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
                   >
                     <motion.img
@@ -324,7 +336,7 @@ export const Menu = () => {
                       initial={{ scale: 0.95, opacity: 0 }}
                       whileInView={{ scale: 1, opacity: 1 }}
                       viewport={{ once: true, amount: 0.3 }}
-                      transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
+                      transition={{ duration: 0.6, delay: 0.3 + idx * 0.05 }}
                     />
                     <div className="text-center sm:text-left">
                       <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
@@ -336,8 +348,24 @@ export const Menu = () => {
                     </div>
                   </motion.div>
                 ))}
-              </div>
             </div>
+          </div>
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="w-full flex justify-center"
+          >
+            <motion.img
+              src={coffee4}
+              alt="Coffee"
+              className="w-full max-w-md lg:w-[90%] rounded-lg"
+              initial={{ scale: 0.95, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+            />
           </motion.div>
         </div>
       </section>
@@ -413,34 +441,37 @@ export const Menu = () => {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full"
           >
-            {menuItems.slice(0, 6).map((item) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
-                className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
-              >
-                <motion.img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
-                  initial={{ scale: 0.95, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
+            {allMenuItems
+              .filter((item) => item.category === "main course")
+              .slice(0, 6)
+              .map((item) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
-                />
-                <div className="text-center sm:text-left">
-                  <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
-                    {item.title}
-                  </h3>
-                  <p className="text-[#B39A91] font-medium text-base lg:text-lg">
-                    Rs. {item.price.toFixed(2)}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+                  transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
+                  className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
+                >
+                  <motion.img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                    initial={{ scale: 0.95, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
+                  />
+                  <div className="text-center sm:text-left">
+                    <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
+                      {item.title}
+                    </h3>
+                    <p className="text-[#B39A91] font-medium text-base lg:text-lg">
+                      Rs. {item.price.toFixed(2)}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
           </motion.div>
         </div>
       </section>
@@ -614,34 +645,36 @@ export const Menu = () => {
                 transition={{ duration: 0.7, delay: 0.4 }}
                 className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full"
               >
-                {menuItems.map((item) => (
-                  <motion.div
-                    key={item.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
-                    className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
-                  >
-                    <motion.img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
-                      initial={{ scale: 0.95, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
+                {allMenuItems
+                  .filter((item) => item.category === "waffle" || item.category === "dessert")
+                  .map((item) => (
+                    <motion.div
+                      key={item.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.3 }}
-                      transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
-                    />
-                    <div className="text-center sm:text-left">
-                      <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
-                        {item.title}
-                      </h3>
-                      <p className="text-[#B39A91] font-medium text-base lg:text-lg">
-                        Rs. {item.price.toFixed(2)}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
+                      transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
+                      className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
+                    >
+                      <motion.img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                        initial={{ scale: 0.95, opacity: 0 }}
+                        whileInView={{ scale: 1, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
+                      />
+                      <div className="text-center sm:text-left">
+                        <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
+                          {item.title}
+                        </h3>
+                        <p className="text-[#B39A91] font-medium text-base lg:text-lg">
+                          Rs. {item.price.toFixed(2)}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
               </motion.div>
             </div>
             <motion.div
@@ -677,34 +710,36 @@ export const Menu = () => {
                 transition={{ duration: 0.7, delay: 0.4 }}
                 className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full"
               >
-                {menuItems.map((item) => (
-                  <motion.div
-                    key={item.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
-                    className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
-                  >
-                    <motion.img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
-                      initial={{ scale: 0.95, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
+                {allMenuItems
+                  .filter((item) => item.category === "waffle" || item.category === "dessert")
+                  .map((item) => (
+                    <motion.div
+                      key={item.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.3 }}
-                      transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
-                    />
-                    <div className="text-center sm:text-left">
-                      <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
-                        {item.title}
-                      </h3>
-                      <p className="text-[#B39A91] font-medium text-base lg:text-lg">
-                        Rs. {item.price.toFixed(2)}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
+                      transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
+                      className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
+                    >
+                      <motion.img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                        initial={{ scale: 0.95, opacity: 0 }}
+                        whileInView={{ scale: 1, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
+                      />
+                      <div className="text-center sm:text-left">
+                        <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
+                          {item.title}
+                        </h3>
+                        <p className="text-[#B39A91] font-medium text-base lg:text-lg">
+                          Rs. {item.price.toFixed(2)}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
               </motion.div>
             </div>
             <motion.div

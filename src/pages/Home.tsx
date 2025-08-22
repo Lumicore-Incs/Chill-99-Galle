@@ -4,6 +4,8 @@ import { useState } from "react";
 import { FaChevronRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import aboutbg from "../assets/about-bg.png";
+import cofee from "../assets/booking-01.jpg";
+import mandala from "../assets/booking-02.jpg";
 import thirdbanner from "../assets/booking-03.jpg";
 import burgerfries from "../assets/burger.jpg";
 import logo from "../assets/chill-99.png";
@@ -16,11 +18,9 @@ import iconchoose06 from "../assets/iconchoose06.png";
 import iconchoose01 from "../assets/iconschoose01.png";
 import iconchoose03 from "../assets/iconschoose03.png";
 import iconchoose04 from "../assets/iconschoose04.png";
-import cofee from "../assets/booking-01.jpg";
 import burger from "../assets/imagecaro-01.jpg";
 import meat from "../assets/imagecaro-04.png";
 import waffles from "../assets/imagecaro-06.jpg";
-import mandala from "../assets/booking-02.jpg";
 import popularBg from "../assets/popular-bg.png";
 import testimonial from "../assets/testimonialbg.png";
 import uberLogo from "../assets/uber-logo.svg";
@@ -33,7 +33,6 @@ import { Testimonial } from "../components/features/Testimonial";
 import { useReservationNavigation } from "../utils/navigation";
 
 import { Footer } from "../components/common/Footer";
-import { red } from "@mui/material/colors";
 
 interface BannerButton {
   text: string;
@@ -130,7 +129,7 @@ export const Home = () => {
   const current = banners[bannerIndex];
 
   return (
-    <div className="w-full overflow-x-hidden relative pt-20">
+    <div className="w-full overflow-x-hidden relative lg:pt-20">
       <TopLine />
       <Navbar />
 
@@ -240,13 +239,14 @@ export const Home = () => {
       </section>
 
       {/* Breakfast Banner */}
-      <section className="text-white flex flex-col lg:flex-row items-stretch min-h-[40vh] lg:h-[271px] overflow-hidden"
-      style={{backgroundImage: ` url(${cofee})`, 
-       backgroundRepeat: "no-repeat",
+      <section
+        className="text-white flex flex-col lg:flex-row items-stretch min-h-[40vh] lg:h-[271px] overflow-hidden"
+        style={{
+          backgroundImage: ` url(${cofee})`,
+          backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
-      
-    }}
+        }}
       >
         {/* Left Section - Breakfast Spread Image */}
         <motion.div
@@ -255,10 +255,8 @@ export const Home = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, delay: 0.2 }}
           className="w-full lg:w-1/3 relative"
-        >
-         
-        </motion.div>
-        
+        ></motion.div>
+
         {/* Right Section - Text and Button */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
@@ -267,9 +265,9 @@ export const Home = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="w-full lg:w-1/2 flex flex-col lg:flex-row items-center justify-between gap-6 px-4 lg:px-12 py-8 lg:py-12"
           style={{
-           // background: `linear-gradient(135deg, #8B4513, #654321)`,
-           position:"relative",
-           right:"-1rem"
+            // background: `linear-gradient(135deg, #8B4513, #654321)`,
+            position: "relative",
+            right: "-1rem",
           }}
         >
           <div className=" lg:text-left px-1 text-center">
@@ -279,11 +277,9 @@ export const Home = () => {
             <h2 className="text-[#FFD700] font-bold text-2xl sm:text-3xl lg:text-4xl mb-2 tracking-wide">
               BREAKFAST RESERVATION
             </h2>
-            <p className="text-white font-medium text-lg lg:text-xl">
-              SHARE THE MORNING TOGETHER
-            </p>
+            <p className="text-white font-medium text-lg lg:text-xl">SHARE THE MORNING TOGETHER</p>
           </div>
-          
+
           <motion.button
             onClick={handleReservationClick}
             whileHover={{ scale: 1.08 }}
@@ -334,13 +330,14 @@ export const Home = () => {
       </section>
 
       {/* Table Booking Banner */}
-      <section className="text-white flex flex-col lg:flex-row items-stretch min-h-[40vh] lg:h-[271px] overflow-hidden"
-      style={{backgroundImage: ` url(${thirdbanner})`, 
-       backgroundRepeat: "no-repeat",
+      <section
+        className="text-white flex flex-col lg:flex-row items-stretch min-h-[40vh] lg:h-[271px] overflow-hidden"
+        style={{
+          backgroundImage: ` url(${thirdbanner})`,
+          backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
-      
-    }}
+        }}
       >
         {/* Left Section - Breakfast Spread Image */}
         <motion.div
@@ -349,10 +346,8 @@ export const Home = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, delay: 0.2 }}
           className="w-full lg:w-1/3 relative"
-        >
-         
-        </motion.div>
-        
+        ></motion.div>
+
         {/* Right Section - Text and Button */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
@@ -361,23 +356,21 @@ export const Home = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="w-full lg:w-1/2 flex flex-col lg:flex-row items-center justify-between gap-6 px-4 lg:px-12 py-8 lg:py-12"
           style={{
-           // background: `linear-gradient(135deg, #8B4513, #654321)`,
-           position:"relative",
-           right:"-1rem"
+            // background: `linear-gradient(135deg, #8B4513, #654321)`,
+            position: "relative",
+            right: "-1rem",
           }}
         >
           <div className=" lg:text-left px-1 text-center">
             <p className="font-medium text-lg lg:text-xl mb-3 text-white">
-                Need a Table On Chill 99.
+              Need a Table On Chill 99.
             </p>
             <h2 className="text-[#FFD700] font-bold text-2xl sm:text-3xl lg:text-4xl mb-2 tracking-wide">
               Booking Table For Your & Family Members
             </h2>
-            <p className="text-white font-medium text-lg lg:text-xl">
-              SHARE THE MORNING TOGETHER
-            </p>
+            <p className="text-white font-medium text-lg lg:text-xl">SHARE THE MORNING TOGETHER</p>
           </div>
-          
+
           <motion.button
             onClick={handleReservationClick}
             whileHover={{ scale: 1.08 }}
@@ -388,7 +381,6 @@ export const Home = () => {
           </motion.button>
         </motion.div>
       </section>
-
 
       {/* Why Choose Us */}
       <motion.section
@@ -683,13 +675,14 @@ export const Home = () => {
         </div>
       </section> */}
 
-         <section className="text-white flex flex-col lg:flex-row items-stretch min-h-[40vh] lg:h-[271px] overflow-hidden"
-      style={{backgroundImage: ` url(${mandala})`, 
-       backgroundRepeat: "no-repeat",
+      <section
+        className="text-white flex flex-col lg:flex-row items-stretch min-h-[40vh] lg:h-[271px] overflow-hidden"
+        style={{
+          backgroundImage: ` url(${mandala})`,
+          backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
-      
-    }}
+        }}
       >
         {/* Left Section - Breakfast Spread Image */}
         <motion.div
@@ -698,10 +691,8 @@ export const Home = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, delay: 0.2 }}
           className="w-full lg:w-1/3 relative"
-        >
-         
-        </motion.div>
-        
+        ></motion.div>
+
         {/* Right Section - Text and Button */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
@@ -710,23 +701,21 @@ export const Home = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="w-full lg:w-1/2 flex flex-col lg:flex-row items-center justify-between gap-6 px-4 lg:px-12 py-8 lg:py-12"
           style={{
-           // background: `linear-gradient(135deg, #8B4513, #654321)`,
-           position:"relative",
-           right:"-1rem"
+            // background: `linear-gradient(135deg, #8B4513, #654321)`,
+            position: "relative",
+            right: "-1rem",
           }}
         >
           <div className=" lg:text-left px-1 text-center">
             <p className="font-medium text-lg lg:text-xl mb-3 text-white">
-                 Workshop Slots Filling Fast – Book Now!.
+              Workshop Slots Filling Fast – Book Now!.
             </p>
             <h2 className="text-[#FFD700] font-bold text-2xl sm:text-3xl lg:text-4xl mb-2 tracking-wide">
               Workshop Seats For You & Your Loved Ones
             </h2>
-            <p className="text-white font-medium text-lg lg:text-xl">
-              SHARE THE MORNING TOGETHER
-            </p>
+            <p className="text-white font-medium text-lg lg:text-xl">SHARE THE MORNING TOGETHER</p>
           </div>
-          
+
           <motion.button
             onClick={handleReservationClick}
             whileHover={{ scale: 1.08 }}

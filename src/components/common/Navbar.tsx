@@ -20,9 +20,8 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-8 left-0 w-full z-40 flex items-center justify-between bg-[var(--color-navbar)] px-4 lg:px-20 py-3 shadow-md">
-      <div className="">
-      </div>
+    <div className="fixed lg:top-8 left-0 w-full z-40 flex items-center justify-between bg-[var(--color-navbar)] px-4 lg:px-20 py-3 shadow-md">
+      <div className=""></div>
 
       {/* Desktop Navigation */}
       <div className="hidden lg:block">
