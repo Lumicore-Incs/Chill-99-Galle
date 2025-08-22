@@ -84,21 +84,6 @@ export const Gallery = () => {
     }
   }, []);
 
-  // Function to generate sample data
-  const generateSampleData = () => {
-    const sampleData = {
-      fullName: "John Doe",
-      email: "dev.mg4@gmail.com",
-      phone: "+1-555-123-4567",
-      guests: "2 People",
-      date: "2025-08-25", // A week from today
-      time: "19:30", // 7:30 PM
-    };
-
-    setFormData(sampleData);
-    console.log("📝 Sample data generated:", sampleData);
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     console.log("🔥 handleSubmit function called!");
     e.preventDefault();
@@ -270,19 +255,6 @@ export const Gallery = () => {
           <h2 className="italic text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-[#FFD580] font-semibold mb-6 lg:mb-8">
             Make Your Reservations
           </h2>
-
-          {/* Sample Data Button - Hidden on small screens */}
-          <div className="mb-4 hidden sm:block">
-            <motion.button
-              type="button"
-              onClick={generateSampleData}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.96 }}
-              className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition-all duration-300 min-h-[44px]"
-            >
-              📝 Fill Sample Data
-            </motion.button>
-          </div>
 
           {/* Form fields - Single column on mobile, two columns on larger screens */}
           <motion.form

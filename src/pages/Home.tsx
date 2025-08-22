@@ -63,7 +63,7 @@ const banners = [
       {
         text: "Book a Table",
         color: "bg-[#FFD580] text-[#31201B] hover:bg-[#e6c16b] transition-all duration-500",
-        href: "#booking-table-section",
+        href: "/menu#reservation-section",
         icon: null,
       },
     ],
@@ -169,7 +169,6 @@ export const Home = () => {
                   <motion.a
                     key={idx}
                     href={btn.href}
-                    target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.08 }}
                     whileTap={{ scale: 0.96 }}
