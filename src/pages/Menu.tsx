@@ -167,7 +167,7 @@ export const Menu = () => {
   };
 
   return (
-    <div className="w-full overflow-x-hidden relative">
+    <div className="w-full overflow-x-hidden relative pt-20">
       <TopLine />
       <Navbar />
 

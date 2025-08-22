@@ -1,7 +1,6 @@
 import { Menu as MenuIcon, X } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/chill-99.png";
 import { useReservationNavigation } from "../../utils/navigation";
 // Helper to scroll to footer
 const scrollToFooter = () => {
@@ -21,7 +20,7 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 flex items-center justify-between bg-[var(--color-navbar)] px-4 lg:px-20 py-3 shadow-md">
+    <div className="fixed top-8 left-0 w-full z-40 flex items-center justify-between bg-[var(--color-navbar)] px-4 lg:px-20 py-3 shadow-md">
       <div className="">
       </div>
 

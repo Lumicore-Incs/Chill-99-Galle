@@ -35,7 +35,21 @@ import { useReservationNavigation } from "../utils/navigation";
 import { Footer } from "../components/common/Footer";
 import { red } from "@mui/material/colors";
 
-const banners = [
+interface BannerButton {
+  text: string;
+  color: string;
+  href?: string;
+  icon?: React.ReactElement | null;
+}
+
+interface Banner {
+  image: string;
+  title: React.ReactElement;
+  subtitle: React.ReactElement;
+  buttons: BannerButton[];
+}
+
+const banners: Banner[] = [
   {
     image: banner1,
     title: (
@@ -116,7 +130,7 @@ export const Home = () => {
   const current = banners[bannerIndex];
 
   return (
-    <div className="w-full overflow-x-hidden relative">
+    <div className="w-full overflow-x-hidden relative pt-20">
       <TopLine />
       <Navbar />
 
@@ -173,7 +187,7 @@ export const Home = () => {
                     whileTap={{ scale: 0.96 }}
                     className={`${btn.color} flex items-center gap-3 px-6 lg:px-8 rounded-lg cursor-pointer w-full sm:w-auto justify-center min-h-[48px] min-w-[160px]`}
                   >
-                    {btn.icon} {btn.text} <FaChevronRight />
+                    {btn.icon && btn.icon} {btn.text} <FaChevronRight />
                   </motion.a>
                 ) : (
                   <motion.button
@@ -182,7 +196,7 @@ export const Home = () => {
                     whileTap={{ scale: 0.96 }}
                     className={`${btn.color} flex items-center gap-3 px-6 lg:px-8 rounded-lg cursor-pointer w-full sm:w-auto justify-center min-h-[48px] min-w-[160px]`}
                   >
-                    {btn.icon} {btn.text} <FaChevronRight />
+                    {btn.icon && btn.icon} {btn.text} <FaChevronRight />
                   </motion.button>
                 )
               )}

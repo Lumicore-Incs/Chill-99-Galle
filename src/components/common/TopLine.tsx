@@ -6,7 +6,7 @@ import { RiInstagramFill } from "react-icons/ri";
 
 export const TopLine = () => {
   return (
-    <div className="hidden lg:flex items-center justify-between py-2 bg-[var(--color-topline)] text-[#A1887F] text-sm font-normal px-4 lg:px-20">
+    <div className="fixed top-0 left-0 w-full z-50 hidden lg:flex items-center justify-between py-2 bg-[var(--color-topline)] text-[#A1887F] text-sm font-normal px-4 lg:px-20">
       <div className="flex items-center">
         <FaRegClock className="inline mr-2" />
         <p>
