@@ -4,8 +4,7 @@ import { useState } from "react";
 import { FaChevronRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import aboutbg from "../assets/about-bg.png";
-import about from "../assets/about.png";
-import thirdbanner from "../assets/banner03.jpg";
+import thirdbanner from "../assets/booking-03.jpg";
 import burgerfries from "../assets/burger.jpg";
 import logo from "../assets/chill-99.png";
 import banner2 from "../assets/header-banner-02.jpg";
@@ -17,12 +16,12 @@ import iconchoose06 from "../assets/iconchoose06.png";
 import iconchoose01 from "../assets/iconschoose01.png";
 import iconchoose03 from "../assets/iconschoose03.png";
 import iconchoose04 from "../assets/iconschoose04.png";
+import cofee from "../assets/booking-01.jpg";
 import burger from "../assets/imagecaro-01.jpg";
 import meat from "../assets/imagecaro-04.png";
 import waffles from "../assets/imagecaro-06.jpg";
-import mandala from "../assets/mandala.png";
+import mandala from "../assets/booking-02.jpg";
 import popularBg from "../assets/popular-bg.png";
-import secondbanner from "../assets/second-banner.jpg";
 import testimonial from "../assets/testimonialbg.png";
 import uberLogo from "../assets/uber-logo.svg";
 import whychhose from "../assets/whychoose.jpg";
@@ -34,6 +33,7 @@ import { Testimonial } from "../components/features/Testimonial";
 import { useReservationNavigation } from "../utils/navigation";
 
 import { Footer } from "../components/common/Footer";
+import { red } from "@mui/material/colors";
 
 const banners = [
   {
@@ -129,7 +129,6 @@ export const Home = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           cursor: "pointer",
-          marginTop: "64px", // Adjust this value to match your navbar height
         }}
         onClick={handleBannerChange}
         onTouchStart={handleBannerChange}
@@ -197,7 +196,7 @@ export const Home = () => {
       <section
         className="text-white flex flex-col lg:flex-row items-center justify-between gap-8 px-4 lg:px-50 py-12 lg:py-0 min-h-[70vh] lg:min-h-[100vh] bg-[#261410]"
         style={{
-          backgroundImage: `linear-gradient(to right, #261410E5, #261410E5), url(${aboutbg})`,
+          backgroundImage: ` url(${aboutbg})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -208,13 +207,13 @@ export const Home = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="flex flex-col text-center lg:text-left lg:w-1/2"
+          className="flex flex-col text-center lg:text-left"
         >
           <h2 className="font-medium text-lg">ABOUT US</h2>
           <p className="text-[var(--green-primary)] font-semibold italic text-2xl sm:text-3xl lg:text-4xl mb-3">
             Where tradition meets taste in the heart of Galle Fort.
           </p>
-          <p className="max-w-[500px] text-base sm:text-lg lg:text-xl mx-auto lg:mx-0">
+          <p className=" text-base sm:text-lg lg:text-xl mx-auto lg:mx-0">
             <span className="font-bold">Chill 99</span> is a cozy eatery nestled in the heart of{" "}
             <span className="font-bold">Galle Fort, Sri Lanka.</span>
             <br className="hidden lg:block" />
@@ -225,61 +224,58 @@ export const Home = () => {
             bustle.
           </p>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="lg:w-1/2 flex justify-center"
-        >
-          <motion.img
-            src={about}
-            alt="About Chill 99"
-            className="w-full max-w-md lg:max-w-lg"
-            initial={{ scale: 0.95, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-          />
-        </motion.div>
       </section>
 
       {/* Breakfast Banner */}
-      <section
-        className="text-white flex flex-col lg:flex-row items-center justify-between gap-6 px-4 lg:px-50 py-8 lg:py-0 min-h-[40vh] lg:h-[271px] bg-[#1F0D09]"
-        style={{
-          backgroundImage: `linear-gradient(to right, #1F0D09BA, #1F0D09BA), url(${secondbanner})`,
-          backgroundRepeat: "no-repeat",
+      <section className="text-white flex flex-col lg:flex-row items-stretch min-h-[40vh] lg:h-[271px] overflow-hidden"
+      style={{backgroundImage: ` url(${cofee})`, 
+       backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
-        }}
+      
+    }}
       >
+        {/* Left Section - Breakfast Spread Image */}
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="w-full lg:w-1/3 relative"
+        >
+         
+        </motion.div>
+        
+        {/* Right Section - Text and Button */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-center lg:text-left"
-        >
-          <p className="font-medium text-lg lg:text-xl mb-2">
-            Start your day with a cozy breakfast at Chill 99.
-          </p>
-          <h2 className="text-[var(--green-primary)] italic font-semibold text-2xl sm:text-3xl lg:text-4xl">
-            Breakfast Reservation – Share the Morning Together
-          </h2>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex items-center text-sm sm:text-base lg:text-lg font-medium"
+          className="w-full lg:w-1/2 flex flex-col lg:flex-row items-center justify-between gap-6 px-4 lg:px-12 py-8 lg:py-12"
+          style={{
+           // background: `linear-gradient(135deg, #8B4513, #654321)`,
+           position:"relative",
+           right:"-1rem"
+          }}
         >
+          <div className=" lg:text-left px-1 text-center">
+            <p className="font-medium text-lg lg:text-xl mb-3 text-white">
+              Start your day with a cozy breakfast at Chill 99.
+            </p>
+            <h2 className="text-[#FFD700] font-bold text-2xl sm:text-3xl lg:text-4xl mb-2 tracking-wide">
+              BREAKFAST RESERVATION
+            </h2>
+            <p className="text-white font-medium text-lg lg:text-xl">
+              SHARE THE MORNING TOGETHER
+            </p>
+          </div>
+          
           <motion.button
             onClick={handleReservationClick}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
-            className="flex items-center gap-3 px-6 lg:px-8 py-4 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center"
+            className="flex items-center gap-1 px-6 lg:px-2 py-4 rounded-lg bg-[#DAA520] hover:bg-[#B8860B] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center text-white font-semibold"
           >
             BOOK A SPOT <FaChevronRight />
           </motion.button>
@@ -325,48 +321,61 @@ export const Home = () => {
       </section>
 
       {/* Table Booking Banner */}
-      <motion.section
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.8 }}
-        className="text-white flex flex-col lg:flex-row items-center justify-between gap-6 px-4 lg:px-50 py-8 lg:py-0 min-h-[40vh] lg:h-[271px] bg-[#1F0D09]"
-        style={{
-          backgroundImage: `linear-gradient(to right, #1F0D09BA, #1F0D09BA), url(${thirdbanner})`,
-          backgroundRepeat: "no-repeat",
+      <section className="text-white flex flex-col lg:flex-row items-stretch min-h-[40vh] lg:h-[271px] overflow-hidden"
+      style={{backgroundImage: ` url(${thirdbanner})`, 
+       backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
-        }}
+      
+    }}
       >
+        {/* Left Section - Breakfast Spread Image */}
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="w-full lg:w-1/3 relative"
+        >
+         
+        </motion.div>
+        
+        {/* Right Section - Text and Button */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-center lg:text-left"
-        >
-          <p className="font-medium text-lg lg:text-xl mb-2">Need a Table On Chill 99</p>
-          <h2 className="text-[var(--green-primary)] italic font-semibold text-2xl sm:text-3xl lg:text-4xl">
-            Booking Table For Your & Family Members
-          </h2>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex items-center text-sm sm:text-base lg:text-lg font-medium"
+          className="w-full lg:w-1/2 flex flex-col lg:flex-row items-center justify-between gap-6 px-4 lg:px-12 py-8 lg:py-12"
+          style={{
+           // background: `linear-gradient(135deg, #8B4513, #654321)`,
+           position:"relative",
+           right:"-1rem"
+          }}
         >
+          <div className=" lg:text-left px-1 text-center">
+            <p className="font-medium text-lg lg:text-xl mb-3 text-white">
+                Need a Table On Chill 99.
+            </p>
+            <h2 className="text-[#FFD700] font-bold text-2xl sm:text-3xl lg:text-4xl mb-2 tracking-wide">
+              Booking Table For Your & Family Members
+            </h2>
+            <p className="text-white font-medium text-lg lg:text-xl">
+              SHARE THE MORNING TOGETHER
+            </p>
+          </div>
+          
           <motion.button
             onClick={handleReservationClick}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
-            className="flex items-center gap-3 px-6 lg:px-8 py-4 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center"
+            className="flex items-center gap-1 px-6 lg:px-2 py-4 rounded-lg bg-[#DAA520] hover:bg-[#B8860B] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center text-white font-semibold"
           >
             BOOK A TABLE <FaChevronRight />
           </motion.button>
         </motion.div>
-      </motion.section>
+      </section>
+
 
       {/* Why Choose Us */}
       <motion.section
@@ -637,7 +646,7 @@ export const Home = () => {
       </motion.section>
 
       {/* Workshop Banner */}
-      <section
+      {/* <section
         className="text-white flex flex-col lg:flex-row items-center justify-between gap-6 px-4 lg:px-50 py-8 lg:py-0 min-h-[40vh] lg:h-[271px] bg-[#B39A91]"
         style={{
           backgroundImage: `linear-gradient(to right, #311F1ADE, #311F1ADE), url(${mandala})`,
@@ -659,6 +668,61 @@ export const Home = () => {
             JOIN NOW <FaChevronRight />
           </button>
         </div>
+      </section> */}
+
+         <section className="text-white flex flex-col lg:flex-row items-stretch min-h-[40vh] lg:h-[271px] overflow-hidden"
+      style={{backgroundImage: ` url(${mandala})`, 
+       backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+      
+    }}
+      >
+        {/* Left Section - Breakfast Spread Image */}
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="w-full lg:w-1/3 relative"
+        >
+         
+        </motion.div>
+        
+        {/* Right Section - Text and Button */}
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="w-full lg:w-1/2 flex flex-col lg:flex-row items-center justify-between gap-6 px-4 lg:px-12 py-8 lg:py-12"
+          style={{
+           // background: `linear-gradient(135deg, #8B4513, #654321)`,
+           position:"relative",
+           right:"-1rem"
+          }}
+        >
+          <div className=" lg:text-left px-1 text-center">
+            <p className="font-medium text-lg lg:text-xl mb-3 text-white">
+                 Workshop Slots Filling Fast – Book Now!.
+            </p>
+            <h2 className="text-[#FFD700] font-bold text-2xl sm:text-3xl lg:text-4xl mb-2 tracking-wide">
+              Workshop Seats For You & Your Loved Ones
+            </h2>
+            <p className="text-white font-medium text-lg lg:text-xl">
+              SHARE THE MORNING TOGETHER
+            </p>
+          </div>
+          
+          <motion.button
+            onClick={handleReservationClick}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.96 }}
+            className="flex items-center gap-1 px-6 lg:px-2 py-4 rounded-lg bg-[#DAA520] hover:bg-[#B8860B] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center text-white font-semibold"
+          >
+            BOOK A TABLE <FaChevronRight />
+          </motion.button>
+        </motion.div>
       </section>
 
       {/* Footer */}

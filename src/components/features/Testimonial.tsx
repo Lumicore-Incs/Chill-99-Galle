@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import av1 from "../../assets/av1.png";
 import av2 from "../../assets/av2.png";
 import av3 from "../../assets/av3.png";
@@ -46,11 +47,23 @@ const testimonials: Testimonial[] = [
 export const Testimonial = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length
+    );
+  };
+
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (
       <span
         key={index}
-        className={`text-xl ${index < rating ? "text-[var(--green-primary)]" : "text-gray-400"}`}
+        className={`text-lg ${
+          index < rating ? "text-[var(--green-primary)]" : "text-[#1F0D09]"
+        }`}
       >
         ★
       </span>
@@ -58,49 +71,43 @@ export const Testimonial = () => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto">
+    <div className="w-full">
       {/* Mobile: Carousel view */}
       <div className="block lg:hidden">
-        <div className="relative px-4">
-          <div className="bg-[#1F0D09] backdrop-blur-sm rounded-lg px-6 py-8 mx-auto max-w-md">
+        <div className="relative">
+          <div className="bg-[#1F0D09] backdrop-blur-sm rounded-lg px-6 py-10 mx-4">
             <div className="flex justify-center mb-6">
               <img
                 src={testimonials[currentIndex].avatar}
                 alt={testimonials[currentIndex].name}
-                className="w-16 h-16 rounded-full object-cover border-2 border-[var(--green-primary)]"
+                className="w-16 h-16 rounded-full object-cover"
               />
             </div>
             <div className="flex justify-center mb-4">
               {renderStars(testimonials[currentIndex].rating)}
             </div>
-            <p className="text-white text-base leading-relaxed mb-6 text-center px-2">
+            <p className="text-white text-sm leading-relaxed mb-4 text-center">
               "{testimonials[currentIndex].text}"
             </p>
             <div className="text-center">
-              <p className="text-[var(--green-primary)] font-semibold text-lg">
+              <p className="text-[#E5B024] font-semibold">
                 {testimonials[currentIndex].name}
               </p>
             </div>
           </div>
-
+          
           {/* Navigation for mobile */}
-          <div className="flex justify-center mt-8 space-x-3">
+          <div className="flex justify-center mt-6 space-x-2">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-4 h-4 rounded-full transition-all duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center ${
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   index === currentIndex
-                    ? "bg-[var(--green-primary)] scale-110"
+                    ? "bg-[var(--green-primary)] scale-125"
                     : "bg-yellow-600/50 hover:bg-[var(--green-primary)]"
                 }`}
-              >
-                <div
-                  className={`w-3 h-3 rounded-full ${
-                    index === currentIndex ? "bg-white" : "bg-transparent"
-                  }`}
-                />
-              </button>
+              />
             ))}
           </div>
         </div>
@@ -112,38 +119,40 @@ export const Testimonial = () => {
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="bg-[#1F0D09] backdrop-blur-sm rounded-lg px-6 py-8 transform transition-all duration-300 hover:scale-105 shadow-lg relative mt-8"
+              className="bg-[#1F0D09] backdrop-blur-sm rounded-lg px-6 py-10 transform transition-all duration-300 hover:scale-105 shadow-lg relative"
             >
               <div className="flex justify-center mb-6">
-                <div className="absolute -top-8">
+                <div className="absolute -top-5">
                   <img
                     src={testimonial.avatar}
                     alt={testimonial.name}
-                    className="w-16 h-16 rounded-full object-cover border-2 border-[var(--green-primary)]"
+                    className="w-16 h-16 rounded-full object-cover"
                   />
                 </div>
               </div>
-              <div className="flex justify-center mb-4 pt-2">{renderStars(testimonial.rating)}</div>
-              <p className="text-white text-sm leading-relaxed mb-6 text-center">
+              <div className="flex justify-center mb-4">
+                {renderStars(testimonial.rating)}
+              </div>
+              <p className="text-white text-sm leading-relaxed mb-4 text-center">
                 "{testimonial.text}"
               </p>
               <div className="text-center">
-                <p className="text-[var(--green-primary)] font-semibold text-base">
+                <p className="text-[#E5B024] font-semibold">
                   {testimonial.name}
                 </p>
               </div>
             </div>
           ))}
         </div>
-
-        <div className="flex justify-center space-x-3">
+        
+        <div className="flex justify-center space-x-2">
           {testimonials.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-4 h-4 rounded-full transition-all duration-300 ${
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 index === currentIndex
-                  ? "bg-[var(--green-primary)] scale-110"
+                  ? "bg-[var(--green-primary)] scale-125"
                   : "bg-yellow-600/50 hover:bg-[var(--green-primary)]"
               }`}
             />
