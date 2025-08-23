@@ -46,7 +46,6 @@ const testimonials: Testimonial[] = [
 export const Testimonial = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-
   // const nextSlide = () => { // Unused function
   //   setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
   // };
@@ -60,9 +59,7 @@ export const Testimonial = () => {
     return Array.from({ length: 5 }, (_, index) => (
       <span
         key={index}
-        className={`text-lg ${
-          index < rating ? "text-[var(--green-primary)]" : "text-[#1F0D09]"
-        }`}
+        className={`text-lg ${index < rating ? "text-[var(--green-primary)]" : "text-[#1F0D09]"}`}
       >
         ★
       </span>
@@ -89,9 +86,7 @@ export const Testimonial = () => {
               "{testimonials[currentIndex].text}"
             </p>
             <div className="text-center">
-              <p className="text-[#E5B024] font-semibold">
-                {testimonials[currentIndex].name}
-              </p>
+              <p className="text-[#E5B024] font-semibold">{testimonials[currentIndex].name}</p>
             </div>
           </div>
           {/* Navigation for mobile */}
@@ -128,16 +123,12 @@ export const Testimonial = () => {
                   />
                 </div>
               </div>
-              <div className="flex justify-center mb-4">
-                {renderStars(testimonial.rating)}
-              </div>
+              <div className="flex justify-center mb-4">{renderStars(testimonial.rating)}</div>
               <p className="text-white text-sm leading-relaxed mb-4 text-center">
                 "{testimonial.text}"
               </p>
               <div className="text-center">
-                <p className="text-[#E5B024] font-semibold">
-                  {testimonial.name}
-                </p>
+                <p className="text-[#E5B024] font-semibold">{testimonial.name}</p>
               </div>
             </div>
           ))}

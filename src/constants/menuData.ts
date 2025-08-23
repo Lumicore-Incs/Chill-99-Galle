@@ -4,6 +4,10 @@ import avacadoPoch from "../assets/avacado-toast-wt-poch-egg.jpg";
 import avacadoScrumbled from "../assets/avacado-toast-wt-scrumbled-egg.jpg";
 import beefShawarma from "../assets/beef-shawarma.jpg";
 import blueberryCheesecakeImg from "../assets/blueberry-cheese-cake.jpg";
+import beefBurgerImg from "../assets/burger-02.jpg";
+import muttonBurgerImg from "../assets/burger-03.jpg";
+import chickenBurgerImg from "../assets/burger-04.jpg";
+import specialBurger from "../assets/burger-special.jpg";
 import cafeMochaImg from "../assets/cafe-mocha.jpg";
 import cappuccinoImg from "../assets/cappuccino.jpg";
 import caramelMachaImg from "../assets/caramel-macha.jpg";
@@ -25,6 +29,8 @@ import friedBananaIceCreamImg from "../assets/fried-banana-ice-cream.jpg";
 import greenSalad from "../assets/green-salad.jpg";
 import iceLatteImg from "../assets/ice-latte.jpg";
 import iceCappuccinoImg from "../assets/iced-cappuchino.jpg";
+import vegetableBurgerImg from "../assets/imagecaro-01.jpg";
+import spaghettiSeafoodImg from "../assets/italian-seafood-pasta.jpg";
 import latteImg from "../assets/latte.jpg";
 import mixRice from "../assets/mix-rice.jpg";
 import mongolianRice from "../assets/mongolian-rice.jpg";
@@ -50,6 +56,9 @@ import image3 from "../assets/sl-special-mix-vege-soup.jpg";
 import traditionalKottu from "../assets/sl-traditional-kottu.jpg";
 import image2 from "../assets/soup.jpg";
 import specialMixIceCreamImg from "../assets/spcial-mix-ice-cream.jpg";
+import spaghettiBologneseImg from "../assets/speghetti-bolognese.jpg";
+import spaghettiCarbonaraImg from "../assets/speghetti-cabonara.jpg";
+import spaghettiGorengImg from "../assets/speghetti-mee-goreng.jpg";
 import spicyChickenChipsImg from "../assets/spicy-chicken-waffles.jpg";
 import spicyCornDog from "../assets/spicy-conr-dog.jpg";
 import surfTurfPlatter from "../assets/surf-and-turf.jpg";
@@ -65,6 +74,69 @@ export interface MenuItem {
 }
 
 export const allMenuItems: MenuItem[] = [
+  {
+    id: 62,
+    image: vegetableBurgerImg,
+    title: "Vegetable Burger",
+    price: 1800.0,
+    category: "burger",
+  },
+  {
+    id: 63,
+    image: beefBurgerImg,
+    title: "Beef Burger",
+    price: 2300.0,
+    category: "burger",
+  },
+  {
+    id: 64,
+    image: muttonBurgerImg,
+    title: "Mutton Burger",
+    price: 2500.0,
+    category: "burger",
+  },
+  {
+    id: 65,
+    image: chickenBurgerImg,
+    title: "Chicken Burger",
+    price: 2200.0,
+    category: "burger",
+  },
+  {
+    id: 66,
+    image: specialBurger,
+    title: "Chill 99 Special Burger",
+    price: 4500.0,
+    category: "burger",
+  },
+  {
+    id: 58,
+    image: spaghettiSeafoodImg,
+    title: "Italian Special Sea Food Pasta",
+    price: 2700.0,
+    category: "pasta",
+  },
+  {
+    id: 59,
+    image: spaghettiBologneseImg,
+    title: "Spaghetti Bolognese",
+    price: 2300.0,
+    category: "pasta",
+  },
+  {
+    id: 60,
+    image: spaghettiCarbonaraImg,
+    title: "Spaghetti Carbonara",
+    price: 2500.0,
+    category: "pasta",
+  },
+  {
+    id: 61,
+    image: spaghettiGorengImg,
+    title: "Spaghettis Me Goreng",
+    price: 2500.0,
+    category: "pasta",
+  },
   {
     id: 1,
     image: image1,
@@ -128,20 +200,6 @@ export const allMenuItems: MenuItem[] = [
     price: 2000.0,
     category: "salad",
   },
-  {
-    id: 5,
-    image: image1,
-    title: "Chill 99 Special Burger ",
-    price: 4500.0,
-    category: "burger",
-  },
-  // {
-  //   id: 6,
-  //   image: image2,
-  //   title: "Cream Soup Of Pumkin",
-  //   price: 1200.0,
-  //   category: "main_course",
-  // },
 
   // Rice Menu Items
   {
