@@ -20,7 +20,7 @@ import { allMenuItems } from "../constants/menuData";
 import { useReservationNavigation } from "../utils/navigation";
 
 export const Menu = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("main course");
+  const [selectedCategory, setSelectedCategory] = useState<string>("main_course");
   const navigate = useNavigate();
   const handleReservationClick = useReservationNavigation(navigate);
 
