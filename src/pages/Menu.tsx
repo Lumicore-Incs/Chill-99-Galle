@@ -374,7 +374,7 @@ export const Menu = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
             className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full"
           >
             {allMenuItems
@@ -385,7 +385,7 @@ export const Menu = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.6, delay: 0.2 + item.id * 0.05 }}
+                  transition={{ duration: 0.6, delay: item.id * 0.05 }}
                   className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
                 >
                   <motion.img
@@ -395,7 +395,7 @@ export const Menu = () => {
                     initial={{ scale: 0.95, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: 0.3 + item.id * 0.05 }}
+                    transition={{ duration: 0.6, delay: item.id * 0.05 }}
                   />
                   <div className="text-center sm:text-left">
                     <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
@@ -653,7 +653,7 @@ export const Menu = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
             className="flex items-center justify-center flex-col lg:flex-row gap-5"
           >
             <div className="w-full bg-[#00000051] py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
@@ -661,7 +661,7 @@ export const Menu = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.7, delay: 0.4 }}
+                transition={{ duration: 0.7, delay: 0.1 }}
                 className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full"
               >
                 {allMenuItems
