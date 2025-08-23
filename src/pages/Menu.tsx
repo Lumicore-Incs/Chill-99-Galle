@@ -630,7 +630,18 @@ export const Menu = () => {
             </motion.div>
           </div>
         </div>
+      </section>
 
+      <section
+        className="bg-[#1F0D09] w-full min-h-[100vh] px-4 lg:px-50 py-12 lg:py-20 flex flex-col items-center justify-center text-white gap-8"
+        style={{
+          backgroundImage: `linear-gradient(to right, #1F0D09C9, #1F0D09C9), url(${popularBg})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* waffles Section */}
         <div className="flex flex-col items-center text-center">
           <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">Choose Best Dishes</p>
           <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">
