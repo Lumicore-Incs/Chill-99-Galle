@@ -25,6 +25,7 @@ import popularBg from "../assets/popular-bg.png";
 import testimonial from "../assets/testimonialbg.png";
 import uberLogo from "../assets/uber-logo.svg";
 import whychhose from "../assets/whychoose.jpg";
+import { FloatingContactIcons } from "../components/common/FloatingContactIcons";
 import { Navbar } from "../components/common/Navbar";
 import { TopLine } from "../components/common/TopLine";
 import ImageCarousel from "../components/features/CarouselItem";
@@ -132,6 +133,7 @@ export const Home = () => {
     <div className="w-full overflow-x-hidden relative lg:pt-20">
       <TopLine />
       <Navbar />
+      <FloatingContactIcons />
 
       {/* Hero Banner */}
       <section

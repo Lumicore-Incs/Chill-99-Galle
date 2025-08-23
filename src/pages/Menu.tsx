@@ -13,6 +13,7 @@ import popularBg from "../assets/popular-bg.png";
 import saladMain from "../assets/salad-main.jpg";
 import secondbanner from "../assets/second-banner.jpg";
 import image2 from "../assets/soup.jpg";
+import { FloatingContactIcons } from "../components/common/FloatingContactIcons";
 import { Footer } from "../components/common/Footer";
 import { Navbar } from "../components/common/Navbar";
 import { TopLine } from "../components/common/TopLine";
@@ -126,6 +127,7 @@ export const Menu = () => {
     <div className="w-full overflow-x-hidden relative lg:pt-20">
       <TopLine />
       <Navbar />
+      <FloatingContactIcons />
 
       {/* Hero Banner */}
       <section
