@@ -20,6 +20,7 @@ import { allMenuItems } from "../constants/menuData";
 import { useReservationNavigation } from "../utils/navigation";
 
 export const Menu = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>("main course");
   const navigate = useNavigate();
   const handleReservationClick = useReservationNavigation(navigate);
 
@@ -268,7 +269,7 @@ export const Menu = () => {
               <div className="lg:gap-5 w-full flex flex-col">
                 {allMenuItems
                   .filter((item) => item.category === "salad")
-                  .slice(0, 4)
+                  .slice(0, 5)
                   .map((item) => (
                     <motion.div
                       key={item.id}
@@ -413,24 +414,24 @@ export const Menu = () => {
         </motion.div>
         {/* menu select bar */}
         <div className="flex items-center justify-center gap-4 flex-wrap">
-          <button className="px-4 py-2 rounded-lg bg-[#1F0D09] hover:bg-[#81685F] transition-all duration-500">
-            Main Course
-          </button>
-          <button className="px-4 py-2 rounded-lg bg-[#1F0D09] hover:bg-[#81685F] transition-all duration-500">
-            Pasta
-          </button>
-          <button className="px-4 py-2 rounded-lg bg-[#1F0D09] hover:bg-[#81685F] transition-all duration-500">
-            Rice
-          </button>
-          <button className="px-4 py-2 rounded-lg bg-[#1F0D09] hover:bg-[#81685F] transition-all duration-500">
-            Shawarma
-          </button>
-          <button className="px-4 py-2 rounded-lg bg-[#1F0D09] hover:bg-[#81685F] transition-all duration-500">
-            Burger
-          </button>
-          <button className="px-4 py-2 rounded-lg bg-[#1F0D09] hover:bg-[#81685F] transition-all duration-500">
-            Corn Dog
-          </button>
+          {[
+            { label: "Main Course", value: "main_course" },
+            { label: "Pasta", value: "pasta" },
+            { label: "Rice", value: "rice" },
+            { label: "Shawarma", value: "shawarma" },
+            { label: "Burger", value: "burger" },
+            { label: "Corn Dog", value: "corn_dog" },
+          ].map((cat) => (
+            <button
+              key={cat.value}
+              className={`px-4 py-2 rounded-lg transition-all duration-500 ${
+                selectedCategory === cat.value ? "bg-[#81685F]" : "bg-[#1F0D09] hover:bg-[#81685F]"
+              }`}
+              onClick={() => setSelectedCategory(cat.value)}
+            >
+              {cat.label}
+            </button>
+          ))}
         </div>
 
         <div className="w-full bg-[#1F0D09] flex flex-col items-center justify-between py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
@@ -442,8 +443,7 @@ export const Menu = () => {
             className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full"
           >
             {allMenuItems
-              .filter((item) => item.category === "main course")
-              .slice(0, 6)
+              .filter((item) => item.category === selectedCategory)
               .map((item) => (
                 <motion.div
                   key={item.id}
