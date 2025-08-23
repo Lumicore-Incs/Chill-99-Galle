@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 import av1 from "../../assets/av1.png";
 import av2 from "../../assets/av2.png";
 import av3 from "../../assets/av3.png";
@@ -47,16 +46,16 @@ const testimonials: Testimonial[] = [
 export const Testimonial = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-  };
 
-  const prevSlide = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length
-    );
-  };
+  // const nextSlide = () => { // Unused function
+  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+  // };
 
+  // const prevSlide = () => { // Unused function
+  //   setCurrentIndex(
+  //     (prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length
+  //   );
+  // };
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (
       <span
@@ -95,7 +94,6 @@ export const Testimonial = () => {
               </p>
             </div>
           </div>
-          
           {/* Navigation for mobile */}
           <div className="flex justify-center mt-6 space-x-2">
             {testimonials.map((_, index) => (
@@ -144,7 +142,6 @@ export const Testimonial = () => {
             </div>
           ))}
         </div>
-        
         <div className="flex justify-center space-x-2">
           {testimonials.map((_, index) => (
             <button
