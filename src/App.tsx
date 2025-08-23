@@ -5,17 +5,17 @@ import { Feedback } from "./pages/Feedback";
 import { Gallery } from "./pages/Gallery";
 import { Home } from "./pages/Home";
 import { Menu } from "./pages/Menu";
-import { useImageLoader } from "./utils/useImageLoader";
 import { getRouteImages } from "./utils/imagePreloader";
+import { useImageLoader } from "./utils/useImageLoader";
 
 function AppContent() {
   const location = useLocation();
   const [currentRoute, setCurrentRoute] = useState(location.pathname);
   const [routeChanged, setRouteChanged] = useState(false);
-  
+
   // Get images for current route
   const routeImages = getRouteImages(currentRoute);
-  
+
   // Use the image loader hook with route-specific images
   const { isLoading, progress, loadedCount, totalCount } = useImageLoader({
     imageUrls: routeImages,
@@ -27,7 +27,7 @@ function AppContent() {
     if (location.pathname !== currentRoute) {
       setCurrentRoute(location.pathname);
       setRouteChanged(true);
-      
+
       // Reset route changed flag after a short delay
       const timer = setTimeout(() => setRouteChanged(false), 100);
       return () => clearTimeout(timer);

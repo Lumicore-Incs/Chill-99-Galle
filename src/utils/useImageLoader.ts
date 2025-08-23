@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface UseImageLoaderOptions {
   /**
@@ -81,26 +81,26 @@ export const useImageLoader = ({
 
     const handleImageError = () => {
       // Count errored images as "loaded" to prevent infinite loading
-      console.warn('Image failed to load, but continuing...');
+      console.warn("Image failed to load, but continuing...");
       handleImageLoad();
     };
 
     // Create image elements and start loading
     const imageElements = imageUrls.map((url) => {
       const img = new Image();
-      
+
       // Set up event listeners before setting src
       img.onload = handleImageLoad;
       img.onerror = handleImageError;
-      
+
       // Start loading
       img.src = url;
-      
+
       // If image is already cached, it might be complete immediately
       if (img.complete) {
         setTimeout(handleImageLoad, 0);
       }
-      
+
       return img;
     });
 

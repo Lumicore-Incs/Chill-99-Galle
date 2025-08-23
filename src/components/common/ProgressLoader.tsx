@@ -7,10 +7,7 @@ interface ProgressLoaderProps {
   showProgress?: boolean;
 }
 
-export const ProgressLoader = ({
-  progress = 0,
-  showProgress = true,
-}: ProgressLoaderProps) => (
+export const ProgressLoader = ({ progress = 0, showProgress = true }: ProgressLoaderProps) => (
   <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#261410] bg-opacity-90">
     <img
       src={chillLogo}
