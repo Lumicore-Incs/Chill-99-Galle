@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 import av1 from "../../assets/av1.png";
 import av2 from "../../assets/av2.png";
 import av3 from "../../assets/av3.png";
@@ -47,23 +46,20 @@ const testimonials: Testimonial[] = [
 export const Testimonial = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-  };
+  // const nextSlide = () => { // Unused function
+  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+  // };
 
-  const prevSlide = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length
-    );
-  };
-
+  // const prevSlide = () => { // Unused function
+  //   setCurrentIndex(
+  //     (prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length
+  //   );
+  // };
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (
       <span
         key={index}
-        className={`text-lg ${
-          index < rating ? "text-[var(--green-primary)]" : "text-[#1F0D09]"
-        }`}
+        className={`text-lg ${index < rating ? "text-[var(--green-primary)]" : "text-[#1F0D09]"}`}
       >
         ★
       </span>
@@ -90,12 +86,9 @@ export const Testimonial = () => {
               "{testimonials[currentIndex].text}"
             </p>
             <div className="text-center">
-              <p className="text-[#E5B024] font-semibold">
-                {testimonials[currentIndex].name}
-              </p>
+              <p className="text-[#E5B024] font-semibold">{testimonials[currentIndex].name}</p>
             </div>
           </div>
-          
           {/* Navigation for mobile */}
           <div className="flex justify-center mt-6 space-x-2">
             {testimonials.map((_, index) => (
@@ -130,21 +123,16 @@ export const Testimonial = () => {
                   />
                 </div>
               </div>
-              <div className="flex justify-center mb-4">
-                {renderStars(testimonial.rating)}
-              </div>
+              <div className="flex justify-center mb-4">{renderStars(testimonial.rating)}</div>
               <p className="text-white text-sm leading-relaxed mb-4 text-center">
                 "{testimonial.text}"
               </p>
               <div className="text-center">
-                <p className="text-[#E5B024] font-semibold">
-                  {testimonial.name}
-                </p>
+                <p className="text-[#E5B024] font-semibold">{testimonial.name}</p>
               </div>
             </div>
           ))}
         </div>
-        
         <div className="flex justify-center space-x-2">
           {testimonials.map((_, index) => (
             <button

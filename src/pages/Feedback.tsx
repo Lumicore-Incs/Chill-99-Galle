@@ -6,6 +6,7 @@ import carosal5 from "../assets/feed-back/carosal-image-05.jpg";
 import mainImage from "../assets/feed-back/main-image.png";
 import sideImage1 from "../assets/feed-back/side-images-01.jpg";
 import sideImage2 from "../assets/feed-back/side-images-02.jpg";
+import { FloatingContactIcons } from "../components/common/FloatingContactIcons";
 import { Footer } from "../components/common/Footer";
 import { Navbar } from "../components/common/Navbar";
 import { TopLine } from "../components/common/TopLine";
@@ -18,9 +19,11 @@ import { useState } from "react";
 export const Feedback = () => {
   const [rating, setRating] = useState(0);
   return (
-    <div className="w-full overflow-x-hidden relative pt-20">
+    <div className="w-full overflow-x-hidden relative lg:pt-20">
       <TopLine />
       <Navbar />
+      <FloatingContactIcons />
+
       {/* Hero Banner */}
       <section
         className="text-white flex items-center justify-center px-4 lg:px-50 transition-all duration-700 min-h-[60vh] lg:min-h-[96vh]"
