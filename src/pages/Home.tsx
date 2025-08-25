@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { CalendarDays, MessagesSquare } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaChevronRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import aboutbg from "../assets/about-bg.png";
@@ -127,6 +127,14 @@ export const Home = () => {
     setBannerIndex((prev) => (prev + 1) % banners.length);
   };
 
+   // Set up automatic banner rotation
+  useEffect(() => {
+    const intervalId = setInterval(handleBannerChange, 5000); 
+    
+    // Clean up interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []); 
+
   const current = banners[bannerIndex];
 
   return (
@@ -144,6 +152,7 @@ export const Home = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           cursor: "pointer",
+           transition: "background-image 0.7s ease-in-out",
         }}
         onClick={handleBannerChange}
         onTouchStart={handleBannerChange}
@@ -227,7 +236,7 @@ export const Home = () => {
           <p className="text-[var(--green-primary)] font-semibold italic text-2xl sm:text-3xl lg:text-4xl mb-3">
             Where tradition meets taste in the heart of Galle Fort.
           </p>
-          <p className=" text-base sm:text-lg lg:text-xl mx-auto lg:mx-0">
+          <p className=" text-base sm:text-lg lg:text-xl mx-auto lg:mx-0 w-2/4">
             <span className="font-bold">Chill 99</span> is a cozy eatery nestled in the heart of{" "}
             <span className="font-bold">Galle Fort, Sri Lanka.</span>
             <br className="hidden lg:block" />
