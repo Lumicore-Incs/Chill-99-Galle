@@ -13,6 +13,7 @@ interface Testimonial {
 }
 
 const testimonials: Testimonial[] = [
+  // Your testimonials array remains the same
   {
     id: 1,
     name: "Nimasha R",
@@ -69,18 +70,28 @@ export const Testimonial = () => {
   const [autoPlay, setAutoPlay] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Clear interval function
+  const clearAutoPlayInterval = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    // Clear any existing interval
+    clearAutoPlayInterval();
     
     if (autoPlay) {
-      interval = setInterval(() => {
+      intervalRef.current = setInterval(() => {
         handleNext();
-      }, 4000); // Change slide every 4 seconds
+      }, 1500); // Change slide every 4 seconds
     }
     
     return () => {
-      if (interval) clearInterval(interval);
+      clearAutoPlayInterval();
     };
   }, [autoPlay, currentIndex]);
 
@@ -120,7 +131,7 @@ export const Testimonial = () => {
     return Array.from({ length: 5 }, (_, index) => (
       <span
         key={index}
-        className={`text-lg ${index < rating ? "text-[var(--green-primary)]" : "text-[#1F0D09]"}`}
+        className={`text-lg ${index < rating ? "text-[var(--green-primary)]" : "text-gray-400"}`}
       >
         ★
       </span>
@@ -138,7 +149,12 @@ export const Testimonial = () => {
   };
 
   return (
-    <div className="w-full" onMouseEnter={() => setAutoPlay(false)} onMouseLeave={() => setAutoPlay(true)}>
+    <div className="w-full py-10" onMouseEnter={() => setAutoPlay(false)} onMouseLeave={() => setAutoPlay(true)}>
+      {/* Section title */}
+      <h2 className="text-3xl font-bold text-center mb-12 text-[var(--green-primary)]">
+        What Our Customers Say
+      </h2>
+      
       {/* Mobile: Carousel view */}
       <div className="block lg:hidden">
         <div className="relative">
@@ -147,7 +163,7 @@ export const Testimonial = () => {
               <img
                 src={testimonials[currentIndex].avatar}
                 alt={testimonials[currentIndex].name}
-                className="w-16 h-16 rounded-full object-cover transition-all duration-500 ease-in-out"
+                className="w-16 h-16 rounded-full object-cover transition-all duration-500 ease-in-out border-2 border-[var(--green-primary)]"
               />
             </div>
             <div className="flex justify-center mb-4">
@@ -167,12 +183,14 @@ export const Testimonial = () => {
           <button 
             onClick={handlePrev}
             className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/70 rounded-full p-2 text-white hover:bg-[var(--green-primary)] transition-all duration-300"
+            aria-label="Previous testimonial"
           >
             ‹
           </button>
           <button 
             onClick={handleNext}
             className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/70 rounded-full p-2 text-white hover:bg-[var(--green-primary)] transition-all duration-300"
+            aria-label="Next testimonial"
           >
             ›
           </button>
@@ -188,6 +206,7 @@ export const Testimonial = () => {
                     ? "bg-[var(--green-primary)] scale-125"
                     : "bg-yellow-600/50 hover:bg-[var(--green-primary)]"
                 }`}
+                aria-label={`Go to testimonial ${index + 1}`}
               />
             ))}
           </div>
@@ -196,7 +215,7 @@ export const Testimonial = () => {
 
       {/* Desktop: Animated carousel view showing 4 testimonials */}
       <div className="hidden lg:block">
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden px-12">
           <div 
             ref={containerRef}
             className="flex transition-all duration-500 ease-in-out gap-6 mb-8"
@@ -206,8 +225,8 @@ export const Testimonial = () => {
                 key={testimonial.id}
                 className="flex-shrink-0 w-[calc(25%-18px)] bg-[#1F0D09] backdrop-blur-sm rounded-lg px-6 py-10 transform transition-all duration-500 hover:scale-105 shadow-lg relative"
                 style={{ 
-                  opacity: index === 0 ? 1 : 0.9,
-                  transform: `translateX(${index * 0}%) scale(${index === 0 ? 1 : 0.95})` 
+                  opacity: index === 0 ? 1 : 0.9 - (index * 0.1),
+                  transform: `scale(${1 - (index * 0.05)})` 
                 }}
               >
                 <div className="flex justify-center mb-6">
@@ -215,7 +234,7 @@ export const Testimonial = () => {
                     <img
                       src={testimonial.avatar}
                       alt={testimonial.name}
-                      className="w-16 h-16 rounded-full object-cover transition-all duration-500"
+                      className="w-16 h-16 rounded-full object-cover transition-all duration-500 border-2 border-[var(--green-primary)]"
                     />
                   </div>
                 </div>
@@ -234,12 +253,14 @@ export const Testimonial = () => {
           <button 
             onClick={handlePrev}
             className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/70 rounded-full p-3 text-white hover:bg-[var(--green-primary)] transition-all duration-300"
+            aria-label="Previous testimonial"
           >
             ‹
           </button>
           <button 
             onClick={handleNext}
             className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/70 rounded-full p-3 text-white hover:bg-[var(--green-primary)] transition-all duration-300"
+            aria-label="Next testimonial"
           >
             ›
           </button>
@@ -256,6 +277,7 @@ export const Testimonial = () => {
                   ? "bg-[var(--green-primary)] scale-125"
                   : "bg-yellow-600/50 hover:bg-[var(--green-primary)]"
               }`}
+              aria-label={`Go to testimonial ${index + 1}`}
             />
           ))}
         </div>
