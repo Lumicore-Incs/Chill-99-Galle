@@ -7,9 +7,7 @@ import cofee from "../assets/booking-01.jpg";
 import mandala from "../assets/booking-02.jpg";
 import thirdbanner from "../assets/booking-03.jpg";
 import logo from "../assets/chill-99.png";
-import banner2 from "../assets/header-banner-02.jpg";
-import banner3 from "../assets/header-banner-03.jpg";
-import banner1 from "../assets/header-banner.jpg";
+// banners are now loaded from src/constants/banners
 import iconchoose02 from "../assets/iconchoose02.png";
 import iconchoose05 from "../assets/iconchoose05.png";
 import iconchoose06 from "../assets/iconchoose06.png";
@@ -19,7 +17,6 @@ import iconchoose04 from "../assets/iconschoose04.png";
 import burger from "../assets/imagecaro-01.jpg";
 import popularBg from "../assets/popular-bg.png";
 import testimonial from "../assets/testimonialbg.png";
-import uberLogo from "../assets/uber-logo.svg";
 import whychhose from "../assets/whychoose.jpg";
 import FAQ from "../components/common/FAQ";
 import { FloatingContactIcons } from "../components/common/FloatingContactIcons";
@@ -29,92 +26,10 @@ import { TopLine } from "../components/common/TopLine";
 import ImageCarousel from "../components/features/CarouselItem";
 import { PopularMenu } from "../components/features/PopularMenu";
 import { Testimonial } from "../components/features/Testimonial";
+import banners from "../constants/banners";
 import { useReservationNavigation } from "../utils/navigation";
 
 import { Footer } from "../components/common/Footer";
-
-interface BannerButton {
-  text: string;
-  color: string;
-  href?: string;
-  icon?: React.ReactElement | null;
-}
-
-interface Banner {
-  image: string;
-  title: React.ReactElement;
-  subtitle: React.ReactElement;
-  buttons: BannerButton[];
-}
-
-const banners: Banner[] = [
-  {
-    image: banner1,
-    title: (
-      <>
-        Chill 99 - Your
-        <br />
-        Everyday Escape
-      </>
-    ),
-    subtitle: (
-      <>
-        Delicious bites, cozy feels, and a space that feeds your
-        <span className="block">soul. We’re not just serving food — we’re setting the tone.</span>
-      </>
-    ),
-    buttons: [
-      {
-        text: "Order now",
-        color: "bg-[#05A357] hover:bg-[#059e4e] transition-all duration-500",
-        href: "https://www.ubereats.com/lk/store/chill-99-galle-fort-galle/Uy9eNDD1VGq5rv6BTOMk-A?srsltid=AfmBOopcnc5JJKxHWa-Tp-sFn0LwZCVJE98R15M5PM6LFSsVwTcSYtmJ",
-        icon: (
-          <img src={uberLogo} alt="Uber Eats" style={{ height: "30px", borderRadius: "6px" }} />
-        ),
-      },
-      {
-        text: "Book a Table",
-        color: "bg-[#FFD580] text-[#31201B] hover:bg-[#e6c16b] transition-all duration-500",
-        href: "/menu#reservation-section",
-        icon: null,
-      },
-    ],
-  },
-  {
-    image: banner2,
-    title: <>Workshop Seats For You & Your Loved Ones</>,
-    subtitle: (
-      <>
-        Inspiring moments, shared creativity, and a space to grow together.
-        <span className="block">We’re not just hosting a workshop — we’re crafting memories.</span>
-      </>
-    ),
-    buttons: [
-      {
-        text: "JOIN NOW",
-        color: "bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500",
-      },
-    ],
-  },
-  {
-    image: banner3,
-    title: <>Breakfast Reservation – Share the Morning Together</>,
-    subtitle: (
-      <>
-        Warm sips, hearty bites, and mornings made meaningful. We’re
-        <span className="block">
-          not just serving breakfast — we’re starting your day with care.
-        </span>
-      </>
-    ),
-    buttons: [
-      {
-        text: "BOOK A SPOT",
-        color: "bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500",
-      },
-    ],
-  },
-];
 
 export const Home = () => {
   const [bannerIndex, setBannerIndex] = useState(0);
@@ -302,7 +217,7 @@ export const Home = () => {
       </section>
 
       {/* Image Carousel */}
-      <section className="bg-[var(--color-navbar)] min-h-[400px] lg:h-[571px] w-full flex items-center justify-center">
+      <section className="bg-[var(--color-navbar)] min-h-[400px] lg:h-[60vh] w-full flex items-center justify-center">
         <ImageCarousel />
       </section>
 

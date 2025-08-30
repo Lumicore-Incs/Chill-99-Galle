@@ -1,29 +1,29 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { Clock, Coffee, CreditCard, Info } from "lucide-react";
 import React, { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import whychoose from "../../assets/whychoose.jpg";
-import { Clock, Coffee, CreditCard, Info } from "lucide-react";
 
 const questions = [
   {
-  icon: Clock,
-  q: "What are the opening hours?",
-  a: "A unique cultural experience held exclusive at Chill 99 Galle Fort. It is open from 7:00 a.m. to 10:00 p.m. every day of the week.",
+    icon: Clock,
+    q: "What are the opening hours?",
+    a: "A unique cultural experience held exclusive at Chill 99 Galle Fort. It is open from 7:00 a.m. to 10:00 p.m. every day of the week.",
   },
   {
-  icon: Coffee,
-  q: "What is the most delicious food we have?",
-  a: "We have the ability to delight children, young and old with delicious new items, foods and beverages in any way. Our most popular foods are Pasta, Burgers and Main Course and Bubble Tea from beverage items.",
+    icon: Coffee,
+    q: "What is the most delicious food we have?",
+    a: "We have the ability to delight children, young and old with delicious new items, foods and beverages in any way. Our most popular foods are Pasta, Burgers and Main Course and Bubble Tea from beverage items.",
   },
   {
-  icon: CreditCard,
-  q: "What forms of payment do you accept?",
-  a: "We accept cash, Visa, Mastercard, American Express and direct bank deposits.",
+    icon: CreditCard,
+    q: "What forms of payment do you accept?",
+    a: "We accept cash, Visa, Mastercard, American Express and direct bank deposits.",
   },
   {
-  icon: Info,
-  q: "What is the refund policy?",
-  a: "We focus on providing our guests with an unprecedented experience. We do not accommodate requests for refunds, cancellations, or date changes.",
+    icon: Info,
+    q: "What is the refund policy?",
+    a: "We focus on providing our guests with an unprecedented experience. We do not accommodate requests for refunds, cancellations, or date changes.",
   },
 ];
 

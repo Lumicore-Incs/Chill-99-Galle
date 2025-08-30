@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState } from "react";
 import image1 from "../../assets/gallery/GalleryImage1.jpg";
 import image2 from "../../assets/gallery/GalleryImage2.jpg";
 import image3 from "../../assets/gallery/GalleryImage4.jpg";
-import image4 from "../../assets/gallery/GalleryImage6.jpg";
 import image5 from "../../assets/gallery/GalleryImage5.jpg";
+import image4 from "../../assets/gallery/GalleryImage6.jpg";
 import image6 from "../../assets/imagecaro-01.jpg";
 import image7 from "../../assets/imagecaro-02.jpg";
 import image8 from "../../assets/imagecaro-03.jpg";
@@ -35,7 +35,7 @@ const HorizontalScrollingGallery = () => {
     { id: 7, src: image7 },
     { id: 8, src: image8 },
     { id: 9, src: image9 },
-    { id: 10, src: image10 }
+    { id: 10, src: image10 },
   ];
 
   // Split images into two rows
@@ -43,25 +43,23 @@ const HorizontalScrollingGallery = () => {
   const row2Images = [...images.slice(5), ...images.slice(5)]; // Duplicate for seamless loop
 
   const ImageCard = ({ image, delay = 0 }: ImageCardProps) => (
-    <div 
+    <div
       className="flex-shrink-0 w-80 h-50 mx-4 relative group cursor-pointer transform transition-all duration-500 hover:scale-105"
       style={{ animationDelay: `${delay}ms` }}
     >
       <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br">
         <img
           src={image.src}
-          alt={image.title || ''}
+          alt={image.title || ""}
           className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
         />
-        
+
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
-        
+
         {/* Content overlay */}
-        <div className="absolute inset-0 flex flex-col justify-end p-6">
-      
-        </div>
-        
+        <div className="absolute inset-0 flex flex-col justify-end p-6"></div>
+
         {/* Glowing border effect */}
         <div className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r from-emerald-400 via-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
         <div className="absolute inset-0 rounded-2xl border border-white/20 group-hover:border-white/40 transition-colors duration-500" />
@@ -70,19 +68,19 @@ const HorizontalScrollingGallery = () => {
   );
 
   return (
-    <div className="w-full md:min-h-screen md:mt-44 mt-8 relative overflow-hidden">
+    <div className="w-full relative overflow-hidden">
       <div className="relative z-10 py-12">
         {/* First Row - Scrolling Right */}
-        <div 
+        <div
           className="relative mb-8 overflow-hidden"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div 
-            className={`flex ${isPaused ? '' : 'animate-scroll-right'}`}
+          <div
+            className={`flex ${isPaused ? "" : "animate-scroll-right"}`}
             style={{
-              width: 'fit-content',
-              animation: isPaused ? 'none' : 'scroll-right 30s linear infinite'
+              width: "fit-content",
+              animation: isPaused ? "none" : "scroll-right 30s linear infinite",
             }}
           >
             {row1Images.map((image, index) => (
@@ -92,16 +90,16 @@ const HorizontalScrollingGallery = () => {
         </div>
 
         {/* Second Row - Scrolling Left */}
-        <div 
+        <div
           className="relative overflow-hidden"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div 
-            className={`flex ${isPaused ? '' : 'animate-scroll-left'}`}
+          <div
+            className={`flex ${isPaused ? "" : "animate-scroll-left"}`}
             style={{
-              width: 'fit-content',
-              animation: isPaused ? 'none' : 'scroll-left 25s linear infinite'
+              width: "fit-content",
+              animation: isPaused ? "none" : "scroll-left 25s linear infinite",
             }}
           >
             {row2Images.map((image, index) => (
