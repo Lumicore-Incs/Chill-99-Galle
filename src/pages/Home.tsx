@@ -205,8 +205,8 @@ export const Home = () => {
             <p className="text-white font-medium text-lg lg:text-xl">SHARE THE MORNING TOGETHER</p>
           </div>
 
-          <motion.button
-            onClick={handleReservationClick}
+      <motion.button
+        onClick={() => handleReservationClick("breakfast")}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
             className="flex items-center gap-1 px-6 lg:px-2 py-4 rounded-lg bg-[#DAA520] hover:bg-[#B8860B] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center text-white font-semibold"
@@ -297,7 +297,7 @@ export const Home = () => {
           </div>
 
           <motion.button
-            onClick={handleReservationClick}
+            onClick={() => handleReservationClick("rice-and-curry")}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
             className="flex items-center gap-1 px-6 lg:px-2 py-4 rounded-lg bg-[#DAA520] hover:bg-[#B8860B] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center text-white font-semibold"
@@ -574,7 +574,7 @@ export const Home = () => {
           </div>
 
           <motion.button
-            onClick={handleReservationClick}
+            onClick={() => handleReservationClick("workshop")}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
             className="flex items-center gap-1 px-6 lg:px-2 py-4 rounded-lg bg-[#DAA520] hover:bg-[#B8860B] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center text-white font-semibold"

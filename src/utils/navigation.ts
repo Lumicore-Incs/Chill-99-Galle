@@ -5,8 +5,9 @@ import type { NavigateFunction } from "react-router-dom";
  * Navigates to the Gallery page's reservation section
  * @param navigate - The navigate function from useNavigate hook
  */
-export const handleReservationClick = (navigate: NavigateFunction) => {
-  navigate("/gallery#reservation-section");
+export const handleReservationClick = (navigate: NavigateFunction, source?: string) => {
+  const url = source ? `/gallery?from=${encodeURIComponent(source)}#reservation-section` : "/gallery#reservation-section";
+  navigate(url);
 };
 
 /**
@@ -15,5 +16,6 @@ export const handleReservationClick = (navigate: NavigateFunction) => {
  * @returns A function that can be used as onClick handler for reservation buttons
  */
 export const useReservationNavigation = (navigate: NavigateFunction) => {
-  return () => handleReservationClick(navigate);
+  // returns a function that accepts an optional source identifier
+  return (source?: string) => handleReservationClick(navigate, source);
 };

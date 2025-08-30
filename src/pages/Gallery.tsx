@@ -52,6 +52,64 @@ export const Gallery = () => {
     severity: "success" as "success" | "error" | "warning" | "info",
   });
 
+  // Read `from` query param to show section-specific reservation details
+  const [reservationInfo, setReservationInfo] = useState<React.ReactNode | null>(null);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const from = urlParams.get("from");
+    if (!from) return;
+
+    // Map of content for each source
+    const contentMap: Record<string, React.ReactNode> = {
+      "breakfast": (
+        <div className="text-left bg-[#261410] p-4 rounded-lg mb-4">
+          <h3 className="text-[var(--green-primary)] font-semibold mb-2">Breakfast Reservation Details</h3>
+          <p>✨ Welcome to Chill 99 restaurant. By using our website, booking our services, you agree to comply with and be bound by the following terms and conditions at Chill 99 restaurant breakfast. Please read them carefully before making any reservation or use of our services.</p>
+          <ul className="list-disc pl-5 mt-2 text-sm">
+            <li>📍 Breakfast orders must be confirmed 12 hours.</li>
+            <li>🍲 Breakfast available from 6:00 a.m to 9:00 a.m.</li>
+            <li>💸 Payment: Cash, Visa, MasterCard, Amex and online payment.</li>
+            <li>🛜 Free Starlink (SpaceX) Wi‑Fi for guests.</li>
+          </ul>
+        </div>
+      ),
+      "rice-and-curry": (
+        <div className="text-left bg-[#261410] p-4 rounded-lg mb-4">
+          <h3 className="text-[var(--green-primary)] font-semibold mb-2">Rice & Curry Reservation Details</h3>
+          <p>First of all, join us in a calm, serene environment for our Down South “Sri Lankan traditional mini buffet” at Chill 99 Galle Fort.</p>
+          <ul className="list-disc pl-5 mt-2 text-sm">
+            <li>❌ Half advance payment required and non-refundable upon confirmation.</li>
+            <li>⚡ Confirm your order within 24 hours.</li>
+            <li>📍 Mini buffet: 2 types of rice and 10 types of curries.</li>
+            <li>💫 Mini buffet prepared for 10 people — cost: 20,000 LKR.</li>
+            <li>💸 Payment: Cash, Visa, MasterCard, Amex and online payment.</li>
+            <li>🛜 Free Starlink (SpaceX) Wi‑Fi for guests.</li>
+          </ul>
+        </div>
+      ),
+      "workshop": (
+        <div className="text-left bg-[#261410] p-4 rounded-lg mb-4">
+          <h3 className="text-[var(--green-primary)] font-semibold mb-2">Mask Painting Workshop</h3>
+          <p>Discover your creativity at our Mask Painting Workshop – a unique cultural experience held at Chill 99, Galle Fort.</p>
+          <ul className="list-disc pl-5 mt-2 text-sm">
+            <li>🎨 Learn traditional mask painting.</li>
+            <li>🌿 Peaceful, creative setting with refreshments.</li>
+            <li>🤝 Meet locals and travellers; every participant gets a FREE food & drink pack.</li>
+            <li>📦 Flexible packages for groups & individuals. Available weekends only.</li>
+          </ul>
+        </div>
+      ),
+    };
+
+    if (from && contentMap[from]) {
+      setReservationInfo(contentMap[from]);
+      // scroll into view if hash present
+      const element = document.getElementById("reservation-section");
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -433,6 +491,9 @@ export const Gallery = () => {
             </motion.h2>
           </motion.div>
 
+          {/* Section-specific reservation info (if any) */}
+          {reservationInfo}
+
           {/* Enhanced form with staggered animations */}
           <motion.form
             initial={{ opacity: 0, y: 30 }}
@@ -445,7 +506,7 @@ export const Gallery = () => {
             {[
               { name: "fullName", placeholder: "Full Name", type: "text" },
               { name: "email", placeholder: "Email Address", type: "email" },
-              { name: "phone", placeholder: "Phone Number", type: "tel" },
+              { name: "phone", placeholder: "Whats App Number", type: "tel" },
               { name: "guests", placeholder: "Number of Guests", type: "select" },
               { name: "date", placeholder: "Date", type: "date" },
               { name: "time", placeholder: "Time", type: "time" },
