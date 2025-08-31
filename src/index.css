@@ -1,12 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --color-topline: #1F0D09;
-  --color-navbar: #2D1B17;
+  --color-topline: #1f0d09;
+  --color-navbar: #2d1b17;
   --green-primary: #ffc000;
   --green-dark: #ffc062;
   --font-family-default: "Inter", sans-serif;
   --font-family-nav: "Roboto", sans-serif;
+  /* Default page background color */
+  background: var(--color-navbar);
 }
 
 /* Custom scrollbar for Chrome, Edge, Safari */

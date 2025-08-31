@@ -1,17 +1,13 @@
 import { motion } from "framer-motion";
-import { CalendarDays, MessagesSquare } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FaChevronRight } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import aboutbg from "../assets/about-bg.png";
 import cofee from "../assets/booking-01.jpg";
 import mandala from "../assets/booking-02.jpg";
 import thirdbanner from "../assets/booking-03.jpg";
-import burgerfries from "../assets/burger.jpg";
 import logo from "../assets/chill-99.png";
-import banner2 from "../assets/header-banner-02.jpg";
-import banner3 from "../assets/header-banner-03.jpg";
-import banner1 from "../assets/header-banner.jpg";
+// banners are now loaded from src/constants/banners
 import iconchoose02 from "../assets/iconchoose02.png";
 import iconchoose05 from "../assets/iconchoose05.png";
 import iconchoose06 from "../assets/iconchoose06.png";
@@ -19,104 +15,21 @@ import iconchoose01 from "../assets/iconschoose01.png";
 import iconchoose03 from "../assets/iconschoose03.png";
 import iconchoose04 from "../assets/iconschoose04.png";
 import burger from "../assets/imagecaro-01.jpg";
-import meat from "../assets/imagecaro-04.png";
-import waffles from "../assets/imagecaro-06.jpg";
 import popularBg from "../assets/popular-bg.png";
 import testimonial from "../assets/testimonialbg.png";
-import uberLogo from "../assets/uber-logo.svg";
 import whychhose from "../assets/whychoose.jpg";
+import FAQ from "../components/common/FAQ";
 import { FloatingContactIcons } from "../components/common/FloatingContactIcons";
 import { Navbar } from "../components/common/Navbar";
+import ReviewButtons from "../components/common/ReviewButtons";
 import { TopLine } from "../components/common/TopLine";
 import ImageCarousel from "../components/features/CarouselItem";
 import { PopularMenu } from "../components/features/PopularMenu";
 import { Testimonial } from "../components/features/Testimonial";
+import banners from "../constants/banners";
 import { useReservationNavigation } from "../utils/navigation";
 
 import { Footer } from "../components/common/Footer";
-
-interface BannerButton {
-  text: string;
-  color: string;
-  href?: string;
-  icon?: React.ReactElement | null;
-}
-
-interface Banner {
-  image: string;
-  title: React.ReactElement;
-  subtitle: React.ReactElement;
-  buttons: BannerButton[];
-}
-
-const banners: Banner[] = [
-  {
-    image: banner1,
-    title: (
-      <>
-        Chill 99 - Your
-        <br />
-        Everyday Escape
-      </>
-    ),
-    subtitle: (
-      <>
-        Delicious bites, cozy feels, and a space that feeds your
-        <span className="block">soul. We’re not just serving food — we’re setting the tone.</span>
-      </>
-    ),
-    buttons: [
-      {
-        text: "Order now",
-        color: "bg-[#05A357] hover:bg-[#059e4e] transition-all duration-500",
-        href: "https://www.ubereats.com/lk/store/chill-99-galle-fort-galle/Uy9eNDD1VGq5rv6BTOMk-A?srsltid=AfmBOopcnc5JJKxHWa-Tp-sFn0LwZCVJE98R15M5PM6LFSsVwTcSYtmJ",
-        icon: (
-          <img src={uberLogo} alt="Uber Eats" style={{ height: "30px", borderRadius: "6px" }} />
-        ),
-      },
-      {
-        text: "Book a Table",
-        color: "bg-[#FFD580] text-[#31201B] hover:bg-[#e6c16b] transition-all duration-500",
-        href: "/menu#reservation-section",
-        icon: null,
-      },
-    ],
-  },
-  {
-    image: banner2,
-    title: <>Workshop Seats For You & Your Loved Ones</>,
-    subtitle: (
-      <>
-        Inspiring moments, shared creativity, and a space to grow together.
-        <span className="block">We’re not just hosting a workshop — we’re crafting memories.</span>
-      </>
-    ),
-    buttons: [
-      {
-        text: "JOIN NOW",
-        color: "bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500",
-      },
-    ],
-  },
-  {
-    image: banner3,
-    title: <>Breakfast Reservation – Share the Morning Together</>,
-    subtitle: (
-      <>
-        Warm sips, hearty bites, and mornings made meaningful. We’re
-        <span className="block">
-          not just serving breakfast — we’re starting your day with care.
-        </span>
-      </>
-    ),
-    buttons: [
-      {
-        text: "BOOK A SPOT",
-        color: "bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500",
-      },
-    ],
-  },
-];
 
 export const Home = () => {
   const [bannerIndex, setBannerIndex] = useState(0);
@@ -127,13 +40,13 @@ export const Home = () => {
     setBannerIndex((prev) => (prev + 1) % banners.length);
   };
 
-   // Set up automatic banner rotation
+  // Set up automatic banner rotation
   useEffect(() => {
-    const intervalId = setInterval(handleBannerChange, 5000); 
-    
+    const intervalId = setInterval(handleBannerChange, 5000);
+
     // Clean up interval on component unmount
     return () => clearInterval(intervalId);
-  }, []); 
+  }, []);
 
   const current = banners[bannerIndex];
 
@@ -152,7 +65,7 @@ export const Home = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           cursor: "pointer",
-           transition: "background-image 0.7s ease-in-out",
+          transition: "background-image 0.7s ease-in-out",
         }}
         onClick={handleBannerChange}
         onTouchStart={handleBannerChange}
@@ -237,14 +150,15 @@ export const Home = () => {
             Where tradition meets taste in the heart of Galle Fort.
           </p>
           <p className=" text-base sm:text-lg lg:text-xl mx-auto lg:mx-0 w-2/4">
-            <span className="font-bold">Chill 99</span> is a cozy eatery nestled in the heart of{" "}
-            <span className="font-bold">Galle Fort, Sri Lanka.</span>
-            <br className="hidden lg:block" />
-            Celebrated for its flavorful meals, hearty comfort food, freshly made snacks, and
-            homemade treats, it's a favorite stop for both locals and travelers. Whether you're
-            craving a warm brunch, a savory bite, or a sweet indulgence, Chill 99 serves up
-            satisfying dishes in a relaxed, stylish setting — the perfect escape from the everyday
-            bustle.
+            <span className="font-bold">Chill 99 Galle Fort</span>
+            is a charming café Nestled in the scenic village of Galle Fort, in the heart of Galle,
+            Southern Province, Sri Lanka, Chill 99 Galle Fort is a delightful oasis of calm and
+            tranquility. This charming cafe is renowned for its wide variety of pastry items,
+            different cappuccino, coffee, amazing taste bubble tea refreshing beverages, and more,
+            making it a beloved destination for locals and visitors alike. As you step into Chill 99
+            Galle Fort, you are greeted with a warm and inviting atmosphere, perfect for escaping
+            the hustle and bustle of everyday life. The cafe's interior is cozy yet stylish, with
+            comfortable seating arrangements and tasteful decor that creates a serene ambiance.
           </p>
         </motion.div>
       </section>
@@ -291,8 +205,8 @@ export const Home = () => {
             <p className="text-white font-medium text-lg lg:text-xl">SHARE THE MORNING TOGETHER</p>
           </div>
 
-          <motion.button
-            onClick={handleReservationClick}
+      <motion.button
+        onClick={() => handleReservationClick("breakfast")}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
             className="flex items-center gap-1 px-6 lg:px-2 py-4 rounded-lg bg-[#DAA520] hover:bg-[#B8860B] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center text-white font-semibold"
@@ -303,7 +217,7 @@ export const Home = () => {
       </section>
 
       {/* Image Carousel */}
-      <section className="bg-[var(--color-navbar)] min-h-[400px] lg:h-[571px] w-full flex items-center justify-center">
+      <section className="bg-[var(--color-navbar)] min-h-[400px] lg:h-[60vh] w-full flex items-center justify-center">
         <ImageCarousel />
       </section>
 
@@ -383,7 +297,7 @@ export const Home = () => {
           </div>
 
           <motion.button
-            onClick={handleReservationClick}
+            onClick={() => handleReservationClick("rice-and-curry")}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
             className="flex items-center gap-1 px-6 lg:px-2 py-4 rounded-lg bg-[#DAA520] hover:bg-[#B8860B] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center text-white font-semibold"
@@ -528,11 +442,11 @@ export const Home = () => {
           backgroundPosition: "center",
         }}
       >
-        <div className="text-center">
+        <div className="text-center flex justify-between max-sm:block">
           <img
             src={logo}
             alt="Chill 99 Logo"
-            className="hidden lg:block absolute top-10 left-30 w-32 lg:w-50 h-auto"
+            className="hidden lg:block top-10 left-30 w-32 lg:w-50 h-auto"
           />
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -546,6 +460,9 @@ export const Home = () => {
               What Our Clients Say
             </h2>
           </motion.div>
+          <div className="mt-4 flex items-center justify-center">
+            <ReviewButtons />
+          </div>
         </div>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -588,78 +505,7 @@ export const Home = () => {
         ))}
       </motion.section>
 
-      {/* Blog/Updates Section */}
-      <motion.section
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.8 }}
-        className="bg-[#2D1B17] w-full min-h-[80vh] lg:min-h-[100vh] flex flex-col px-4 lg:px-50 py-8 lg:py-10 gap-8 lg:gap-10 text-[#F5F5F5]"
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="flex flex-col items-center justify-center text-center"
-        >
-          <p className="text-[#FAF3E0] font-medium text-lg lg:text-xl mb-2">
-            Get Every Single Update
-          </p>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[var(--green-primary)] italic">
-            Fresh updates, straight from Chill 99
-          </h2>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {[
-            { title: "Weekly Taste Drops", image: waffles },
-            { title: "New Burger Just Dropped", image: burgerfries },
-            { title: "Flavor of the Month V Meat Classic", image: meat },
-          ].map((update, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-              className="relative w-full h-64 lg:h-[400px] overflow-hidden rounded-lg cursor-pointer group"
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{
-                  backgroundImage: `linear-gradient(to right, #31201BBA, #31201BBA), url(${update.image})`,
-                }}
-              />
-              <div className="absolute inset-4 lg:inset-8 flex flex-col items-center justify-end text-center">
-                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[var(--green-primary)] tracking-wide mb-3">
-                  {update.title}
-                </h3>
-                <div className="flex flex-col sm:flex-row items-center gap-2 lg:gap-5 text-xs lg:text-sm">
-                  <div className="flex items-center gap-2">
-                    <CalendarDays className="w-4" />
-                    <p className="font-semibold">July 9, 2025</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <MessagesSquare className="w-4" />
-                    <p className="font-semibold">Comments (22)</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="flex items-center justify-center">
-          <motion.button
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.96 }}
-            className="flex items-center gap-3 rounded-md cursor-pointer text-[var(--green-primary)] border border-[var(--green-primary)] py-3 px-6 lg:px-8 hover:bg-[var(--green-primary)] hover:text-[var(--color-topline)] transition-all duration-300 min-h-[48px] min-w-[160px] justify-center"
-          >
-            Explore More <FaChevronRight />
-          </motion.button>
-        </div>
-      </motion.section>
+      <FAQ />
 
       {/* Workshop Banner */}
       {/* <section
@@ -728,7 +574,7 @@ export const Home = () => {
           </div>
 
           <motion.button
-            onClick={handleReservationClick}
+            onClick={() => handleReservationClick("workshop")}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
             className="flex items-center gap-1 px-6 lg:px-2 py-4 rounded-lg bg-[#DAA520] hover:bg-[#B8860B] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center text-white font-semibold"

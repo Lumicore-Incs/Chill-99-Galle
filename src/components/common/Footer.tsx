@@ -8,6 +8,7 @@ import gal2 from "../../assets/coffee3.jpg";
 import gal3 from "../../assets/coffee4.jpg";
 import gal4 from "../../assets/coffee5.jpg";
 import gal5 from "../../assets/coffee6.jpg";
+import ReviewButtons from "./ReviewButtons";
 
 const galleryImages = [gal1, coffee, gal2, gal3, gal4, gal5];
 
@@ -166,6 +167,7 @@ export const Footer = () => {
             >
               Gallery
             </motion.h3>
+            <ReviewButtons className="mb-4 mx-auto md:mx-0" />
             <div className="grid grid-cols-3 gap-2 max-w-xs mx-auto md:mx-0">
               {galleryImages.map((image, index) => (
                 <motion.div
