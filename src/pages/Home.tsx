@@ -34,7 +34,7 @@ import { Footer } from "../components/common/Footer";
 export const Home = () => {
   const [bannerIndex, setBannerIndex] = useState(0);
   const [imageLoading, setImageLoading] = useState(true);
-  const [setLoadedImages] = useState(new Set());
+  const [_loadedImages, setLoadedImages] = useState(new Set());
   const navigate = useNavigate();
   const handleReservationClick = useReservationNavigation(navigate);
 
