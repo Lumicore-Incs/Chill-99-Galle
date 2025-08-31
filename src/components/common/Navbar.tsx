@@ -2,6 +2,7 @@ import { Menu as MenuIcon, X } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useReservationNavigation } from "../../utils/navigation";
+
 // Helper to scroll to footer
 const scrollToFooter = () => {
   const footer = document.getElementById("footer-section");
@@ -58,7 +59,7 @@ export const Navbar = () => {
       {/* Desktop CTA Button */}
       <div className="hidden lg:block">
         <button
-          onClick={handleReservationClick}
+          onClick={() => handleReservationClick()}
           className="bg-[var(--green-primary)] text-[var(--color-topline)] text-md py-2 px-5 rounded-lg font-semibold cursor-pointer hover:bg-[var(--green-dark)] transition-all duration-500"
         >
           BOOK A TABLE

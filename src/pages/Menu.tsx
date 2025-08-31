@@ -326,7 +326,9 @@ export const Menu = () => {
         </div>
         <div className="flex items-center text-sm sm:text-base lg:text-lg font-medium">
           <button
-            onClick={handleReservationClick}
+             onClick={() => {
+                handleReservationClick();
+              }}
             className="flex items-center gap-3 px-4 lg:px-5 py-2 rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer"
           >
             BOOK A SPOT <FaChevronRight />
