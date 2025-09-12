@@ -1,46 +1,48 @@
-import emailjs from "@emailjs/browser";
-import { Alert, Snackbar } from "@mui/material";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import formimg2 from "../assets/imagecaro-01.jpg";
-import formimg1 from "../assets/imageside.jpg";
-import { FloatingContactIcons } from "../components/common/FloatingContactIcons";
-import { Footer } from "../components/common/Footer";
-import { Navbar } from "../components/common/Navbar";
-import { TopLine } from "../components/common/TopLine";
-import { GalleryCarousel } from "../components/features/GalleryCarousel";
+import emailjs from '@emailjs/browser';
+import { Alert, Snackbar } from '@mui/material';
+import { motion } from 'framer-motion';
+import { Calendar } from 'primereact/calendar';
+import { useEffect, useState } from 'react';
+import { createOrder } from '../services/postgrest';
+import formimg2 from '../assets/imagecaro-01.jpg';
+import formimg1 from '../assets/imageside.jpg';
+import { FloatingContactIcons } from '../components/common/FloatingContactIcons';
+import { Footer } from '../components/common/Footer';
+import { Navbar } from '../components/common/Navbar';
+import { TopLine } from '../components/common/TopLine';
+import { GalleryCarousel } from '../components/features/GalleryCarousel';
 
-import banner from "../assets/gallery/background-image.jpg";
-import bun01 from "../assets/gallery/bun-01.jpg";
-import bun02 from "../assets/gallery/bun-02.jpg";
-import imagecaro01 from "../assets/gallery/imagecaro-01.jpg";
-import pancake from "../assets/gallery/pancake.jpg";
-import pie from "../assets/gallery/pie.jpg";
-import sandwich01 from "../assets/gallery/sandwich-01.jpg";
-import sandwich04 from "../assets/gallery/sandwich-04.jpg";
-import sandwitch02 from "../assets/gallery/sandwitch-02.jpg";
-import sandwitch03 from "../assets/gallery/sandwitch-03.jpg";
+import banner from '../assets/gallery/background-image.jpg';
+import bun01 from '../assets/gallery/bun-01.jpg';
+import bun02 from '../assets/gallery/bun-02.jpg';
+import imagecaro01 from '../assets/gallery/imagecaro-01.jpg';
+import pancake from '../assets/gallery/pancake.jpg';
+import pie from '../assets/gallery/pie.jpg';
+import sandwich01 from '../assets/gallery/sandwich-01.jpg';
+import sandwich04 from '../assets/gallery/sandwich-04.jpg';
+import sandwitch02 from '../assets/gallery/sandwitch-02.jpg';
+import sandwitch03 from '../assets/gallery/sandwitch-03.jpg';
 
 const galleryImageData = [
-  { src: bun01, name: "Chill 99 Waffle Fries" },
-  { src: bun02, name: "Salmon Sandwich" },
-  { src: imagecaro01, name: "Waffle Burger" },
-  { src: pancake, name: "Loaded Fries" },
-  { src: pie, name: "Chill 99 Special Sandwich" }, // Center tile with label
-  { src: sandwich01, name: "Burger Platter" },
-  { src: sandwich04, name: "Classic Burger" },
-  { src: sandwitch02, name: "Strawberry Dessert" },
-  { src: sandwitch03, name: "Salad Bowl" },
+  { src: bun01, name: 'Chill 99 Waffle Fries' },
+  { src: bun02, name: 'Salmon Sandwich' },
+  { src: imagecaro01, name: 'Waffle Burger' },
+  { src: pancake, name: 'Loaded Fries' },
+  { src: pie, name: 'Chill 99 Special Sandwich' }, // Center tile with label
+  { src: sandwich01, name: 'Burger Platter' },
+  { src: sandwich04, name: 'Classic Burger' },
+  { src: sandwitch02, name: 'Strawberry Dessert' },
+  { src: sandwitch03, name: 'Salad Bowl' },
 ];
 
 export const Gallery = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    guests: "1 Person",
-    date: "",
-    time: "",
+    fullName: '',
+    email: '',
+    phone: '',
+    guests: '1 Person',
+    date: '',
+    time: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -48,8 +50,8 @@ export const Gallery = () => {
   // Snackbar state
   const [snackbar, setSnackbar] = useState({
     open: false,
-    message: "",
-    severity: "success" as "success" | "error" | "warning" | "info",
+    message: '',
+    severity: 'success' as 'success' | 'error' | 'warning' | 'info',
   });
 
   // Read `from` query param to show section-specific reservation details
@@ -57,15 +59,22 @@ export const Gallery = () => {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const from = urlParams.get("from");
+    const from = urlParams.get('from');
     if (!from) return;
 
     // Map of content for each source
     const contentMap: Record<string, React.ReactNode> = {
-      "breakfast": (
+      breakfast: (
         <div className="text-left bg-[#261410] p-4 rounded-lg mb-4">
-          <h3 className="text-[var(--green-primary)] font-semibold mb-2">Breakfast Reservation Details</h3>
-          <p>✨ Welcome to Chill 99 restaurant. By using our website, booking our services, you agree to comply with and be bound by the following terms and conditions at Chill 99 restaurant breakfast. Please read them carefully before making any reservation or use of our services.</p>
+          <h3 className="text-[var(--green-primary)] font-semibold mb-2">
+            Breakfast Reservation Details
+          </h3>
+          <p>
+            ✨ Welcome to Chill 99 restaurant. By using our website, booking our services, you agree
+            to comply with and be bound by the following terms and conditions at Chill 99 restaurant
+            breakfast. Please read them carefully before making any reservation or use of our
+            services.
+          </p>
           <ul className="list-disc pl-5 mt-2 text-sm">
             <li>📍 Breakfast orders must be confirmed 12 hours.</li>
             <li>🍲 Breakfast available from 6:00 a.m to 9:00 a.m.</li>
@@ -74,10 +83,15 @@ export const Gallery = () => {
           </ul>
         </div>
       ),
-      "rice-and-curry": (
+      'rice-and-curry': (
         <div className="text-left bg-[#261410] p-4 rounded-lg mb-4">
-          <h3 className="text-[var(--green-primary)] font-semibold mb-2">Rice & Curry Reservation Details</h3>
-          <p>First of all, join us in a calm, serene environment for our Down South “Sri Lankan traditional mini buffet” at Chill 99 Galle Fort.</p>
+          <h3 className="text-[var(--green-primary)] font-semibold mb-2">
+            Rice & Curry Reservation Details
+          </h3>
+          <p>
+            First of all, join us in a calm, serene environment for our Down South “Sri Lankan
+            traditional mini buffet” at Chill 99 Galle Fort.
+          </p>
           <ul className="list-disc pl-5 mt-2 text-sm">
             <li>❌ Half advance payment required and non-refundable upon confirmation.</li>
             <li>⚡ Confirm your order within 24 hours.</li>
@@ -88,10 +102,13 @@ export const Gallery = () => {
           </ul>
         </div>
       ),
-      "workshop": (
+      workshop: (
         <div className="text-left bg-[#261410] p-4 rounded-lg mb-4">
           <h3 className="text-[var(--green-primary)] font-semibold mb-2">Mask Painting Workshop</h3>
-          <p>Discover your creativity at our Mask Painting Workshop – a unique cultural experience held at Chill 99, Galle Fort.</p>
+          <p>
+            Discover your creativity at our Mask Painting Workshop – a unique cultural experience
+            held at Chill 99, Galle Fort.
+          </p>
           <ul className="list-disc pl-5 mt-2 text-sm">
             <li>🎨 Learn traditional mask painting.</li>
             <li>🌿 Peaceful, creative setting with refreshments.</li>
@@ -105,8 +122,8 @@ export const Gallery = () => {
     if (from && contentMap[from]) {
       setReservationInfo(contentMap[from]);
       // scroll into view if hash present
-      const element = document.getElementById("reservation-section");
-      if (element) element.scrollIntoView({ behavior: "smooth" });
+      const element = document.getElementById('reservation-section');
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
     }
   }, []);
 
@@ -119,7 +136,7 @@ export const Gallery = () => {
   };
 
   // Function to show snackbar
-  const showSnackbar = (message: string, severity: "success" | "error" | "warning" | "info") => {
+  const showSnackbar = (message: string, severity: 'success' | 'error' | 'warning' | 'info') => {
     setSnackbar({
       open: true,
       message,
@@ -135,41 +152,25 @@ export const Gallery = () => {
   // Handle hash navigation to reservation section
   useEffect(() => {
     const hash = window.location.hash;
-    if (hash === "#reservation-section") {
-      const element = document.getElementById("reservation-section");
+    if (hash === '#reservation-section') {
+      const element = document.getElementById('reservation-section');
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        element.scrollIntoView({ behavior: 'smooth' });
       }
     }
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    console.log("🔥 handleSubmit function called!");
+    console.log('🔥 handleSubmit function called!');
     e.preventDefault();
-    console.log("📝 Form data:", formData);
+    console.log('📝 Form data:', formData);
     setIsSubmitting(true);
 
     try {
       // Validate required fields
-      if (
-        !formData.fullName ||
-        !formData.email ||
-        !formData.phone ||
-        !formData.date ||
-        !formData.time
-      ) {
-        console.log("❌ Validation failed - missing fields");
-        showSnackbar("Please fill in all required fields!", "error");
-        setIsSubmitting(false);
-        return;
-      }
-
-      console.log("✅ Validation passed - sending via EmailJS...");
-
-      // EmailJS Configuration - REPLACE THESE WITH YOUR ACTUAL IDs
-      const serviceId = "service_ga0l9mu"; // Get from EmailJS dashboard
-      const templateId = "template_i110m2w"; // Get from EmailJS dashboard
-      const publicKey = "p1sWGViGQPTgg6qBM"; // Get from EmailJS dashboard
+      const serviceId = 'service_ga0l9mu'; // Get from EmailJS dashboard
+      const templateId = 'template_i110m2w'; // Get from EmailJS dashboard
+      const publicKey = 'p1sWGViGQPTgg6qBM'; // Get from EmailJS dashboard
 
       // Prepare template parameters for EmailJS (simplified approach)
       const templateParams = {
@@ -185,38 +186,62 @@ export const Gallery = () => {
         message: `New reservation request from ${formData.fullName} for ${formData.guests} on ${formData.date} at ${formData.time}. Contact: ${formData.phone} (${formData.email})`,
       };
 
-      console.log("📧 Sending email with EmailJS...");
+      // Save to Postgres/PostgREST first (if configured) using centralized service
+      try {
+        const postgrestUrl = import.meta.env.VITE_POSTGREST_URL as string | undefined;
+        if (postgrestUrl) {
+          const orderPayload = {
+            full_name: formData.fullName,
+            email: formData.email,
+            phone: formData.phone,
+            guests: formData.guests,
+            reservation_date: formData.date || null,
+            reservation_time: formData.time || null,
+            message: `New reservation request from ${formData.fullName} for ${formData.guests} on ${formData.date} at ${formData.time}. Contact: ${formData.phone} (${formData.email})`,
+            raw_payload: templateParams,
+          };
+
+          await createOrder(orderPayload);
+        }
+      } catch (dbErr) {
+        console.error('DB save error:', dbErr);
+        showSnackbar('Failed to save reservation to database. Please try again.', 'error');
+        setIsSubmitting(false);
+        return;
+      }
+
+      console.log('📧 Sending email with EmailJS...');
 
       try {
         // Send email using EmailJS
         const result = await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
-        console.log("✅ EmailJS Success:", result);
+        console.log('✅ EmailJS Success:', result);
 
         // Reset form
         setFormData({
-          fullName: "",
-          email: "",
-          phone: "",
-          guests: "1 Person",
-          date: "",
-          time: "",
+          fullName: '',
+          email: '',
+          phone: '',
+          guests: '1 Person',
+          date: '',
+          time: '',
         });
 
-        showSnackbar("Reservation sent successfully!", "success");
+        showSnackbar('Reservation sent successfully!', 'success');
       } catch (emailError) {
-        console.error("❌ EmailJS Error:", emailError);
+        console.error('❌ EmailJS Error:', emailError);
 
         showSnackbar(
-          "❌ Failed to send reservation. \nPlease try again or contact us directly at mg4.aca@gmail.com",
-          "error"
+          '❌ Failed to send reservation. \nPlease try again or contact us directly at mg4.aca@gmail.com',
+          'error'
         );
       }
     } catch (error) {
-      console.error("Error processing reservation:", error);
+      console.error('Error processing reservation:', error);
       showSnackbar(
-        "Sorry, there was an error processing your reservation. Please try again or contact us directly.",
-        "error"
+        'Sorry, there was an error processing your reservation. Please try again or contact us directly.',
+        'error'
       );
     } finally {
       setIsSubmitting(false);
@@ -234,10 +259,10 @@ export const Gallery = () => {
         className="text-white flex items-center justify-center px-4 lg:px-50 transition-all duration-700 min-h-[60vh] lg:min-h-[96vh] relative overflow-hidden"
         style={{
           backgroundImage: `linear-gradient(to right, #230700, #8C4A3B00), url(${banner})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          cursor: "pointer",
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          cursor: 'pointer',
         }}
       >
         {/* Animated background overlay */}
@@ -253,8 +278,8 @@ export const Gallery = () => {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{
             duration: 1.2,
-            ease: "easeOut",
-            type: "spring",
+            ease: 'easeOut',
+            type: 'spring',
             stiffness: 100,
           }}
           className="flex flex-col text-center lg:text-left absolute left-[10%] z-10"
@@ -271,7 +296,7 @@ export const Gallery = () => {
               transition={{
                 duration: 1,
                 delay: 0.5,
-                ease: "easeOut",
+                ease: 'easeOut',
               }}
               className="text-2xl sm:text-3xl lg:text-[60px] font-bold leading-tight"
             >
@@ -298,7 +323,7 @@ export const Gallery = () => {
               transition={{ duration: 0.7, delay: 1 }}
               className="text-base sm:text-lg lg:text-xl italic text-[var(--green-primary)] font-medium"
             >
-              A gallery of flavors, made to please both your eyes and your appetite{" "}
+              A gallery of flavors, made to please both your eyes and your appetite{' '}
             </motion.p>
           </motion.div>
         </motion.div>
@@ -314,7 +339,7 @@ export const Gallery = () => {
           transition={{
             duration: 3,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: 'easeInOut',
           }}
         />
         <motion.div
@@ -327,7 +352,7 @@ export const Gallery = () => {
           transition={{
             duration: 2.5,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             delay: 0.5,
           }}
         />
@@ -347,7 +372,7 @@ export const Gallery = () => {
             className="absolute inset-0"
             style={{
               backgroundImage: `radial-gradient(circle at 25% 25%, #FFD580 2px, transparent 2px)`,
-              backgroundSize: "50px 50px",
+              backgroundSize: '50px 50px',
             }}
           />
         </motion.div>
@@ -358,8 +383,8 @@ export const Gallery = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{
             duration: 1,
-            ease: "easeOut",
-            type: "spring",
+            ease: 'easeOut',
+            type: 'spring',
             stiffness: 100,
           }}
           className="flex flex-col items-center text-center mb-8 relative z-10"
@@ -381,7 +406,7 @@ export const Gallery = () => {
             transition={{
               duration: 0.8,
               delay: 0.4,
-              ease: "easeOut",
+              ease: 'easeOut',
             }}
           >
             Look at Our Photo Gallery
@@ -404,8 +429,8 @@ export const Gallery = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{
             duration: 1.2,
-            ease: "easeOut",
-            type: "spring",
+            ease: 'easeOut',
+            type: 'spring',
             stiffness: 80,
           }}
           className="relative z-10 w-full"
@@ -441,8 +466,8 @@ export const Gallery = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{
             duration: 1.2,
-            ease: "easeOut",
-            type: "spring",
+            ease: 'easeOut',
+            type: 'spring',
             stiffness: 80,
           }}
         />
@@ -454,8 +479,8 @@ export const Gallery = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{
             duration: 1.2,
-            ease: "easeOut",
-            type: "spring",
+            ease: 'easeOut',
+            type: 'spring',
             stiffness: 100,
           }}
           className="w-full lg:w-2/4 px-4 sm:px-6 lg:px-16 py-8 lg:py-12 flex flex-col items-center text-center text-white bg-[#1F0D09] relative z-10"
@@ -484,7 +509,7 @@ export const Gallery = () => {
               transition={{
                 duration: 0.8,
                 delay: 0.4,
-                ease: "easeOut",
+                ease: 'easeOut',
               }}
             >
               Make Your Reservations
@@ -504,12 +529,12 @@ export const Gallery = () => {
             className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full max-w-lg lg:max-w-none"
           >
             {[
-              { name: "fullName", placeholder: "Full Name", type: "text" },
-              { name: "email", placeholder: "Email Address", type: "email" },
-              { name: "phone", placeholder: "Whats App Number", type: "tel" },
-              { name: "guests", placeholder: "Number of Guests", type: "select" },
-              { name: "date", placeholder: "Date", type: "date" },
-              { name: "time", placeholder: "Time", type: "time" },
+              { name: 'fullName', placeholder: 'Full Name', type: 'text' },
+              { name: 'email', placeholder: 'Email Address', type: 'email' },
+              { name: 'phone', placeholder: 'Whats App Number', type: 'tel' },
+              { name: 'guests', placeholder: 'Number of Guests', type: 'select' },
+              { name: 'date', placeholder: 'Date', type: 'date' },
+              { name: 'time', placeholder: 'Time', type: 'time' },
             ].map((field, index) => (
               <motion.div
                 key={field.name}
@@ -519,14 +544,14 @@ export const Gallery = () => {
                 transition={{
                   duration: 0.6,
                   delay: 0.6 + index * 0.1,
-                  ease: "easeOut",
+                  ease: 'easeOut',
                 }}
                 whileHover={{
                   scale: 1.02,
                   transition: { duration: 0.2 },
                 }}
               >
-                {field.type === "select" ? (
+                {field.type === 'select' ? (
                   <select
                     name={field.name}
                     value={formData[field.name as keyof typeof formData]}
@@ -541,6 +566,35 @@ export const Gallery = () => {
                     <option value="5 People">5 People</option>
                     <option value="6+ People">6+ People</option>
                   </select>
+                ) : field.type === 'date' ? (
+                  <Calendar
+                    value={formData.date ? new Date(formData.date) : null}
+                    onChange={(e) => {
+                      const d = e.value as Date | null;
+                      const iso = d ? d.toISOString().slice(0, 10) : '';
+                      setFormData((prev) => ({ ...prev, date: iso }));
+                    }}
+                    dateFormat="yy-mm-dd"
+                    showIcon
+                    placeholder="Select date"
+                    className="w-full bg-transparent text-white"
+                    required
+                  />
+                ) : field.type === 'time' ? (
+                  <Calendar
+                    value={formData.time ? new Date(`1970-01-01T${formData.time}`) : null}
+                    onChange={(e) => {
+                      const d = e.value as Date | null;
+                      const hh = d ? d.getHours().toString().padStart(2, '0') : '';
+                      const mm = d ? d.getMinutes().toString().padStart(2, '0') : '';
+                      setFormData((prev) => ({ ...prev, time: d ? `${hh}:${mm}` : '' }));
+                    }}
+                    timeOnly
+                    showIcon
+                    placeholder="Select time"
+                    className="w-full bg-transparent text-white"
+                    required
+                  />
                 ) : (
                   <input
                     type={field.type}
@@ -563,13 +617,13 @@ export const Gallery = () => {
               transition={{
                 duration: 0.8,
                 delay: 1.2,
-                ease: "easeOut",
+                ease: 'easeOut',
               }}
             >
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                onClick={() => console.log("🔘 Button clicked directly!")}
+                onClick={() => console.log('🔘 Button clicked directly!')}
                 className="flex items-center gap-3 px-6 lg:px-8 py-4 text-base lg:text-lg font-semibold rounded-lg bg-[var(--green-primary)] hover:bg-[var(--green-dark)] transition-all duration-500 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px] min-w-[200px] justify-center relative overflow-hidden group"
                 whileHover={{
                   scale: 1.05,
@@ -580,12 +634,12 @@ export const Gallery = () => {
                 {/* Animated button background */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-[var(--green-primary)] to-[var(--green-dark)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "0%" }}
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: '0%' }}
                   transition={{ duration: 0.3 }}
                 />
                 <span className="relative z-10">
-                  {isSubmitting ? "SENDING..." : "BOOKING TABLE"}
+                  {isSubmitting ? 'SENDING...' : 'BOOKING TABLE'}
                 </span>
               </motion.button>
             </motion.div>
@@ -602,8 +656,8 @@ export const Gallery = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{
             duration: 1.2,
-            ease: "easeOut",
-            type: "spring",
+            ease: 'easeOut',
+            type: 'spring',
             stiffness: 80,
           }}
         />
@@ -616,41 +670,41 @@ export const Gallery = () => {
         open={snackbar.open}
         autoHideDuration={6000}
         onClose={handleSnackbarClose}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
         <Alert
           onClose={handleSnackbarClose}
           severity={snackbar.severity}
           variant="filled"
           sx={{
-            width: "100%",
-            whiteSpace: "pre-line", // This allows \n to create line breaks
-            "&.MuiAlert-filledSuccess": {
-              backgroundColor: "#FFD580", // Green for success
-              color: "#1f1c18ff", // Golden text
-              "& .MuiAlert-icon": {
-                color: "#a1a09eff",
+            width: '100%',
+            whiteSpace: 'pre-line', // This allows \n to create line breaks
+            '&.MuiAlert-filledSuccess': {
+              backgroundColor: '#FFD580', // Green for success
+              color: '#1f1c18ff', // Golden text
+              '& .MuiAlert-icon': {
+                color: '#a1a09eff',
               },
             },
-            "&.MuiAlert-filledError": {
-              backgroundColor: "#8B4513", // Warm brown for errors (matches theme)
-              color: "#FFD580", // Golden text
-              "& .MuiAlert-icon": {
-                color: "#FFD580",
+            '&.MuiAlert-filledError': {
+              backgroundColor: '#8B4513', // Warm brown for errors (matches theme)
+              color: '#FFD580', // Golden text
+              '& .MuiAlert-icon': {
+                color: '#FFD580',
               },
             },
-            "&.MuiAlert-filledWarning": {
-              backgroundColor: "#FF8C00", // Warm orange for warnings
-              color: "#1F0D09", // Dark text for contrast
-              "& .MuiAlert-icon": {
-                color: "#1F0D09",
+            '&.MuiAlert-filledWarning': {
+              backgroundColor: '#FF8C00', // Warm orange for warnings
+              color: '#1F0D09', // Dark text for contrast
+              '& .MuiAlert-icon': {
+                color: '#1F0D09',
               },
             },
-            "&.MuiAlert-filledInfo": {
-              backgroundColor: "#31201B", // Theme dark color for info
-              color: "#FFD580", // Golden text
-              "& .MuiAlert-icon": {
-                color: "#FFD580",
+            '&.MuiAlert-filledInfo': {
+              backgroundColor: '#31201B', // Theme dark color for info
+              color: '#FFD580', // Golden text
+              '& .MuiAlert-icon': {
+                color: '#FFD580',
               },
             },
           }}
