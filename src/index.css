@@ -1,14 +1,19 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --color-topline: #1f0d09;
   --color-navbar: #2d1b17;
   --green-primary: #ffc000;
   --green-dark: #ffc062;
-  --font-family-default: "Inter", sans-serif;
-  --font-family-nav: "Roboto", sans-serif;
+  --font-family-default: 'Inter', sans-serif;
+  --font-family-nav: 'Roboto', sans-serif;
   /* Default page background color */
   background: var(--color-navbar);
+}
+
+.p-button {
+  background: var(--green-primary);
+  border-color: var(--green-dark);
 }
 
 /* Custom scrollbar for Chrome, Edge, Safari */
@@ -26,4 +31,8 @@
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--green-primary) var(--color-navbar);
+}
+
+.p-datatable-wrapper {
+  height: 80vh;
 }
