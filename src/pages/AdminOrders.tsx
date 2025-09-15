@@ -4,6 +4,7 @@ import { fetchOrders as serviceFetchOrders } from '../services/postgrest';
 import 'primeicons/primeicons.css';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
+import { ProgressSpinner } from 'primereact/progressspinner';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/saga-green/theme.css';
 // Calendar and InputText are not used in this admin listing; removed unused imports.
@@ -16,7 +17,7 @@ type Order = {
   guests?: string;
   reservation_date?: string | null;
   reservation_time?: string | null;
-  message?: string;
+  reservation_type?: string | null;
   raw_payload?: unknown;
   status?: string;
   created_at?: string;
@@ -65,7 +66,7 @@ export const AdminOrders = () => {
   if (!loggedIn) {
     return (
       <div className="flex h-[90vh] w-[100%] justify-center align-items-center">
-        <div className="flex flex-col align-items-stretch w-[25vw] justify-center">
+        <div className="flex flex-col align-items-stretch w-[25vw] justify-center p-[2rem] border border-[#ffc000] rounded shadow-lg h-[55vh] mt-[10rem]">
           <h2 className="text-2xl text-[#ffc000] font-semibold text-[2rem] mb-[2rem]">
             Admin Login
           </h2>
@@ -109,7 +110,7 @@ export const AdminOrders = () => {
                 'reservation_time',
                 'status',
                 'created_at',
-                'message',
+                'reservation_type',
               ];
               const rows = orders.map((o) => [
                 o.id,
@@ -121,7 +122,7 @@ export const AdminOrders = () => {
                 o.reservation_time ?? '',
                 o.status ?? '',
                 o.created_at ?? '',
-                (o.message || '').replace(/\n/g, ' '),
+                ((o.reservation_type as string) || '').replace(/\n/g, ' '),
               ]);
               const csv = [headers, ...rows]
                 .map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(','))
@@ -143,7 +144,11 @@ export const AdminOrders = () => {
         </div>
       </div>
 
-      {loading && <div>Loading...</div>}
+      {loading && (
+        <div className="flex justify-center items-center py-6" aria-live="polite">
+          <ProgressSpinner />
+        </div>
+      )}
       {error && <div className="text-red-500">{error}</div>}
       <div className="mt-4">
         <DataTable value={orders} responsiveLayout="scroll" emptyMessage="No orders found">
@@ -152,34 +157,13 @@ export const AdminOrders = () => {
           <Column field="email" header="Email" />
           <Column field="phone" header="Phone" />
           <Column field="guests" header="Guests" />
-          <Column
-            header="Booking Type"
-            body={(row: Order) => {
-              const explicit = (row as unknown as Record<string, unknown>)['booking_type'] as
-                | string
-                | undefined;
-              const src = (row.raw_payload as unknown as Record<string, unknown>)?.['source'] as
-                | string
-                | undefined;
-              const key = explicit || src || '';
-              if (!key) return 'Booking Table For Your & Family Members';
-              const map: Record<string, string> = {
-                breakfast: 'Breakfast Reservation',
-                workshop: 'Mask Painting Workshop',
-                website: 'Booking Table For Your & Family Members',
-                table: 'Booking Table For Your & Family Members',
-              };
-              return map[key] || key;
-            }}
-          />
-          <Column header="Date" body={(row: Order) => row.reservation_date ?? '-'} />
-          <Column header="Time" body={(row: Order) => row.reservation_time ?? '-'} />
+          <Column header="Booking Type" field="reservation_type" />
+          <Column header="Date" body={(row: any) => row.reservation_date ?? '-'} />
+          <Column header="Time" body={(row: any) => row.reservation_time ?? '-'} />
           <Column field="status" header="Status" />
           <Column
             header="Created"
-            body={(row: Order) =>
-              row.created_at ? new Date(row.created_at).toLocaleString() : '-'
-            }
+            body={(row: any) => (row.created_at ? new Date(row.created_at).toLocaleString() : '-')}
           />
         </DataTable>
       </div>

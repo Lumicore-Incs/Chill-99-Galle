@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Local env files (do not commit secrets)
+.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -19,6 +22,12 @@ dist-ssr
 .DS_Store
 *.suo
 *.ntvs*
+postgrest-bin/
+pgdata/
+
+# Build outputs
+dist/
+
 *.njsproj
 *.sln
 *.sw?

@@ -2,7 +2,6 @@ import emailjs from '@emailjs/browser';
 import { Alert, Snackbar } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Calendar } from 'primereact/calendar';
-import { createOrder } from '../services/postgrest';
 import React, { useState } from 'react';
 import { FaChevronRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +17,7 @@ import { Footer } from '../components/common/Footer';
 import { Navbar } from '../components/common/Navbar';
 import { TopLine } from '../components/common/TopLine';
 import { allMenuItems } from '../constants/menuData';
+import { createOrder } from '../services/postgrest';
 import { useReservationNavigation } from '../utils/navigation';
 
 export const Menu = () => {
@@ -123,12 +123,11 @@ export const Menu = () => {
       }
 
       // EmailJS send (after DB save)
-      await emailjs.send(
-        'service_ga0l9mu',
-        'template_i110m2w',
-        templateParams,
-        'p1sWGViGQPTgg6qBM'
-      );
+      const serviceId = (import.meta.env.VITE_EMAILJS_SERVICE_ID as string) || 'service_ga0l9mu';
+      const templateId = (import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string) || 'template_i110m2w';
+      const publicKey = (import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string) || 'p1sWGViGQPTgg6qBM';
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
       showSnackbar("Reservation request sent successfully! We'll contact you soon.", 'success');
 
@@ -196,22 +195,43 @@ export const Menu = () => {
       </section>
 
       <section className="bg-[#1F0D09] w-full min-h-[100vh] px-4 lg:px-50 py-12 lg:py-20 flex flex-col items-center justify-center text-white gap-8">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex flex-col items-center text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex flex-col items-center text-center"
+        >
           <p className="text-lg lg:text-xl text-[#FAF3E0] font-medium">Choose Best Dishes</p>
-          <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">Chill 99 Restaurant Menu</h2>
+          <h2 className="italic text-2xl sm:text-3xl lg:text-4xl text-[var(--green-primary)] font-semibold">
+            Chill 99 Restaurant Menu
+          </h2>
         </motion.div>
 
         <div className="w-full bg-[#1F0D09] flex flex-col items-center justify-between py-6 lg:py-10 gap-6 lg:gap-10 px-4 lg:px-10 rounded-lg">
           <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full">
-            {allMenuItems.filter((item) => item.category === selectedCategory).map((item) => (
-              <motion.div key={item.id} className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5">
-                <motion.img src={item.image} alt={item.title} className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg" />
-                <div className="text-center sm:text-left">
-                  <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">{item.title}</h3>
-                  <p className="text-[#B39A91] font-medium text-base lg:text-lg">Rs. {item.price.toFixed(2)}</p>
-                </div>
-              </motion.div>
-            ))}
+            {allMenuItems
+              .filter((item) => item.category === selectedCategory)
+              .map((item) => (
+                <motion.div
+                  key={item.id}
+                  className="flex flex-col sm:flex-row items-center gap-3 lg:gap-5"
+                >
+                  <motion.img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-lg"
+                  />
+                  <div className="text-center sm:text-left">
+                    <h3 className="text-md sm:text-lg lg:text-xl xl:text-2xl font-medium mb-2 text-white">
+                      {item.title}
+                    </h3>
+                    <p className="text-[#B39A91] font-medium text-base lg:text-lg">
+                      Rs. {item.price.toFixed(2)}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
           </motion.div>
         </div>
       </section>
@@ -425,7 +445,9 @@ export const Menu = () => {
                 type="submit"
                 disabled={isSubmitting}
                 className={`flex items-center gap-3 px-6 lg:px-8 py-4 text-base lg:text-lg font-semibold rounded-lg transition-all duration-500 cursor-pointer min-h-[48px] min-w-[200px] justify-center ${
-                  isSubmitting ? 'bg-gray-500 cursor-not-allowed' : 'bg-[var(--green-primary)] hover:bg-[var(--green-dark)]'
+                  isSubmitting
+                    ? 'bg-gray-500 cursor-not-allowed'
+                    : 'bg-[var(--green-primary)] hover:bg-[var(--green-dark)]'
                 }`}
               >
                 {isSubmitting ? 'SENDING...' : 'BOOK TABLE'} <FaChevronRight />

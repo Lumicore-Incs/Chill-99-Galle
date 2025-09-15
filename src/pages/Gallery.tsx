@@ -3,7 +3,6 @@ import { Alert, Snackbar } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Calendar } from 'primereact/calendar';
 import { useEffect, useState } from 'react';
-import { createOrder } from '../services/postgrest';
 import formimg2 from '../assets/imagecaro-01.jpg';
 import formimg1 from '../assets/imageside.jpg';
 import { FloatingContactIcons } from '../components/common/FloatingContactIcons';
@@ -11,6 +10,7 @@ import { Footer } from '../components/common/Footer';
 import { Navbar } from '../components/common/Navbar';
 import { TopLine } from '../components/common/TopLine';
 import { GalleryCarousel } from '../components/features/GalleryCarousel';
+import { createOrder } from '../services/postgrest';
 
 import banner from '../assets/gallery/background-image.jpg';
 import bun01 from '../assets/gallery/bun-01.jpg';
@@ -56,6 +56,7 @@ export const Gallery = () => {
 
   // Read `from` query param to show section-specific reservation details
   const [reservationInfo, setReservationInfo] = useState<React.ReactNode | null>(null);
+  const [reservationType, setReservationType] = useState<string | null>(null);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -83,7 +84,7 @@ export const Gallery = () => {
           </ul>
         </div>
       ),
-      'rice-and-curry': (
+      'family-reservation': (
         <div className="text-left bg-[#261410] p-4 rounded-lg mb-4">
           <h3 className="text-[var(--green-primary)] font-semibold mb-2">
             Rice & Curry Reservation Details
@@ -121,6 +122,7 @@ export const Gallery = () => {
 
     if (from && contentMap[from]) {
       setReservationInfo(contentMap[from]);
+      setReservationType(from);
       // scroll into view if hash present
       const element = document.getElementById('reservation-section');
       if (element) element.scrollIntoView({ behavior: 'smooth' });
@@ -161,19 +163,19 @@ export const Gallery = () => {
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    console.log('🔥 handleSubmit function called!');
+    console.log('🔥 handleSubmit function called!', reservationType);
     e.preventDefault();
     console.log('📝 Form data:', formData);
     setIsSubmitting(true);
 
     try {
       // Validate required fields
-      const serviceId = 'service_ga0l9mu'; // Get from EmailJS dashboard
-      const templateId = 'template_i110m2w'; // Get from EmailJS dashboard
-      const publicKey = 'p1sWGViGQPTgg6qBM'; // Get from EmailJS dashboard
+      const serviceId = (import.meta.env.VITE_EMAILJS_SERVICE_ID as string) || 'service_ga0l9mu';
+      const templateId = (import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string) || 'template_i110m2w';
+      const publicKey = (import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string) || 'p1sWGViGQPTgg6qBM';
 
       // Prepare template parameters for EmailJS (simplified approach)
-      const templateParams = {
+      const templateParams: Record<string, unknown> = {
         from_name: formData.fullName,
         from_email: formData.email,
         customer_name: formData.fullName,
@@ -183,10 +185,11 @@ export const Gallery = () => {
         reservation_date: formData.date,
         reservation_time: formData.time,
         reply_to: formData.email,
-        message: `New reservation request from ${formData.fullName} for ${formData.guests} on ${formData.date} at ${formData.time}. Contact: ${formData.phone} (${formData.email})`,
+        reservation_type: reservationType,
       };
 
-      // Save to Postgres/PostgREST first (if configured) using centralized service
+      // Save to Postgres/PostgREST first (if configured) using centralized service.
+      // If saving fails, annotate the email so staff are aware, but still send the email.
       try {
         const postgrestUrl = import.meta.env.VITE_POSTGREST_URL as string | undefined;
         if (postgrestUrl) {
@@ -197,7 +200,7 @@ export const Gallery = () => {
             guests: formData.guests,
             reservation_date: formData.date || null,
             reservation_time: formData.time || null,
-            message: `New reservation request from ${formData.fullName} for ${formData.guests} on ${formData.date} at ${formData.time}. Contact: ${formData.phone} (${formData.email})`,
+            reservation_type: reservationType,
             raw_payload: templateParams,
           };
 
@@ -205,9 +208,9 @@ export const Gallery = () => {
         }
       } catch (dbErr) {
         console.error('DB save error:', dbErr);
-        showSnackbar('Failed to save reservation to database. Please try again.', 'error');
-        setIsSubmitting(false);
-        return;
+        // Add a flag/message into the email template so the team knows DB save failed.
+        templateParams.db_save_issue =
+          'NOTE: We were unable to save this reservation to the database. The email was sent, but please verify and save manually.';
       }
 
       console.log('📧 Sending email with EmailJS...');
