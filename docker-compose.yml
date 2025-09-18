@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      # Use environment variables or a separate `.env` file for real secrets.
+      POSTGRES_USER: chill99
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: chill99db
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+    ports:
+      - '5432:5432'
+
+  postgrest:
+    image: postgrest/postgrest:latest
+    depends_on:
+      - db
+    restart: always
+    environment:
+      # Do NOT hardcode credentials in version control. Provide them via env or secrets manager.
+      PGRST_DB_URI: 'postgres://chill99:REDACTED_PASSWORD@db:5432/chill99db'
+      PGRST_DB_SCHEMA: 'public'
+      PGRST_DB_ANON_ROLE: 'web_anon'
+      # Set this in production (do NOT hardcode here). Example: PGRST_JWT_SECRET: "replace_with_secret"
+      # You can provide it via an .env file or environment when running docker-compose.
+      # PGRST_JWT_SECRET: "your_jwt_secret_here"
+    ports:
+      - '3000:3000'
+    command: ['postgrest', '/etc/postgrest.conf']
+    volumes:
+      - ./postgrest.conf:/etc/postgrest.conf:ro

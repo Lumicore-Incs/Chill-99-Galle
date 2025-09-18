@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "mint-token": "node ./scripts/mint-token.js",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -16,7 +17,10 @@
     "@mui/material": "^7.3.1",
     "@tailwindcss/vite": "^4.1.11",
     "framer-motion": "^12.23.12",
+    "jsonwebtoken": "^9.0.0",
     "lucide-react": "^0.534.0",
+    "primeicons": "^7.0.0",
+    "primereact": "^10.9.7",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",

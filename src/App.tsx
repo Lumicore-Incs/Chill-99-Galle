@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
-import { Route, BrowserRouter as Router, Routes, useLocation } from "react-router-dom";
-import { ProgressLoader } from "./components/common/ProgressLoader";
-import { Feedback } from "./pages/Feedback";
-import { Gallery } from "./pages/Gallery";
-import { Home } from "./pages/Home";
-import { Menu } from "./pages/Menu";
-import { getRouteImages } from "./utils/imagePreloader";
-import { useImageLoader } from "./utils/useImageLoader";
+import { useEffect, useState } from 'react';
+import { Route, BrowserRouter as Router, Routes, useLocation } from 'react-router-dom';
+import { ProgressLoader } from './components/common/ProgressLoader';
+import AdminOrders from './pages/AdminOrders';
+import { Feedback } from './pages/Feedback';
+import { Gallery } from './pages/Gallery';
+import { Home } from './pages/Home';
+import { Menu } from './pages/Menu';
+import { getRouteImages } from './utils/imagePreloader';
+import { useImageLoader } from './utils/useImageLoader';
 
 function AppContent() {
   const location = useLocation();
@@ -53,6 +54,7 @@ function AppContent() {
       <Route path="/" element={<Home />} />
       <Route path="/menu" element={<Menu />} />
       <Route path="/gallery" element={<Gallery />} />
+      <Route path="/admin/orders" element={<AdminOrders />} />
       <Route path="/feed-back" element={<Feedback />} />
     </Routes>
   );

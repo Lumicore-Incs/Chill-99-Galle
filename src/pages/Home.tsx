@@ -1,35 +1,35 @@
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { FaChevronRight, FaChevronDown } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
-import aboutbg from "../assets/about-bg.png";
-import cofee from "../assets/booking-01.jpg";
-import mandala from "../assets/booking-02.jpg";
-import thirdbanner from "../assets/booking-03.jpg";
-import logo from "../assets/chill-99.png";
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { FaChevronDown, FaChevronRight } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
+import aboutbg from '../assets/about-bg.png';
+import cofee from '../assets/booking-01.jpg';
+import mandala from '../assets/booking-02.jpg';
+import thirdbanner from '../assets/booking-03.jpg';
+import logo from '../assets/chill-99.png';
 // banners are now loaded from src/constants/banners
-import iconchoose02 from "../assets/iconchoose02.png";
-import iconchoose05 from "../assets/iconchoose05.png";
-import iconchoose06 from "../assets/iconchoose06.png";
-import iconchoose01 from "../assets/iconschoose01.png";
-import iconchoose03 from "../assets/iconschoose03.png";
-import iconchoose04 from "../assets/iconschoose04.png";
-import burger from "../assets/imagecaro-01.jpg";
-import popularBg from "../assets/popular-bg.png";
-import testimonial from "../assets/testimonialbg.png";
-import whychhose from "../assets/whychoose.jpg";
-import FAQ from "../components/common/FAQ";
-import { FloatingContactIcons } from "../components/common/FloatingContactIcons";
-import { Navbar } from "../components/common/Navbar";
-import ReviewButtons from "../components/common/ReviewButtons";
-import { TopLine } from "../components/common/TopLine";
-import ImageCarousel from "../components/features/CarouselItem";
-import { PopularMenu } from "../components/features/PopularMenu";
-import { Testimonial } from "../components/features/Testimonial";
-import banners from "../constants/banners";
-import { useReservationNavigation } from "../utils/navigation";
+import iconchoose02 from '../assets/iconchoose02.png';
+import iconchoose05 from '../assets/iconchoose05.png';
+import iconchoose06 from '../assets/iconchoose06.png';
+import iconchoose01 from '../assets/iconschoose01.png';
+import iconchoose03 from '../assets/iconschoose03.png';
+import iconchoose04 from '../assets/iconschoose04.png';
+import burger from '../assets/imagecaro-01.jpg';
+import popularBg from '../assets/popular-bg.png';
+import testimonial from '../assets/testimonialbg.png';
+import whychhose from '../assets/whychoose.jpg';
+import FAQ from '../components/common/FAQ';
+import { FloatingContactIcons } from '../components/common/FloatingContactIcons';
+import { Navbar } from '../components/common/Navbar';
+import ReviewButtons from '../components/common/ReviewButtons';
+import { TopLine } from '../components/common/TopLine';
+import ImageCarousel from '../components/features/CarouselItem';
+import { PopularMenu } from '../components/features/PopularMenu';
+import { Testimonial } from '../components/features/Testimonial';
+import banners from '../constants/banners';
+import { useReservationNavigation } from '../utils/navigation';
 
-import { Footer } from "../components/common/Footer";
+import { Footer } from '../components/common/Footer';
 
 export const Home = () => {
   const [bannerIndex, setBannerIndex] = useState(0);
@@ -56,9 +56,9 @@ export const Home = () => {
     const loadAllImages = async () => {
       try {
         setImageLoading(true);
-        const imagePromises = banners.map(banner => preloadImage(banner.image));
+        const imagePromises = banners.map((banner) => preloadImage(banner.image));
         await Promise.all(imagePromises);
-        setLoadedImages(new Set(banners.map(banner => banner.image)));
+        setLoadedImages(new Set(banners.map((banner) => banner.image)));
         setImageLoading(false);
       } catch (error) {
         console.error('Error loading images:', error);
@@ -88,35 +88,35 @@ export const Home = () => {
       className="absolute inset-0 bg-gradient-to-br from-[#230700] via-[#8C4A3B] to-[#230700] flex items-center justify-center z-20"
     >
       <div className="flex flex-col items-center gap-6">
-        <motion.img 
-          src={logo} 
-          alt="Chill 99 Logo" 
+        <motion.img
+          src={logo}
+          alt="Chill 99 Logo"
           className="w-24 h-24 lg:w-32 lg:h-32 filter drop-shadow-2xl"
-          animate={{ 
+          animate={{
             rotate: [0, 360],
-            scale: [1, 1.1, 1]
+            scale: [1, 1.1, 1],
           }}
-          transition={{ 
-            duration: 2, 
+          transition={{
+            duration: 2,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: 'easeInOut',
           }}
         />
-        
+
         {/* Modern Line Loader */}
         <div className="w-64 h-1 bg-white/20 rounded-full overflow-hidden">
           <motion.div
             className="h-full bg-gradient-to-r from-[#ffc000] via-[#DAA520] to-[#ffc000] rounded-full"
-            initial={{ x: "-100%" }}
-            animate={{ x: "100%" }}
+            initial={{ x: '-100%' }}
+            animate={{ x: '100%' }}
             transition={{
               duration: 1.5,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: 'easeInOut',
             }}
           />
         </div>
-        
+
         <motion.p
           className="text-white/80 text-lg font-medium"
           animate={{ opacity: [0.5, 1, 0.5] }}
@@ -138,10 +138,10 @@ export const Home = () => {
     >
       <motion.div
         animate={{ y: [0, 8, 0] }}
-        transition={{ 
-          duration: 2, 
+        transition={{
+          duration: 2,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: 'easeInOut',
         }}
         className="flex flex-col items-center gap-2"
       >
@@ -149,21 +149,21 @@ export const Home = () => {
         <div className="w-6 h-10 border-2 border-white/50 rounded-full relative bg-white/10 backdrop-blur-sm">
           <motion.div
             animate={{ y: [0, 12, 0] }}
-            transition={{ 
-              duration: 2, 
+            transition={{
+              duration: 2,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: 'easeInOut',
             }}
             className="w-1 h-3 bg-[#ffc000] rounded-full absolute left-1/2 top-2 transform -translate-x-1/2 shadow-lg"
           />
         </div>
         <motion.div
           animate={{ y: [0, 4, 0] }}
-          transition={{ 
-            duration: 2, 
+          transition={{
+            duration: 2,
             repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.2
+            ease: 'easeInOut',
+            delay: 0.2,
           }}
         >
           <FaChevronDown className="text-white/70 text-sm" />
@@ -177,8 +177,10 @@ export const Home = () => {
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
       {/* Geometric Grid Pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div className="w-full h-full" style={{
-          backgroundImage: `
+        <div
+          className="w-full h-full"
+          style={{
+            backgroundImage: `
             radial-gradient(circle at 20% 20%, #ffc000 2px, transparent 2px),
             radial-gradient(circle at 80% 80%, #DAA520 1px, transparent 1px),
             radial-gradient(circle at 40% 60%, #B8860B 1.5px, transparent 1.5px),
@@ -186,21 +188,23 @@ export const Home = () => {
             radial-gradient(circle at 90% 10%, #DAA520 2px, transparent 2px),
             radial-gradient(circle at 10% 90%, #B8860B 1px, transparent 1px)
           `,
-          backgroundSize: '100px 100px, 150px 150px, 120px 120px, 80px 80px, 200px 200px, 90px 90px',
-          backgroundPosition: '0 0, 30px 30px, 60px 10px, 15px 45px, 75px 25px, 45px 75px'
-        }} />
+            backgroundSize:
+              '100px 100px, 150px 150px, 120px 120px, 80px 80px, 200px 200px, 90px 90px',
+            backgroundPosition: '0 0, 30px 30px, 60px 10px, 15px 45px, 75px 25px, 45px 75px',
+          }}
+        />
       </div>
 
       {/* Floating Geometric Shapes */}
       <motion.div
-        animate={{ 
+        animate={{
           rotate: [0, 360],
-          scale: [1, 1.2, 1]
+          scale: [1, 1.2, 1],
         }}
-        transition={{ 
-          duration: 20, 
+        transition={{
+          duration: 20,
           repeat: Infinity,
-          ease: "linear"
+          ease: 'linear',
         }}
         className="absolute top-1/4 right-1/4 w-32 h-32 opacity-5"
       >
@@ -208,14 +212,14 @@ export const Home = () => {
       </motion.div>
 
       <motion.div
-        animate={{ 
+        animate={{
           rotate: [360, 0],
-          y: [-20, 20, -20]
+          y: [-20, 20, -20],
         }}
-        transition={{ 
-          duration: 15, 
+        transition={{
+          duration: 15,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: 'easeInOut',
         }}
         className="absolute bottom-1/3 left-1/6 w-24 h-24 opacity-8"
       >
@@ -223,14 +227,14 @@ export const Home = () => {
       </motion.div>
 
       <motion.div
-        animate={{ 
+        animate={{
           rotate: [0, 180, 360],
-          x: [-30, 30, -30]
+          x: [-30, 30, -30],
         }}
-        transition={{ 
-          duration: 25, 
+        transition={{
+          duration: 25,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: 'easeInOut',
         }}
         className="absolute top-3/4 right-1/6 w-16 h-16 opacity-6"
       >
@@ -239,42 +243,42 @@ export const Home = () => {
 
       {/* Modern Gradient Orbs */}
       <motion.div
-        animate={{ 
+        animate={{
           scale: [1, 1.5, 1],
-          opacity: [0.1, 0.3, 0.1]
+          opacity: [0.1, 0.3, 0.1],
         }}
-        transition={{ 
-          duration: 8, 
+        transition={{
+          duration: 8,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: 'easeInOut',
         }}
         className="absolute top-1/6 left-1/12 w-40 h-40 bg-gradient-radial from-[#ffc000]/20 via-[#DAA520]/10 to-transparent rounded-full blur-xl"
       />
 
       <motion.div
-        animate={{ 
+        animate={{
           scale: [1.2, 0.8, 1.2],
-          opacity: [0.15, 0.4, 0.15]
+          opacity: [0.15, 0.4, 0.15],
         }}
-        transition={{ 
-          duration: 12, 
+        transition={{
+          duration: 12,
           repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
+          ease: 'easeInOut',
+          delay: 2,
         }}
         className="absolute bottom-1/6 right-1/12 w-60 h-60 bg-gradient-radial from-[var(--green-primary)]/15 via-[#DAA520]/8 to-transparent rounded-full blur-2xl"
       />
 
       {/* Animated Lines */}
       <motion.div
-        animate={{ 
+        animate={{
           rotate: [0, 360],
-          scale: [1, 1.1, 1]
+          scale: [1, 1.1, 1],
         }}
-        transition={{ 
-          duration: 30, 
+        transition={{
+          duration: 30,
           repeat: Infinity,
-          ease: "linear"
+          ease: 'linear',
         }}
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 opacity-5"
       >
@@ -295,7 +299,7 @@ export const Home = () => {
         className="text-white flex items-center justify-center px-4 lg:px-50 min-h-[96vh] md:min-h-[60vh] lg:min-h-[96vh] relative overflow-hidden"
         onClick={!imageLoading ? handleBannerChange : undefined}
         onTouchStart={!imageLoading ? handleBannerChange : undefined}
-        style={{ cursor: imageLoading ? "default" : "pointer" }}
+        style={{ cursor: imageLoading ? 'default' : 'pointer' }}
       >
         {/* Loading Indicator */}
         {imageLoading && <LoadingIndicator />}
@@ -310,13 +314,13 @@ export const Home = () => {
             initial={{ scale: 1.1, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+            transition={{ duration: 1.2, ease: 'easeInOut' }}
             className="absolute inset-0"
             style={{
               backgroundImage: `linear-gradient(135deg, #230700DD 0%, #8C4A3B40 50%, #23070080 100%), url(${current.image})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
             }}
           />
         )}
@@ -330,7 +334,7 @@ export const Home = () => {
               transition={{ duration: 2, delay: 0.5 }}
               className="absolute inset-0 bg-gradient-to-br from-transparent via-[#ffc00020] to-transparent"
             />
-            
+
             {/* Additional Modern Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -342,28 +346,28 @@ export const Home = () => {
                   radial-gradient(ellipse at top left, #ffc00015 0%, transparent 50%),
                   radial-gradient(ellipse at bottom right, #DAA52015 0%, transparent 50%),
                   linear-gradient(45deg, transparent 40%, #ffc00008 50%, transparent 60%)
-                `
+                `,
               }}
             />
           </>
         )}
-        
+
         {/* Content Container with Advanced Animations */}
         {!imageLoading && (
           <div className="relative z-10 flex flex-row text-left max-w-4xl left-[-20%]">
-            <motion.img 
+            <motion.img
               key={`logo-${bannerIndex}`}
               initial={{ opacity: 0, scale: 0.5, rotate: -180 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ 
-                duration: 1.2, 
+              transition={{
+                duration: 1.2,
                 delay: 0.3,
-                type: "spring",
-                stiffness: 100
+                type: 'spring',
+                stiffness: 100,
               }}
-              src={logo} 
-              alt="Chill 99 Logo" 
-              style={{ height: "11vw", marginRight: "16px" }} 
+              src={logo}
+              alt="Chill 99 Logo"
+              style={{ height: '11vw', marginRight: '16px' }}
               className="filter drop-shadow-2xl"
             />
             <div>
@@ -372,16 +376,16 @@ export const Home = () => {
                   key={`title-${bannerIndex}`}
                   initial={{ opacity: 0, y: 100, skewY: 7 }}
                   animate={{ opacity: 1, y: 0, skewY: 0 }}
-                  transition={{ 
+                  transition={{
                     duration: 1,
                     delay: 0.6,
-                    type: "spring",
-                    stiffness: 80
+                    type: 'spring',
+                    stiffness: 80,
                   }}
                   className="flex items-center text-left text-2xl sm:text-3xl lg:text-5xl font-bold leading-tight filter drop-shadow-lg"
-                  style={{ 
-                    color: "#ffc000",
-                    textShadow: "0 4px 8px rgba(0,0,0,0.3)"
+                  style={{
+                    color: '#ffc000',
+                    textShadow: '0 4px 8px rgba(0,0,0,0.3)',
                   }}
                 >
                   {current.title}
@@ -392,21 +396,21 @@ export const Home = () => {
                   key={`subtitle-${bannerIndex}`}
                   initial={{ opacity: 0, x: -100 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ 
-                    duration: 1.2, 
+                  transition={{
+                    duration: 1.2,
                     delay: 0.9,
-                    type: "spring",
-                    stiffness: 60
+                    type: 'spring',
+                    stiffness: 60,
                   }}
                   className="text-base sm:text-lg lg:text-xl italic text-[var(--green-primary)] font-medium filter drop-shadow-md"
                   style={{
-                    textShadow: "0 2px 4px rgba(0,0,0,0.4)"
+                    textShadow: '0 2px 4px rgba(0,0,0,0.4)',
                   }}
                 >
                   {current.subtitle}
                 </motion.p>
               </div>
-              
+
               {/* Simplified Button (Removed Animation) */}
               <motion.div
                 key={`buttons-${bannerIndex}`}
@@ -423,30 +427,31 @@ export const Home = () => {
                       rel="noopener noreferrer"
                       initial={{ opacity: 0, y: 50, rotateX: -90 }}
                       animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                      transition={{ 
-                        duration: 0.8, 
-                        delay: 1.4 + (idx * 0.15),
-                        type: "spring",
-                        stiffness: 120
+                      transition={{
+                        duration: 0.8,
+                        delay: 1.4 + idx * 0.15,
+                        type: 'spring',
+                        stiffness: 120,
                       }}
-                      whileHover={{ 
+                      whileHover={{
                         scale: 1.05,
                         y: -6,
-                        transition: { duration: 0.3 }
+                        transition: { duration: 0.3 },
                       }}
-                      whileTap={{ 
+                      whileTap={{
                         scale: 0.98,
-                        transition: { duration: 0.1 }
+                        transition: { duration: 0.1 },
                       }}
                       className={`${btn.color} flex items-center gap-3 px-6 lg:px-8 py-4 rounded-xl cursor-pointer w-full sm:w-auto justify-center min-h-[48px] min-w-[160px] shadow-2xl transition-all duration-300 backdrop-blur-sm border border-white/20 relative overflow-hidden group`}
                       style={{
-                        background: idx === 0 
-                          ? "linear-gradient(135deg, #DAA520 0%, #B8860B 100%)"
-                          : btn.color
+                        background:
+                          idx === 0
+                            ? 'linear-gradient(135deg, #DAA520 0%, #B8860B 100%)'
+                            : btn.color,
                       }}
                     >
                       <div className="relative z-10 flex items-center gap-3">
-                        {btn.icon && btn.icon} {btn.text} 
+                        {btn.icon && btn.icon} {btn.text}
                         <FaChevronRight />
                       </div>
                     </motion.a>
@@ -455,30 +460,31 @@ export const Home = () => {
                       key={`btn-${idx}-${bannerIndex}`}
                       initial={{ opacity: 0, y: 50, rotateX: -90 }}
                       animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                      transition={{ 
-                        duration: 0.8, 
-                        delay: 1.4 + (idx * 0.15),
-                        type: "spring",
-                        stiffness: 120
+                      transition={{
+                        duration: 0.8,
+                        delay: 1.4 + idx * 0.15,
+                        type: 'spring',
+                        stiffness: 120,
                       }}
-                      whileHover={{ 
+                      whileHover={{
                         scale: 1.05,
                         y: -6,
-                        transition: { duration: 0.3 }
+                        transition: { duration: 0.3 },
                       }}
-                      whileTap={{ 
+                      whileTap={{
                         scale: 0.98,
-                        transition: { duration: 0.1 }
+                        transition: { duration: 0.1 },
                       }}
                       className={`${btn.color} flex items-center gap-3 px-6 lg:px-8 py-4 rounded-xl cursor-pointer w-full sm:w-auto justify-center min-h-[48px] min-w-[160px] shadow-2xl transition-all duration-300 backdrop-blur-sm border border-white/20 relative overflow-hidden group`}
                       style={{
-                        background: idx === 0 
-                          ? "linear-gradient(135deg, #DAA520 0%, #B8860B 100%)"
-                          : btn.color
+                        background:
+                          idx === 0
+                            ? 'linear-gradient(135deg, #DAA520 0%, #B8860B 100%)'
+                            : btn.color,
                       }}
                     >
                       <div className="relative z-10 flex items-center gap-3">
-                        {btn.icon && btn.icon} {btn.text} 
+                        {btn.icon && btn.icon} {btn.text}
                         <FaChevronRight />
                       </div>
                     </motion.button>
@@ -501,8 +507,8 @@ export const Home = () => {
               <motion.div
                 key={index}
                 className={`w-3 h-3 rounded-full cursor-pointer transition-all duration-300 ${
-                  index === bannerIndex 
-                    ? 'bg-[#ffc000] shadow-lg scale-125' 
+                  index === bannerIndex
+                    ? 'bg-[#ffc000] shadow-lg scale-125'
                     : 'bg-white/50 hover:bg-white/70'
                 }`}
                 onClick={(e) => {
@@ -529,19 +535,19 @@ export const Home = () => {
               className="absolute top-1/4 right-1/4 w-2 h-2 bg-[#ffc000] rounded-full"
             >
               <motion.div
-                animate={{ 
+                animate={{
                   y: [-20, 20, -20],
-                  x: [-10, 10, -10]
+                  x: [-10, 10, -10],
                 }}
-                transition={{ 
-                  duration: 6, 
+                transition={{
+                  duration: 6,
                   repeat: Infinity,
-                  ease: "easeInOut"
+                  ease: 'easeInOut',
                 }}
                 className="w-full h-full bg-[#ffc000] rounded-full opacity-60 shadow-lg"
               />
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.4 }}
@@ -549,14 +555,14 @@ export const Home = () => {
               className="absolute bottom-1/3 right-1/6 w-1 h-1 bg-[var(--green-primary)] rounded-full"
             >
               <motion.div
-                animate={{ 
+                animate={{
                   y: [15, -15, 15],
-                  x: [8, -8, 8]
+                  x: [8, -8, 8],
                 }}
-                transition={{ 
-                  duration: 8, 
+                transition={{
+                  duration: 8,
                   repeat: Infinity,
-                  ease: "easeInOut"
+                  ease: 'easeInOut',
                 }}
                 className="w-full h-full bg-[var(--green-primary)] rounded-full opacity-80 shadow-md"
               />
@@ -570,14 +576,14 @@ export const Home = () => {
               className="absolute top-1/6 left-1/3 w-3 h-3 bg-gradient-to-br from-[#DAA520] to-[#B8860B] rounded-full blur-sm"
             >
               <motion.div
-                animate={{ 
+                animate={{
                   scale: [1, 1.5, 1],
-                  rotate: [0, 180, 360]
+                  rotate: [0, 180, 360],
                 }}
-                transition={{ 
-                  duration: 10, 
+                transition={{
+                  duration: 10,
                   repeat: Infinity,
-                  ease: "easeInOut"
+                  ease: 'easeInOut',
                 }}
                 className="w-full h-full bg-gradient-to-br from-[#DAA520] to-[#B8860B] rounded-full"
               />
@@ -590,14 +596,14 @@ export const Home = () => {
               className="absolute bottom-1/4 left-1/5 w-4 h-4 border-2 border-[#ffc000]/40 rounded-full"
             >
               <motion.div
-                animate={{ 
+                animate={{
                   rotate: [0, 360],
-                  scale: [0.5, 1.2, 0.5]
+                  scale: [0.5, 1.2, 0.5],
                 }}
-                transition={{ 
-                  duration: 12, 
+                transition={{
+                  duration: 12,
                   repeat: Infinity,
-                  ease: "easeInOut"
+                  ease: 'easeInOut',
                 }}
                 className="w-full h-full border-2 border-[#ffc000]/60 rounded-full"
               />
@@ -611,9 +617,9 @@ export const Home = () => {
         className="text-white flex flex-col lg:flex-row items-center justify-between gap-8 px-4 lg:px-50 py-12 lg:py-0 min-h-[70vh] lg:min-h-[100vh] bg-[#261410]"
         style={{
           backgroundImage: ` url(${aboutbg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
         <motion.div
@@ -646,9 +652,9 @@ export const Home = () => {
         className="text-white flex flex-col lg:flex-row items-stretch min-h-[40vh] lg:h-[271px] overflow-hidden"
         style={{
           backgroundImage: ` url(${cofee})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
         {/* Left Section - Breakfast Spread Image */}
@@ -668,8 +674,8 @@ export const Home = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="w-full lg:w-1/2 flex flex-col lg:flex-row items-center justify-between gap-6 px-4 lg:px-12 py-8 lg:py-12"
           style={{
-            position: "relative",
-            right: "-1rem",
+            position: 'relative',
+            right: '-1rem',
           }}
         >
           <div className=" lg:text-left px-1 text-center">
@@ -683,7 +689,7 @@ export const Home = () => {
           </div>
 
           <motion.button
-            onClick={() => handleReservationClick("breakfast")}
+            onClick={() => handleReservationClick('breakfast')}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
             className="flex items-center gap-1 px-6 lg:px-2 py-4 rounded-lg bg-[#DAA520] hover:bg-[#B8860B] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center text-white font-semibold"
@@ -703,9 +709,9 @@ export const Home = () => {
         className="text-white flex flex-col px-4 lg:px-50 py-10 items-center justify-center gap-8 min-h-[80vh] lg:min-h-[100vh] bg-[#230700]"
         style={{
           backgroundImage: `linear-gradient(to right, #230700C4, #230700C4), url(${popularBg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
         <motion.div
@@ -736,9 +742,9 @@ export const Home = () => {
         className="text-white flex flex-col lg:flex-row items-stretch min-h-[40vh] lg:h-[271px] overflow-hidden"
         style={{
           backgroundImage: ` url(${thirdbanner})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
         {/* Left Section - Breakfast Spread Image */}
@@ -758,8 +764,8 @@ export const Home = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="w-full lg:w-1/2 flex flex-col lg:flex-row items-center justify-between gap-6 px-4 lg:px-12 py-8 lg:py-12"
           style={{
-            position: "relative",
-            right: "-1rem",
+            position: 'relative',
+            right: '-1rem',
           }}
         >
           <div className=" lg:text-left px-1 text-center">
@@ -773,7 +779,7 @@ export const Home = () => {
           </div>
 
           <motion.button
-            onClick={() => handleReservationClick("rice-and-curry")}
+            onClick={() => handleReservationClick('family-reservation')}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
             className="flex items-center gap-1 px-6 lg:px-2 py-4 rounded-lg bg-[#DAA520] hover:bg-[#B8860B] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center text-white font-semibold"
@@ -825,23 +831,23 @@ export const Home = () => {
           {[
             {
               icon: iconchoose01,
-              title: "Signature Dishes, Freshly Prepared Daily",
-              desc: "Enjoy a range of handcrafted dishes, made with bold flavors, fresh ingredients, and a whole lot of care.",
+              title: 'Signature Dishes, Freshly Prepared Daily',
+              desc: 'Enjoy a range of handcrafted dishes, made with bold flavors, fresh ingredients, and a whole lot of care.',
             },
             {
               icon: iconchoose02,
-              title: "Coffee That Warms the Soul",
-              desc: "From smooth cappuccinos to bold espresso – we brew every cup with care.",
+              title: 'Coffee That Warms the Soul',
+              desc: 'From smooth cappuccinos to bold espresso – we brew every cup with care.',
             },
             {
               icon: iconchoose03,
-              title: "Bubble Tea, Bursting with Flavor",
-              desc: "Discover your new favorite drink among our unique and refreshing bubble tea blends.",
+              title: 'Bubble Tea, Bursting with Flavor',
+              desc: 'Discover your new favorite drink among our unique and refreshing bubble tea blends.',
             },
             {
               icon: iconchoose04,
-              title: "A Cozy Escape in Galle Fort",
-              desc: "Relax in a warm, stylish setting tucked inside the historic beauty of Galle Fort.",
+              title: 'A Cozy Escape in Galle Fort',
+              desc: 'Relax in a warm, stylish setting tucked inside the historic beauty of Galle Fort.',
             },
           ].map((item, i) => (
             <motion.div
@@ -874,9 +880,9 @@ export const Home = () => {
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 w-full max-w-6xl">
           {[
-            { title: "Cafe Menu", icon: iconchoose02 },
-            { title: "Coffee Menu", icon: iconchoose05 },
-            { title: "Beverages", icon: iconchoose06 },
+            { title: 'Cafe Menu', icon: iconchoose02 },
+            { title: 'Coffee Menu', icon: iconchoose05 },
+            { title: 'Beverages', icon: iconchoose06 },
           ].map((item, index) => (
             <motion.div
               key={index}
@@ -913,9 +919,9 @@ export const Home = () => {
         className="relative w-full min-h-[80vh] lg:min-h-[100vh] flex flex-col bg-[#31201B] text-white px-4 lg:px-50 py-12 lg:py-20 gap-8 lg:gap-16"
         style={{
           backgroundImage: `linear-gradient(to right, #2D1B17C9, #2D1B17C9), url(${testimonial})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
         <div className="text-center flex justify-between max-sm:block">
@@ -960,9 +966,9 @@ export const Home = () => {
         className="bg-[#230700FC] min-h-[250px] lg:h-[300px] w-full flex flex-col lg:flex-row items-center justify-around lg:justify-between px-4 lg:px-50 py-8 lg:py-10 text-white gap-8 lg:gap-0"
       >
         {[
-          { number: "120+", title: "Happy Customers", subtitle: "Sweet smiles, daily." },
-          { number: "350+", title: "Dishes Served", subtitle: "Flavors with Feeling." },
-          { number: "50+", title: "Positive Reviews", subtitle: "A local and tourist favorite." },
+          { number: '120+', title: 'Happy Customers', subtitle: 'Sweet smiles, daily.' },
+          { number: '350+', title: 'Dishes Served', subtitle: 'Flavors with Feeling.' },
+          { number: '50+', title: 'Positive Reviews', subtitle: 'A local and tourist favorite.' },
         ].map((stat, index) => (
           <motion.div
             key={index}
@@ -988,9 +994,9 @@ export const Home = () => {
         className="text-white flex flex-col lg:flex-row items-stretch min-h-[40vh] lg:h-[271px] overflow-hidden"
         style={{
           backgroundImage: ` url(${mandala})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
         {/* Left Section - Breakfast Spread Image */}
@@ -1010,8 +1016,8 @@ export const Home = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="w-full lg:w-1/2 flex flex-col lg:flex-row items-center justify-between gap-6 px-4 lg:px-12 py-8 lg:py-12"
           style={{
-            position: "relative",
-            right: "-1rem",
+            position: 'relative',
+            right: '-1rem',
           }}
         >
           <div className=" lg:text-left px-1 text-center">
@@ -1025,7 +1031,7 @@ export const Home = () => {
           </div>
 
           <motion.button
-            onClick={() => handleReservationClick("workshop")}
+            onClick={() => handleReservationClick('workshop')}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.96 }}
             className="flex items-center gap-1 px-6 lg:px-2 py-4 rounded-lg bg-[#DAA520] hover:bg-[#B8860B] transition-all duration-500 cursor-pointer min-h-[48px] min-w-[160px] justify-center text-white font-semibold"
