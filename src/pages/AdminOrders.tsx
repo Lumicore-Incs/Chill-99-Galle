@@ -65,22 +65,32 @@ export const AdminOrders = () => {
 
   if (!loggedIn) {
     return (
-      <div className="flex h-[90vh] w-[100%] justify-center align-items-center">
-        <div className="flex flex-col align-items-stretch w-[25vw] justify-center p-[2rem] border border-[#ffc000] rounded shadow-lg h-[55vh] mt-[10rem]">
-          <h2 className="text-2xl text-[#ffc000] font-semibold text-[2rem] mb-[2rem]">
-            Admin Login
-          </h2>
-          <form onSubmit={handleLogin} className="flex flex-col gap-2 max-w-sm">
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Admin Password"
-              className="p-2 border mb-[1rem]"
-            />
-            <button className="p-2 cursor-pointer bg-[#ffc000] text-white rounded">Login</button>
-            {error && <div className="text-red-500">{error}</div>}
-          </form>
+      <div className="flex h-[55vh] max-sm:mt-[5rem] max-sm:h-[100vh] justify-center items-center bg-gradient-to-r mt-[10rem]">
+        <div className="flex max-sm:block flex-row w-[80%] justify-evenly items-center rounded-lg shadow-[0_0_20px_#ffc0003d]">
+          {/* Left side: Chill-99 logo */}
+          <div className="flex items-center">
+            <img src="/src/assets/chill-99-logo.png" alt="Chill-99 Logo" className="h-[35rem]" />
+          </div>
+
+          {/* Right side: Admin Login Section */}
+          <div className="flex flex-col align-items-stretch w-[30vw] h-[25rem] justify-center p-[2rem] border max-sm:border-none border-[#ffc000] rounded-lg shadow-md">
+            <h2 className="text-3xl text-[#ffc000] font-bold mb-[2rem] text-center">
+              Admin Login
+            </h2>
+            <form onSubmit={handleLogin} className="flex flex-col gap-4">
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter Admin Password"
+                className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#ffc000]"
+              />
+              <button className="p-3 bg-[#ffc000] text-white rounded hover:bg-yellow-500 transition-all">
+                Login
+              </button>
+              {error && <div className="text-red-500 text-center">{error}</div>}
+            </form>
+          </div>
         </div>
       </div>
     );
