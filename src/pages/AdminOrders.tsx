@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import chillLogo from '../assets/chill-99-logo.png';
 import { fetchOrders as serviceFetchOrders } from '../services/postgrest';
 // PrimeReact components
 import 'primeicons/primeicons.css';
@@ -70,11 +71,7 @@ export const AdminOrders = () => {
         <div className="bg-gradient-to-r sm:hidden min-h-screen flex items-center justify-center  px-6 py-10">
           <div className="w-full max-w-md  border border-[#ffc000] rounded-xl p-6 rounded-lg shadow-[0_0_20px_#ffc0003d]">
             <div className="flex flex-col items-center">
-              <img
-                src="/src/assets/chill-99-logo.png"
-                alt="Chill-99 Logo"
-                className="w-28 h-auto mb-4"
-              />
+              <img src={chillLogo} alt="Chill-99 Logo" className="w-[11rem] h-auto mb-4" />
               <h2 className="text-2xl text-white font-semibold mb-4">Admin Login</h2>
             </div>
             <form onSubmit={handleLogin} className="flex flex-col gap-4 mt-2">
@@ -105,11 +102,7 @@ export const AdminOrders = () => {
         <div className="hidden sm:flex h-[70vh] justify-center items-center bg-gradient-to-r mt-[6rem] px-6">
           <div className="flex flex-row w-[80%] gap-8 justify-center items-center rounded-lg shadow-[0_0_20px_#ffc0003d]">
             <div className="flex-1 flex items-center justify-center">
-              <img
-                src="/src/assets/chill-99-logo.png"
-                alt="Chill-99 Logo"
-                className="max-h-[30rem]"
-              />
+              <img src={chillLogo} alt="Chill-99 Logo" className="max-h-[30rem]" />
             </div>
             <div className="w-[36rem] bg-white border border-[#ffc000] rounded-xl shadow-md p-8 mr-0 lg:mr-8">
               <h2 className="text-3xl text-[#ffc000] font-bold mb-6 text-center">Admin Login</h2>
