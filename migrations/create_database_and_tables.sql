@@ -56,5 +56,5 @@ END$$;
 
 -- Seed admin user (idempotent)
 INSERT INTO users (name, email, phone, password_hash)
-VALUES ('Admin User', 'admin@chill99.test', '+94123456789', NULL)
+VALUES ('Admin User', 'dev.mg4@gmail.com', '+94123456789', NULL)
 ON CONFLICT (email) DO NOTHING;
